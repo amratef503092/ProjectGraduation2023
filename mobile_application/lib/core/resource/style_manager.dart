@@ -48,6 +48,11 @@ TextStyle getSemiBoldStyle(
 }
 // extra bold
 TextStyle getExtraBoldStyle(
-    {double fontSize = FontSize.s12, required Color color,required double height}) {
+    {double fontSize = FontSize.s12, required Color color,required dynamic height}) {
   return _getTextStyle(fontSize, FontWeightManager.extraBold, color,height);
+}
+
+  double toFigmaHeight({required double figmaHeight ,required double fontSize}) {
+    return figmaHeight / fontSize;
+
 }

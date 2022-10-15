@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:graduation_project/view/resource/color_mananger.dart';
-
+import 'color_mananger.dart';
 ThemeData getTheme(){
   return ThemeData(
     scaffoldBackgroundColor: ColorManage.background,
