@@ -1,11 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class StringManager {
-  static const titleOnBoardingOne = 'Discover';
-  static const subTitleOnBoardingOne =
-      'Find Inspiration, Explore Fascinating Destination With Everest Travel';
-  static const titleOnBoardingTwo = 'Plan Your Trip';
-  static const subTitleOnBoardingTwo = 'Select Destinations And Start Scheduling Details For Your Trip';
-  static const titleOnBoardingThree = 'Start Your Journey';
-  static const subTitleOnBoardingThree = 'Enjoy! Relax And Chilling Memories';
-  static const titleOnBoardingFour = 'Share Your Trip';
-  static const subTitleOnBoardingFour = 'Share Your Experience In Your Trip And Connect with Travel Lovers Around The World';
+  static String titleOnBoardingOne = "Discover";
+  static String subTitleOnBoardingOne =
+      'Find Inspiration, Explore Fascinating Destination With Us';
+  static String titleOnBoardingTwo = 'Plan Your Trip';
+  static String subTitleOnBoardingTwo =
+      'Select Destinations And Start Scheduling Details For Your Trip';
+  static String titleOnBoardingThree = 'Start Your Journey';
+  static String subTitleOnBoardingThree =
+      'Enjoy! Relax And Chilling Memories';
+  static String titleOnBoardingFour = 'Share Your Trip';
+  static String subTitleOnBoardingFour =
+      'Share Your Experience In Your Trip And Connect with Travel Lovers Around The World';
+  static String getStart =
+      'GET START';
 }

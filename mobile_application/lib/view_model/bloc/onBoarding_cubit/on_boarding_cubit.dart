@@ -12,20 +12,32 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   int index = 0;
   List<OnBoardingModel> onBoardingList = [
     OnBoardingModel(
-        title:StringManager.titleOnBoardingOne,
-        subTitle:StringManager.subTitleOnBoardingOne,
-        imagePath:AssetsManager.onBoardingImageOne),
-    OnBoardingModel(title:StringManager.titleOnBoardingTwo,
-        subTitle:StringManager.subTitleOnBoardingTwo, imagePath:AssetsManager.onBoardingImageTwo),
-    OnBoardingModel(title:StringManager.titleOnBoardingThree,
-        subTitle:StringManager.subTitleOnBoardingThree, imagePath:AssetsManager.onBoardingImageThree),
-    OnBoardingModel(title:StringManager.titleOnBoardingFour,
-        subTitle:StringManager.subTitleOnBoardingFour, imagePath:AssetsManager.onBoardingImageFour),
-
+        title: StringManager.titleOnBoardingOne,
+        subTitle: StringManager.subTitleOnBoardingOne,
+        imagePath: AssetsManager.onBoardingImageOne),
+    OnBoardingModel(
+        title: StringManager.titleOnBoardingTwo,
+        subTitle: StringManager.subTitleOnBoardingTwo,
+        imagePath: AssetsManager.onBoardingImageTwo),
+    OnBoardingModel(
+        title: StringManager.titleOnBoardingThree,
+        subTitle: StringManager.subTitleOnBoardingThree,
+        imagePath: AssetsManager.onBoardingImageThree),
+    OnBoardingModel(
+        title: StringManager.titleOnBoardingFour,
+        subTitle: StringManager.subTitleOnBoardingFour,
+        imagePath: AssetsManager.onBoardingImageFour),
   ];
-  void saveValue(int value){
+  bool enableButton = false;
+
+  void saveValue(int value) {
     index = value;
     emit(SaveCurrentIndexState());
+  }
+
+  void enableButtonFunction() {
+    enableButton = true;
+    emit(EnableButtonState());
   }
 }
 
