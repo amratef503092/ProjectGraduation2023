@@ -15,4 +15,8 @@ class StringManager {
       'Share Your Experience In Your Trip And Connect with Travel Lovers Around The World';
   static String getStart =
       'GET START';
+  static String downTitleOnBoardingScreen = 'I’m not the new one';
+  static String skip = 'SKIP';
+
+
 }

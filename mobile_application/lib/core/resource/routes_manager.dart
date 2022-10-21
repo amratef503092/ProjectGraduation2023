@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
 
 import '../../view/pages/onboarding_screen/onBoarding_screen.dart';
@@ -23,6 +24,9 @@ class RouteGenerator {
                   create: (_) => OnBoardingCubit(),
                   child:  OnBoardingScreen(),
                 ));
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+            builder: (_) => const HomeScreen());
       default:
         return unDefinedRoute();
     }

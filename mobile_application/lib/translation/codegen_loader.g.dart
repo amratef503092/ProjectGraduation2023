@@ -23,7 +23,9 @@ class CodegenLoader extends AssetLoader{
   "Enjoy! Relax And Chilling Memories": "أستمتع!بالهدوء واصنع ذكرياتك",
   "Share Your Trip": "شارك رحلتك",
   "GET START": "أبدا",
-  "Share Your Experience In Your Trip And Connect with Travel Lovers Around The World": "شارك رحلتك وتواصل مع محبي السفر حول العالم"
+  "Share Your Experience In Your Trip And Connect with Travel Lovers Around The World": "شارك رحلتك وتواصل مع محبي السفر حول العالم",
+  "downTitleOnBoardingScreen": "لست زائر جديد",
+  "skip": "تخطي"
 };
 static const Map<String,dynamic> en = {
   "Discover": "Discover",
@@ -34,7 +36,9 @@ static const Map<String,dynamic> en = {
   "Enjoy! Relax And Chilling Memories": "Enjoy! Relax And Chilling Memories",
   "Share Your Trip": "Share Your Trip",
   "Share Your Experience In Your Trip And Connect with Travel Lovers Around The World": "Share Your Experience In Your Trip And Connect with Travel Lovers Around The World",
-  "GET START": "GET START"
+  "GET START": "GET START",
+  "downTitleOnBoardingScreen": "I’m not the new one",
+  "skip": "skip"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

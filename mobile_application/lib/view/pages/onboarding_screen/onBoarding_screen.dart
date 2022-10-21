@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/core/resource/string_manager.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
@@ -31,11 +32,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Padding(
-            padding:  EdgeInsets.all(25.0.sp),
+            padding: EdgeInsets.all(25.0.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 BlocConsumer<OnBoardingCubit, OnBoardingState>(
                   listener: (context, state) {
                     // TODO: implement listener
@@ -84,7 +84,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             print(index);
                           }
                           if (index ==
-                              OnBoardingCubit.get(context).onBoardingList.length -
+                              OnBoardingCubit.get(context)
+                                      .onBoardingList
+                                      .length -
                                   1) {
                             OnBoardingCubit.get(context).enableButtonFunction();
                           }
@@ -95,7 +97,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     );
                   },
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -177,30 +178,48 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   },
                   builder: (context, state) {
                     return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManage.primaryYellow,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.r)
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManage.primaryYellow,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.r)),
+                          fixedSize: Size(366.w, 64.h),
                         ),
-                        fixedSize: Size(366.w, 64.h),
-                      ),
                         onPressed: OnBoardingCubit.get(context).enableButton
-                            ? () {}
+                            ? () {
+                          Navigator.pushNamedAndRemoveUntil(context,Routes.homeScreen, (route) => false);
+                        }
                             : null,
-                        child: Text(StringManager.getStart.tr() ,style: getSemiBoldStyle(color:
-                            ColorManage.background,
-                            fontSize: 20.sp,
-                            height: toFigmaHeight(fontSize: 20.sp,figmaHeight: 20.sp)),));
+                        child: Text(
+                          StringManager.getStart.tr(),
+                          style: getSemiBoldStyle(
+                              color: ColorManage.background,
+                              fontSize: 20.sp,
+                              height: toFigmaHeight(
+                                  fontSize: 20.sp, figmaHeight: 20.sp)),
+                        ));
                   },
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: (){
-                      context.setLocale(const Locale('ar'));
-                    }, child: const Text("ar")),
-                    ElevatedButton(onPressed: (){
-                      context.setLocale(const Locale('en'));
-                    }, child: const Text("en")),
+                    Text(
+                      StringManager.downTitleOnBoardingScreen.tr(),
+                      style: getRegularStyle(
+                          color: ColorManage.secondaryBlack,
+                          height: toFigmaHeight(
+                              figmaHeight: 24.sp, fontSize: 16.sp),
+                          fontSize: 16.sp),
+                    ),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          StringManager.skip.tr(),
+                          style: getRegularStyle(
+                              color: ColorManage.primaryBlue,
+                              height: toFigmaHeight(
+                                  figmaHeight: 24.sp, fontSize: 16.sp),
+                              fontSize: 16.sp),
+                        )),
                   ],
                 )
               ],
