@@ -17,6 +17,11 @@ class StringManager {
       'GET START';
   static String downTitleOnBoardingScreen = 'I’m not the new one';
   static String skip = 'SKIP';
+  static String welcome = "Welcome To Travel X";
+  static String signUp = 'Sign Up';
+  static String signIn = 'Sign In';
+  static String or = "Or";
+
 
 
 }

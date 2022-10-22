@@ -46,6 +46,9 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   easy_localization: ^3.0.1
   lottie: ^1.4.3
+  connectivity_plus: ^3.0.2
+  fluttertoast: ^8.1.1
+  font_awesome_flutter: ^10.2.1
 
 
 dev_dependencies:

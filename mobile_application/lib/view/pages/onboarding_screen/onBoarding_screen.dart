@@ -13,6 +13,7 @@ import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../core/resource/font_manager.dart';
+import '../../components/core_components/custom_button.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({Key? key}) : super(key: key);
@@ -177,26 +178,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     }
                   },
                   builder: (context, state) {
-                    return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorManage.primaryYellow,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.r)),
-                          fixedSize: Size(366.w, 64.h),
-                        ),
-                        onPressed: OnBoardingCubit.get(context).enableButton
-                            ? () {
-                          Navigator.pushNamedAndRemoveUntil(context,Routes.homeScreen, (route) => false);
-                        }
-                            : null,
-                        child: Text(
-                          StringManager.getStart.tr(),
-                          style: getSemiBoldStyle(
-                              color: ColorManage.background,
-                              fontSize: 20.sp,
-                              height: toFigmaHeight(
-                                  fontSize: 20.sp, figmaHeight: 20.sp)),
-                        ));
+                    return CustomButton(
+                      color: ColorManage.primaryYellow,
+                      function: (){
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            Routes.homeScreen, (route) => false);
+                      },
+                      widget: Text(
+                        StringManager.getStart.tr(),
+                        style: getSemiBoldStyle(
+                            color: ColorManage.background,
+                            fontSize: 20.sp,
+                            height: toFigmaHeight(
+                                fontSize: 20.sp, figmaHeight: 20.sp)),
+                      ),
+                      radius: 16.r,
+                      disable: OnBoardingCubit.get(context).enableButton,
+                    );
                   },
                 ),
                 Row(
@@ -230,3 +228,5 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 }
+
+
