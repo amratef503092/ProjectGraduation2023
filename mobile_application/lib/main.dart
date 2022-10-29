@@ -1,10 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/bloc/internet_services/internet_service_bloc.dart';
+import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 import 'core/BlocObserver.dart';
 import 'core/resource/routes_manager.dart';
 import 'core/resource/theme_manager.dart';
@@ -12,7 +15,14 @@ import 'core/resource/theme_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  await DioHelper.init();
   await EasyLocalization.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarBrightness: Brightness.light,
+    statusBarIconBrightness:   Brightness.dark,
+    statusBarColor: Colors.white
+
+  ));
   runApp(
     EasyLocalization(
         supportedLocales: const [
@@ -42,7 +52,9 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MultiBlocProvider(
-          providers: [BlocProvider(create: (context) => InternetServiceBloc())],
+          providers: [BlocProvider(create: (context) => InternetServiceBloc()),
+          BlocProvider(create: (context)=>AuthCubit())
+          ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
             listener: (context, state) {
               if(state is Connected){

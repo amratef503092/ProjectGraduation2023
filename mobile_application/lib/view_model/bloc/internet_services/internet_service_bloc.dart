@@ -8,10 +8,8 @@ part 'internet_service_event.dart';
 
 part 'internet_service_state.dart';
 
-class InternetServiceBloc
-    extends Bloc<InternetServiceEvent, InternetServiceState> {
+class InternetServiceBloc extends Bloc<InternetServiceEvent, InternetServiceState> {
   StreamSubscription? subscription;
-
   InternetServiceBloc() : super(InternetServiceInitial()) {
     on<OnConnected>(
         (event, emit) => emit(Connected(message: 'Network is Connected')));

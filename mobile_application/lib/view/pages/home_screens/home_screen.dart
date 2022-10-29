@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/core/resource/string_manager.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
@@ -76,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             CustomSocialMediaButton(
                               function: () {
-                                context.setLocale(Locale('en'));
+                                context.setLocale(const Locale('en'));
                               },
                               color: const Color(0xffDD4B39),
                               socialMediaIcon: FontAwesomeIcons.googlePlus,
@@ -92,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                                       figmaHeight: 30.sp, fontSize: 20.sp),
                                   fontSize: 20.sp)),
                           function: () {
-                            context.setLocale(Locale('ar'));
+                            Navigator.pushNamed(context, Routes.signIn);
                           },
                           color: ColorManage.primaryYellow,
                           disable: true,
@@ -114,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                                           figmaHeight: 24.sp, fontSize: 16.sp),
                                       fontSize: 16.sp)),
                             ),
-                            Expanded(
+                            const Expanded(
                               child: Divider(
                                 height: 50,
                                 thickness: 1,
@@ -129,7 +130,9 @@ class HomeScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16.r)),
                               side: const BorderSide(color: ColorManage.primaryYellow)),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.signUp);
+                          },
                           child:  Text(StringManager.signUp.tr() ,style: getExtraBoldStyle(color: ColorManage.primaryYellow
                               , height: toFigmaHeight(figmaHeight: 30.sp, fontSize: 20.sp),fontSize: 20.sp),),
                         ),
