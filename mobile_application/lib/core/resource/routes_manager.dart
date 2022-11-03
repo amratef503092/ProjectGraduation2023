@@ -10,7 +10,6 @@ import '../../view/pages/onboarding_screen/onBoarding_screen.dart';
 class Routes {
   static const String loginRoute = "/login";
   static const String homeScreen = "/Home";
-  static const String registerRoute = "/register";
   static const String forgotPasswordRoute = "/forgotPassword";
   static const String mainRoute = "/main";
   static const String onBoarding = '/OnBoarding';
@@ -38,7 +37,7 @@ class RouteGenerator {
             builder: (_) =>  SignInScreen());
       case Routes.signUp:
         return MaterialPageRoute(
-            builder: (_) => const SignupScreen());
+            builder: (_) =>   SignupScreen());
       default:
         return unDefinedRoute();
     }

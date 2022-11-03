@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
+import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 
@@ -26,29 +28,23 @@ class SignInScreen extends StatelessWidget {
                 height: 20.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
                       onPressed: () {
-                        
+                        Navigator.pop(context);
                       },
                       icon: Icon(
                         Icons.arrow_back,
                         color: ColorManage.primaryYellow,
                         size: 36.sp,
                       )),
-                  const Center(
-                      child: Text('Amr is here',
-                          style: TextStyle(color: Colors.red))),
-                  IconButton(
-                      onPressed: () {
-
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: ColorManage.primaryYellow,
-                        size: 36.sp,
-                      )),
+                  SizedBox(
+                    width: 75.w,
+                  ),
+                  Center(
+                      child: Text("Sign In To Travel",
+                          style: getSemiBoldStyle(
+                              color: Colors.white, height: 1, fontSize: 28.h))),
                 ],
               ),
               Container(
@@ -91,7 +87,7 @@ class SignInScreen extends StatelessWidget {
                           },
                         ),
 
-                        const SizedBox(height: 10),
+                        SizedBox(height: 30.h),
                         //sign in button
                         BlocBuilder<AuthCubit, AuthState>(
                           buildWhen: (pre, current) {
@@ -122,33 +118,58 @@ class SignInScreen extends StatelessWidget {
                                     disable: true);
                           },
                         ),
-                        const SizedBox(height: 25),
-                        //regster now
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              'Not a Member?',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                        SizedBox(height: 25.h),
+                        Padding(
+                          padding: EdgeInsets.all(20.sp),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text("Remember Password" , style: getSemiBoldStyle(
+                                      color: ColorManage.secondaryBlack,
+                                      fontSize: 20.sp,
+                                      height: 1),),
+                                  Checkbox(
+                                      value: true,
+                                      onChanged: (value)
+                                      {
+
+                                      })
+                                ],
                               ),
-                            ),
-                            Text(
-                              'register now',
-                              style: TextStyle(
-                                color: Colors.indigoAccent,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                              TextButton(onPressed: (){
+                              }, child: const Text("Forget Password"))
+                            ],
+                          ),
+                        )
+                        //Register now
                       ],
                     ),
                   ),
                 ),
               ),
+              SizedBox(
+                height: 8.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("I don’t have account yet? ",
+                      style: getRegularStyle(
+                          color: Colors.white, height: 1, fontSize: 24.sp)),
+                  InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context,Routes.signUp);
 
+                      },
+                      child: Text("Create",
+                          style: getRegularStyle(
+                              color: ColorManage.primaryYellow,
+                              height: 1,
+                              fontSize: 24.sp))),
+                ],
+              )
             ],
           ),
         ),

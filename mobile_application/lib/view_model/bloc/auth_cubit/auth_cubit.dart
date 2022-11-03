@@ -14,14 +14,35 @@ class AuthCubit extends Cubit<AuthState> {
 
   static AuthCubit get(context) => BlocProvider.of<AuthCubit>(context);
   bool visibility = true;
-  void changeState(){
-    visibility =!visibility;
+
+  void changeState() {
+    visibility = !visibility;
     emit(ChangeState());
   }
-  Future<void> signIn({required String email,required String password}) async {
+
+  Future<void> signIn({required String email, required String password}) async {
     emit(SignInLoadingState());
-    await DioHelper.postData(url: "$baseUrl$signInEndPoint", data:
+    await DioHelper.postData(url: "$baseUrl$signInEndPoint", data: {
+      "email": email,
+      "password": password,
+    }).then((value) {
+      if (kDebugMode) {
+        print(value);
+      }
+      emit(SignInSuccessfulState());
+    }).catchError((error) {
+      if (error is DioError) {
+        print(error.response!.statusCode);
+        print(error.response!.data);
+      }
+      emit(SignInErrorState());
+    });
+  }
+  Future<void> signUp({required String email,required String password ,required String name}) async {
+    emit(SignInLoadingState());
+    await DioHelper.postData(url: "$baseUrl$signUpEndPoint", data:
     {
+      "name" :name,
       "email": email,
       "password": password,
     }).then((value) {
@@ -38,4 +59,5 @@ class AuthCubit extends Cubit<AuthState> {
 
     });
   }
+
 }

@@ -7,7 +7,7 @@ const String baseUrl = 'http://10.0.2.2:8000/api';
 // End Points
 
 const String signInEndPoint = '/login';
-const String signUp = '/api/v1/auth/signup';
+const String signUpEndPoint = '/register';
 // const refresh = 'auth/token';
 // const forgetPassword = '/api/v1/auth/forget-password';
 // const resetPassword = '/api/v1/auth/reset-password';
