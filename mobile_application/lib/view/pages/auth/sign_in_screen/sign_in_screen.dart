@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
@@ -8,6 +9,7 @@ import 'package:graduation_project/view/components/core_components/custom_button
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 
 import '../../../../core/resource/validator.dart';
+import '../../../components/core_components/custom_text_form_faild.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);
@@ -55,96 +57,126 @@ class SignInScreen extends StatelessWidget {
                       topLeft: Radius.circular(40.r),
                     ),
                     color: Colors.white),
-                child: SafeArea(
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20.h),
-                        //email falid
-                        CustomTextField(
-                            controller: emailController,
-                            hint: 'email',
-                            fieldValidator: emailValidator),
-                        const SizedBox(height: 10),
-                        //password's
-                        BlocConsumer<AuthCubit, AuthState>(
-                          listener: (context, state) {
-                            // TODO: implement listener
-                          },
-                          builder: (context, state) {
-                            return CustomTextField(
-                              fieldValidator: passwordValidator,
-                              controller: passwordController,
-                              hint: 'password',
-                              password: AuthCubit.get(context).visibility,
-                              passwordTwo: true,
-                              function: () {
-                                AuthCubit.get(context).changeState();
-                              },
-                            );
-                          },
-                        ),
+                child: Padding(
+                  padding: EdgeInsets.all(24.sp),
+                  child: SafeArea(
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20.h),
+                          const Align(
+                              alignment: Alignment.topLeft,
+                              child: Text('Email')),
+                          //email falid
+                          CustomTextField(
+                              iconData: Icon(Icons.email),
 
-                        SizedBox(height: 30.h),
-                        //sign in button
-                        BlocBuilder<AuthCubit, AuthState>(
-                          buildWhen: (pre, current) {
-                            if (current is SignInLoadingState) {
-                              return true;
-                            } else if (current is SignInSuccessfulState) {
-                              return true;
-                            } else if (current is SignInErrorState) {
-                              return true;
-                            } else {
-                              return false;
-                            }
-                          },
-                          builder: (context, state) {
-                            return (state is SignInLoadingState)
-                                ? const Center(
-                                    child: CircularProgressIndicator.adaptive())
-                                : CustomButton(
-                                    widget: const Text("Sign In"),
-                                    function: () {
-                                      if (formKey.currentState!.validate()) {
-                                        AuthCubit.get(context).signIn(
-                                            password: passwordController.text,
-                                            email: emailController.text);
-                                      }
-                                    },
-                                    color: ColorManage.primaryYellow,
-                                    disable: true);
-                          },
-                        ),
-                        SizedBox(height: 25.h),
-                        Padding(
-                          padding: EdgeInsets.all(20.sp),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text("Remember Password" , style: getSemiBoldStyle(
-                                      color: ColorManage.secondaryBlack,
-                                      fontSize: 20.sp,
-                                      height: 1),),
-                                  Checkbox(
-                                      value: true,
-                                      onChanged: (value)
-                                      {
+                              controller: emailController,
+                              hint: 'email',
+                              fieldValidator: emailValidator),
+                          const SizedBox(height: 10),
+                          //password's
+                          const Align(
+                              alignment: Alignment.topLeft,
+                              child: Text('password')),
 
-                                      })
-                                ],
-                              ),
-                              TextButton(onPressed: (){
-                              }, child: const Text("Forget Password"))
-                            ],
+                          BlocConsumer<AuthCubit, AuthState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                            },
+                            builder: (context, state) {
+                              return CustomTextField(
+                                iconData: Icon(FontAwesomeIcons.lock),
+                                fieldValidator: passwordValidator,
+                                controller: passwordController,
+                                hint: 'password',
+                                password: AuthCubit.get(context).visibility,
+                                passwordTwo: true,
+                                function: () {
+                                  AuthCubit.get(context).changeState();
+                                },
+                              );
+                            },
                           ),
-                        )
-                        //Register now
-                      ],
+
+                          SizedBox(height: 30.h),
+                          Padding(
+                            padding: EdgeInsets.all(20.sp),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Remember Password",
+                                      style: getSemiBoldStyle(
+                                          color: ColorManage.secondaryBlack,
+                                          fontSize: 20.sp,
+                                          height: 1),
+                                    ),
+                                    BlocBuilder<AuthCubit, AuthState>(
+                                      buildWhen: (previous, current) {
+                                        if (current is RememberMe) {
+                                          return true;
+                                        } else {
+                                          return false;
+                                        }
+                                      },
+                                      builder: (context, state) {
+                                        return Checkbox(
+                                            value: AuthCubit.get(context)
+                                                .rememberMe,
+                                            onChanged: (value) {
+                                              AuthCubit.get(context)
+                                                  .changeStateRemember();
+                                            });
+                                      },
+                                    )
+                                  ],
+                                ),
+                                TextButton(
+                                    onPressed: () {},
+                                    child: const Text("Forget Password"))
+                              ],
+                            ),
+                          ),
+                          //sign in button
+                          BlocBuilder<AuthCubit, AuthState>(
+                            buildWhen: (pre, current) {
+                              if (current is SignInLoadingState) {
+                                return true;
+                              } else if (current is SignInSuccessfulState) {
+                                return true;
+                              } else if (current is SignInErrorState) {
+                                return true;
+                              } else {
+                                return false;
+                              }
+                            },
+                            builder: (context, state) {
+                              return (state is SignInLoadingState)
+                                  ? const Center(
+                                      child:
+                                          CircularProgressIndicator.adaptive())
+                                  : CustomButton(
+                                      widget: const Text("Sign In"),
+                                      function: () {
+                                        if (formKey.currentState!.validate()) {
+                                          AuthCubit.get(context).signIn(
+                                              password: passwordController.text,
+                                              email: emailController.text);
+                                        }
+                                      },
+                                      color: ColorManage.primaryYellow,
+                                      disable: true);
+                            },
+                          ),
+                          SizedBox(height: 25.h),
+                          //Register now
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -156,15 +188,14 @@ class SignInScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("I don’t have account yet? ",
-                      style: getRegularStyle(
+                      style: getSemiBoldStyle(
                           color: Colors.white, height: 1, fontSize: 24.sp)),
                   InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context,Routes.signUp);
-
+                        Navigator.pushNamed(context, Routes.signUp);
                       },
                       child: Text("Create",
-                          style: getRegularStyle(
+                          style: getSemiBoldStyle(
                               color: ColorManage.primaryYellow,
                               height: 1,
                               fontSize: 24.sp))),
@@ -178,48 +209,3 @@ class SignInScreen extends StatelessWidget {
   }
 }
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    required this.controller,
-    required this.hint,
-    this.password = false,
-    this.passwordTwo = false,
-    this.function,
-    required this.fieldValidator,
-    Key? key,
-  }) : super(key: key);
-  final TextEditingController controller;
-  final String hint;
-  final bool password;
-  final bool passwordTwo;
-  final Function fieldValidator;
-  final Function? function;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.0.w),
-      child: TextFormField(
-        controller: controller,
-        validator: (value) => fieldValidator(value),
-        decoration: InputDecoration(
-            errorBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: ColorManage.redError)),
-            enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: ColorManage.gray)),
-            hintText: hint,
-            suffix: (passwordTwo)
-                ? GestureDetector(
-                    child: (password)
-                        ? const Icon(Icons.visibility_outlined)
-                        : const Icon(Icons.visibility_off),
-                    onTap: () {
-                      function!();
-                    },
-                  )
-                : SizedBox()),
-        obscureText: password,
-      ),
-    );
-  }
-}

@@ -10,7 +10,6 @@ import 'package:graduation_project/view/components/core_components/custom_button
 import 'package:lottie/lottie.dart';
 
 import '../../../core/resource/assets_manager.dart';
-import '../../components/core_components/custom_social_medial_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,12 +29,12 @@ class HomeScreen extends StatelessWidget {
                   width: 200.w,
                   child: Text(
                     textAlign: TextAlign.center,
-                    StringManager.welcome.tr(),
+                    'Travel X',
                     style: getBoldStyle(
                         color: Colors.white,
                         height:
                             toFigmaHeight(figmaHeight: 48.sp, fontSize: 32.sp),
-                        fontSize: 32.sp),
+                        fontSize: 45.sp),
                   ),
                 ),
               ),
@@ -64,34 +63,44 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         // facebook and google button
-                        Row(
-                          children: [
-                            CustomSocialMediaButton(
-                              function: () {},
-                              color: const Color(0xff3B5998),
-                              socialMediaIcon: FontAwesomeIcons.facebook,
-                              socialMediaName: 'FaceBook',
-                            ),
-                            SizedBox(
-                              width: 20.w,
-                            ),
-                            CustomSocialMediaButton(
-                              function: () {
-                                context.setLocale(const Locale('en'));
-                              },
-                              color: const Color(0xffDD4B39),
-                              socialMediaIcon: FontAwesomeIcons.googlePlus,
-                              socialMediaName: 'Google',
-                            ),
-                          ],
-                        ),
                         CustomButton(
-                          widget: Text(StringManager.signIn.tr(),
-                              style: getBoldStyle(
-                                  color: ColorManage.background,
-                                  height: toFigmaHeight(
-                                      figmaHeight: 30.sp, fontSize: 20.sp),
-                                  fontSize: 20.sp)),
+                          widget: Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.googlePlus,
+                                size: 32.sp,
+                              ),
+                              SizedBox(
+                                width: 115.w,
+                              ),
+                              Text("Google",
+                                  style: getBoldStyle(
+                                      color: ColorManage.background,
+                                      height: toFigmaHeight(
+                                          figmaHeight: 30.sp, fontSize: 20.sp),
+                                      fontSize: 20.sp)),
+                            ],
+                          ),
+                          function: () {
+                            Navigator.pushNamed(context, Routes.signIn);
+                          },
+                          color: ColorManage.redError,
+                          disable: true,
+                        ),
+
+                        CustomButton(
+                          widget: Row(children: [
+                            Icon(Icons.arrow_forward),
+                            SizedBox(
+                              width: 115.w,
+                            ),
+                            Text(StringManager.signIn.tr(),
+                                style: getBoldStyle(
+                                    color: ColorManage.background,
+                                    height: toFigmaHeight(
+                                        figmaHeight: 30.sp, fontSize: 20.sp),
+                                    fontSize: 20.sp))
+                          ],),
                           function: () {
                             Navigator.pushNamed(context, Routes.signIn);
                           },
@@ -125,16 +134,23 @@ class HomeScreen extends StatelessWidget {
                         ),
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            fixedSize: Size(MediaQuery.of(context).size.width, 64.h),
-
+                              fixedSize:
+                                  Size(MediaQuery.of(context).size.width, 64.h),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16.r)),
-                              side: const BorderSide(color: ColorManage.primaryYellow)),
+                              side: const BorderSide(
+                                  color: ColorManage.primaryYellow)),
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.signUp);
                           },
-                          child:  Text(StringManager.signUp.tr() ,style: getExtraBoldStyle(color: ColorManage.primaryYellow
-                              , height: toFigmaHeight(figmaHeight: 30.sp, fontSize: 20.sp),fontSize: 20.sp),),
+                          child: Text(
+                            StringManager.signUp.tr(),
+                            style: getExtraBoldStyle(
+                                color: ColorManage.primaryYellow,
+                                height: toFigmaHeight(
+                                    figmaHeight: 30.sp, fontSize: 20.sp),
+                                fontSize: 20.sp),
+                          ),
                         ),
                       ],
                     ),

@@ -14,10 +14,15 @@ class AuthCubit extends Cubit<AuthState> {
 
   static AuthCubit get(context) => BlocProvider.of<AuthCubit>(context);
   bool visibility = true;
+  bool rememberMe = false;
 
   void changeState() {
     visibility = !visibility;
     emit(ChangeState());
+  }
+  void changeStateRemember() {
+    rememberMe = !rememberMe;
+    emit(RememberMe());
   }
 
   Future<void> signIn({required String email, required String password}) async {

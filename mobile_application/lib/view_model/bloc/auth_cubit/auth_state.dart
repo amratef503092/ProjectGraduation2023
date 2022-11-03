@@ -5,6 +5,8 @@ abstract class AuthState {}
 
 class AuthInitial extends AuthState {}
 class ChangeState extends AuthState{}
+class RememberMe extends AuthState{}
+
 // SignIn state start
 class SignInLoadingState extends AuthState{}
 class SignInSuccessfulState extends AuthState{}

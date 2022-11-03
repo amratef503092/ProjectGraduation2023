@@ -209,7 +209,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           fontSize: 16.sp),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.homeScreen, (route) => false);
+                        },
                         child: Text(
                           StringManager.skip.tr(),
                           style: getRegularStyle(

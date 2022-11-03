@@ -20,10 +20,6 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
         subTitle: StringManager.subTitleOnBoardingTwo,
         imagePath: AssetsManager.onBoardingImageTwo),
     OnBoardingModel(
-        title: StringManager.titleOnBoardingThree,
-        subTitle: StringManager.subTitleOnBoardingThree,
-        imagePath: AssetsManager.onBoardingImageThree),
-    OnBoardingModel(
         title: StringManager.titleOnBoardingFour,
         subTitle: StringManager.subTitleOnBoardingFour,
         imagePath: AssetsManager.onBoardingImageFour),
