@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/view/pages/auth/forget_password/Recover_password.dart';
 import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
 
+import '../../view/pages/auth/forget_password/forget_password_screen.dart';
 import '../../view/pages/auth/sign_up_screen/Sign_up_screen.dart';
 import '../../view/pages/onboarding_screen/onBoarding_screen.dart';
 
@@ -15,8 +17,7 @@ class Routes {
   static const String onBoarding = '/OnBoarding';
   static const String signIn = "/signIn";
   static const String signUp = "/signUp";
-
-
+  static const String recoverPassword = "/RecoverPassword";
   static const String storeDetailsRoute = "/storeDetails";
 }
 
@@ -38,6 +39,12 @@ class RouteGenerator {
       case Routes.signUp:
         return MaterialPageRoute(
             builder: (_) =>   SignupScreen());
+        case Routes.forgotPasswordRoute:
+        return MaterialPageRoute(
+            builder: (_) =>   ForgetPasswordScreen());
+        case Routes.recoverPassword:
+        return MaterialPageRoute(
+            builder: (_) =>   RecoverPasswordScreen());
       default:
         return unDefinedRoute();
     }

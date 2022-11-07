@@ -51,6 +51,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   form_field_validator: ^1.1.0
   dropdown_button2: ^1.8.9
+  pin_code_fields: ^7.4.0
 
 
 dev_dependencies:

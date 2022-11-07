@@ -137,7 +137,10 @@ class SignInScreen extends StatelessWidget {
                                   ],
                                 ),
                                 TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, Routes.forgotPasswordRoute);
+
+                                    },
                                     child: const Text("Forget Password"))
                               ],
                             ),
