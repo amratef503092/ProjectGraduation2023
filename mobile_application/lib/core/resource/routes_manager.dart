@@ -5,8 +5,10 @@ import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen
 import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
 
+import '../../view/pages/auth/forget_password/create_new_password.dart';
 import '../../view/pages/auth/forget_password/forget_password_screen.dart';
 import '../../view/pages/auth/sign_up_screen/Sign_up_screen.dart';
+import '../../view/pages/auth/sign_up_screen/welcome_page.dart';
 import '../../view/pages/onboarding_screen/onBoarding_screen.dart';
 
 class Routes {
@@ -18,6 +20,8 @@ class Routes {
   static const String signIn = "/signIn";
   static const String signUp = "/signUp";
   static const String recoverPassword = "/RecoverPassword";
+  static const String createNewPassword = "/CreateNewPassword";
+  static const String welcomePage = "/WelcomePage";
   static const String storeDetailsRoute = "/storeDetails";
 }
 
@@ -45,6 +49,12 @@ class RouteGenerator {
         case Routes.recoverPassword:
         return MaterialPageRoute(
             builder: (_) =>   RecoverPasswordScreen());
+        case Routes.createNewPassword:
+        return MaterialPageRoute(
+            builder: (_) =>   CreateNewPasswordScreen());
+        case Routes.welcomePage:
+        return MaterialPageRoute(
+            builder: (_) =>   WelcomePage());
       default:
         return unDefinedRoute();
     }

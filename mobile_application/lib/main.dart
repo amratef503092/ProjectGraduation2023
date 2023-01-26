@@ -86,6 +86,7 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: context.localizationDelegates,
               locale: context.locale,
               debugShowCheckedModeBanner: false,
+
               onGenerateRoute: RouteGenerator.getRoute,
               initialRoute: Routes.onBoarding,
               theme: getTheme(),

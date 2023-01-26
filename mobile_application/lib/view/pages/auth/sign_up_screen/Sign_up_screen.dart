@@ -8,6 +8,7 @@ import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 
+import '../../../../core/resource/routes_manager.dart';
 import '../../../../core/resource/validator.dart';
 import '../../../components/core_components/custom_text_form_faild.dart';
 
@@ -355,7 +356,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       style: getBoldStyle(
                           color: Colors.white, height: 1, fontSize: 24.sp)),
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.welcomePage);
+                      },
                       child: Text("SIGN IN",
                           style: getBoldStyle(
                               color: ColorManage.primaryYellow,
