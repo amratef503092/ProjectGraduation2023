@@ -22,8 +22,7 @@ class CustomSmootIndicatior extends StatelessWidget {
         dotWidth: 10,
         dotColor: ColorManage.primaryBlue,
         activeDotColor: ColorManage.primaryBlue,
-
-        expansionFactor: 4,
+        expansionFactor: 5,
         spacing: 5,
 
       ), offset: index,

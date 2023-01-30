@@ -166,11 +166,13 @@ class SignInScreen extends StatelessWidget {
                                   : CustomButton(
                                       widget: const Text("Sign In"),
                                       function: () {
-                                        if (formKey.currentState!.validate()) {
-                                          AuthCubit.get(context).signIn(
-                                              password: passwordController.text,
-                                              email: emailController.text);
-                                        }
+                                        Navigator.pushNamed(context, Routes.HomePageScreen);
+
+                                        // if (formKey.currentState!.validate()) {
+                                        //   AuthCubit.get(context).signIn(
+                                        //       password: passwordController.text,
+                                        //       email: emailController.text);
+                                        // }
                                       },
                                       color: ColorManage.primaryYellow,
                                       disable: true);

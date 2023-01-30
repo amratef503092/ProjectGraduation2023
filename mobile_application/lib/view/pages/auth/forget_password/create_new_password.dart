@@ -46,7 +46,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
               hint: 'New Password',
               fieldValidator: emailValidator),
           SizedBox(height: 30.h),
-           CustomSmootIndicatior(index: 2,count: 2),
+           CustomSmootIndicatior(index: 1,count: 2),
           SizedBox(height: 30.h),
 
           CustomButton(

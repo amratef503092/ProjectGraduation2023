@@ -35,7 +35,7 @@ class CustomBody extends StatelessWidget {
                       size: 36.sp,
                     )),
                 SizedBox(
-                  width: 75.w,
+                  width: 120.w,
                 ),
                 Center(
                     child: Text(textAppBar,
@@ -43,12 +43,15 @@ class CustomBody extends StatelessWidget {
                             color: Colors.white, height: 1, fontSize: 28.h))),
               ],
             ),
+            SizedBox(
+              height: 20.h,
+            ),
             Container(
               height: MediaQuery.of(context).size.height-0.20,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(40.r),
-                    topLeft: Radius.circular(40.r),
+                    topRight: Radius.circular(30.r),
+                    topLeft: Radius.circular(30.r),
                   ),
                   color: Colors.white),
               child: widget,

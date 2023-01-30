@@ -5,10 +5,16 @@ import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen
 import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
 
+import '../../view/pages/Setting_Screen/languages_screen/languages_screen.dart';
+import '../../view/pages/Setting_Screen/setting_currency/setting_currency.dart';
+import '../../view/pages/Setting_Screen/setting_screen.dart';
+import '../../view/pages/Setting_Screen/unit_screen/unit_screen.dart';
 import '../../view/pages/auth/forget_password/create_new_password.dart';
 import '../../view/pages/auth/forget_password/forget_password_screen.dart';
 import '../../view/pages/auth/sign_up_screen/Sign_up_screen.dart';
-import '../../view/pages/auth/sign_up_screen/welcome_page.dart';
+import '../../view/pages/home_page_screen/home_page_screen.dart';
+import '../../view/pages/location_screen/location_screen.dart';
+import '../../view/pages/location_screen/welcome_page.dart';
 import '../../view/pages/onboarding_screen/onBoarding_screen.dart';
 
 class Routes {
@@ -23,10 +29,17 @@ class Routes {
   static const String createNewPassword = "/CreateNewPassword";
   static const String welcomePage = "/WelcomePage";
   static const String storeDetailsRoute = "/storeDetails";
+  static const String location = "/LocationScreen";
+  static const String HomePageScreen = "/HomePageScreen";
+  static const String settingScreen = "/SettingScreen";
+  static const String LanguageScreen = "/LanguageScreen";
+  static const String SettingCurrency = "/SettingCurrency";
+  static const String UnitScreen = "/UnitScreen";
 }
 
 class RouteGenerator {
-  static Route<dynamic> getRoute(RouteSettings routeSettings) {
+  static Route<dynamic> getRoute(RouteSettings routeSettings)
+  {
     switch (routeSettings.name) {
       case Routes.onBoarding:
         return MaterialPageRoute(
@@ -51,10 +64,29 @@ class RouteGenerator {
             builder: (_) =>   RecoverPasswordScreen());
         case Routes.createNewPassword:
         return MaterialPageRoute(
-            builder: (_) =>   CreateNewPasswordScreen());
+            builder: (_) =>   const CreateNewPasswordScreen());
         case Routes.welcomePage:
         return MaterialPageRoute(
-            builder: (_) =>   WelcomePage());
+            builder: (_) =>   const WelcomePage());
+        case Routes.location:
+        return MaterialPageRoute(
+            builder: (_) =>    LocationScreen());
+        case Routes.HomePageScreen:
+        return MaterialPageRoute(
+            builder: (_) =>    const HomePageScreen());
+        case Routes.settingScreen:
+        return MaterialPageRoute(
+            builder: (_) =>    const SettingScreen());
+        case Routes.LanguageScreen:
+        return MaterialPageRoute(
+            builder: (_) =>    const LanguageScreen());
+        case Routes.SettingCurrency:
+        return MaterialPageRoute(
+            builder: (_) =>    const SettingCurrency());
+        case Routes.UnitScreen:
+        return MaterialPageRoute(
+            builder: (_) =>    const UnitScreen());
+
       default:
         return unDefinedRoute();
     }

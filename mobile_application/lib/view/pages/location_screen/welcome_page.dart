@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/forget_password_components/custom_smoothIndecator.dart';
 
-import '../../../../core/resource/color_mananger.dart';
+import '../../../core/resource/color_mananger.dart';
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -117,23 +118,28 @@ class WelcomePage extends StatelessWidget {
             ],
           ),
         ),
-        bottomSheet: Container(
-          height: 0.1.sh,
-          width: 1.sw,
-          decoration: BoxDecoration(
-            color: ColorManage.primaryYellow,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.r),
-              topRight: Radius.circular(20.r),
+        bottomSheet: GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, Routes.location);
+          },
+          child: Container(
+            height: 0.1.sh,
+            width: 1.sw,
+            decoration: BoxDecoration(
+              color: ColorManage.primaryYellow,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.r),
+                topRight: Radius.circular(20.r),
+              ),
             ),
-          ),
-          child: Center(
-            child: Text("Next",
-                style: getBoldStyle(
-                  color: ColorManage.background,
-                  height: 1,
-                  fontSize: 16.h,
-                )),
+            child: Center(
+              child: Text("Next",
+                  style: getBoldStyle(
+                    color: ColorManage.background,
+                    height: 1,
+                    fontSize: 16.h,
+                  )),
+            ),
           ),
         ),
       ),
