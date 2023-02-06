@@ -166,7 +166,7 @@ class SignInScreen extends StatelessWidget {
                                   : CustomButton(
                                       widget: const Text("Sign In"),
                                       function: () {
-                                        Navigator.pushNamed(context, Routes.HomePageScreen);
+                                        Navigator.pushNamed(context, Routes.LayoutScreen);
 
                                         // if (formKey.currentState!.validate()) {
                                         //   AuthCubit.get(context).signIn(

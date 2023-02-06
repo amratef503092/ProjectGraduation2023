@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/resource/color_mananger.dart';
 class CustomTextField extends StatelessWidget {
@@ -10,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.function,
     required this.fieldValidator,
     this.iconData,
+    this.border = false,
     Key? key,
   }) : super(key: key);
   final TextEditingController controller;
@@ -19,15 +21,22 @@ class CustomTextField extends StatelessWidget {
   final Function fieldValidator;
   final Function? function;
   final Widget ?iconData;
+  final bool ?border;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       validator: (value) => fieldValidator(value),
       decoration: InputDecoration(
-          errorBorder: const UnderlineInputBorder(
+        border: border==true?InputBorder.none:OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide(
+            color: ColorManage.primaryBlue,
+          ),
+        ),
+          errorBorder:  UnderlineInputBorder(
               borderSide: BorderSide(color: ColorManage.redError)),
-          enabledBorder: const UnderlineInputBorder(
+          enabledBorder:(border!)?InputBorder.none: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorManage.gray)),
           hintText: hint,
           prefixIcon: (iconData==null)?SizedBox():iconData!,

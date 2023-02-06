@@ -5,6 +5,12 @@ import 'color_mananger.dart';
 
 ThemeData getTheme() {
   return ThemeData(
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorManage.background,
+      elevation: 0,
+      iconTheme: IconThemeData(color: ColorManage.primaryBlue),
+
+    ),
       scaffoldBackgroundColor: ColorManage.background,
       primaryColor: ColorManage.primaryBlue,
       // text

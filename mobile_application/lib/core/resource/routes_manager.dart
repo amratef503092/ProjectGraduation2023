@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/view/pages/auth/forget_password/Recover_password.dart';
 import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
+import 'package:graduation_project/view/pages/layout_screen/layout_screen.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
 
 import '../../view/pages/Setting_Screen/languages_screen/languages_screen.dart';
@@ -35,6 +36,7 @@ class Routes {
   static const String LanguageScreen = "/LanguageScreen";
   static const String SettingCurrency = "/SettingCurrency";
   static const String UnitScreen = "/UnitScreen";
+  static const String LayoutScreen = "/LayoutScreen";
 }
 
 class RouteGenerator {
@@ -73,7 +75,7 @@ class RouteGenerator {
             builder: (_) =>    LocationScreen());
         case Routes.HomePageScreen:
         return MaterialPageRoute(
-            builder: (_) =>    const HomePageScreen());
+            builder: (_) =>     HomePageScreen());
         case Routes.settingScreen:
         return MaterialPageRoute(
             builder: (_) =>    const SettingScreen());
@@ -86,6 +88,9 @@ class RouteGenerator {
         case Routes.UnitScreen:
         return MaterialPageRoute(
             builder: (_) =>    const UnitScreen());
+      case Routes.LayoutScreen:
+        return MaterialPageRoute(
+            builder: (_) =>    const LayoutScreen());
 
       default:
         return unDefinedRoute();

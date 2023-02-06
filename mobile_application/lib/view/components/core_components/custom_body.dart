@@ -21,9 +21,9 @@ class CustomBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              height: 20.h,
-            ),
+              height: 20.h,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                     onPressed: () {
@@ -34,13 +34,11 @@ class CustomBody extends StatelessWidget {
                       color: ColorManage.primaryYellow,
                       size: 36.sp,
                     )),
-                SizedBox(
-                  width: 120.w,
-                ),
                 Center(
                     child: Text(textAppBar,
                         style: getSemiBoldStyle(
                             color: Colors.white, height: 1, fontSize: 28.h))),
+                SizedBox(width: 36.w,)
               ],
             ),
             SizedBox(
