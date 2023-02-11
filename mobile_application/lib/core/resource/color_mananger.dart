@@ -16,4 +16,5 @@ class ColorManage {
   static const Color variantBlue3 = Color(0xffC5CDF7);
   static const Color price = Color(0xffFF4F4F);
   static const Color black = Color(0xff000000);
+  static const Color backgroundHotel = Color(0xffE5E5E5);
 }
