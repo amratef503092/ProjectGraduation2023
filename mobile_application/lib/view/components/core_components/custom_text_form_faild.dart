@@ -30,16 +30,16 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         border: border==true?InputBorder.none:OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: ColorManage.primaryBlue,
           ),
         ),
-          errorBorder:  UnderlineInputBorder(
+          errorBorder:  const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorManage.redError)),
           enabledBorder:(border!)?InputBorder.none: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorManage.gray)),
           hintText: hint,
-          prefixIcon: (iconData==null)?SizedBox():iconData!,
+          prefixIcon: (iconData==null)?const SizedBox():iconData!,
           suffix: (passwordTwo)
               ? GestureDetector(
             child: (password)

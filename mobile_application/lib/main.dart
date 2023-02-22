@@ -52,7 +52,8 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MultiBlocProvider(
-          providers: [BlocProvider(create: (context) => InternetServiceBloc()),
+          providers: [
+            BlocProvider(create: (context) => InternetServiceBloc()),
           BlocProvider(create: (context)=>AuthCubit())
           ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(

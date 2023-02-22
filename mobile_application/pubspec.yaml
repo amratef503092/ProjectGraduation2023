@@ -47,7 +47,7 @@ dependencies:
   easy_localization: ^3.0.1
   lottie: ^1.4.3
   connectivity_plus: ^3.0.2
-  fluttertoast: ^8.1.1
+  fluttertoast: ^8.2.1
   font_awesome_flutter: ^10.2.1
   form_field_validator: ^1.1.0
   dropdown_button2: ^1.8.9
@@ -57,8 +57,7 @@ dependencies:
   flutter_launcher_icons: ^0.11.0
   pandabar: ^0.1.2
   country_list_pick: ^1.0.1+6
-
-
+  country_picker: ^2.0.19
 
 
 dev_dependencies:

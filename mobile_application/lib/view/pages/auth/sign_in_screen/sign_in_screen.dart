@@ -10,6 +10,7 @@ import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 
 import '../../../../core/resource/validator.dart';
 import '../../../components/core_components/custom_text_form_faild.dart';
+import '../../../components/core_components/toast_message.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);
@@ -71,8 +72,7 @@ class SignInScreen extends StatelessWidget {
                               child: Text('Email')),
                           //email falid
                           CustomTextField(
-                              iconData: Icon(Icons.email),
-
+                              iconData: const Icon(Icons.email),
                               controller: emailController,
                               hint: 'email',
                               fieldValidator: emailValidator),
@@ -88,13 +88,14 @@ class SignInScreen extends StatelessWidget {
                             },
                             builder: (context, state) {
                               return CustomTextField(
-                                iconData: Icon(FontAwesomeIcons.lock),
+                                iconData: const Icon(FontAwesomeIcons.lock),
                                 fieldValidator: passwordValidator,
                                 controller: passwordController,
                                 hint: 'password',
                                 password: AuthCubit.get(context).visibility,
                                 passwordTwo: true,
-                                function: () {
+                                function: ()
+                                {
                                   AuthCubit.get(context).changeState();
                                 },
                               );
@@ -138,15 +139,32 @@ class SignInScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.pushNamed(context, Routes.forgotPasswordRoute);
-
+                                      Navigator.pushNamed(
+                                          context, Routes.forgotPasswordRoute);
                                     },
                                     child: const Text("Forget Password"))
                               ],
                             ),
                           ),
                           //sign in button
-                          BlocBuilder<AuthCubit, AuthState>(
+                          BlocConsumer<AuthCubit, AuthState>(
+                            listener: (context, state) {
+                              if (state is SignInSuccessfulState)
+                              {
+                                toastMessage(
+                                  color: ColorManage.primaryYellow,
+                                  message: "Welcome To Travel X"
+                                );
+                                Navigator.pushNamed(context, Routes.LayoutScreen);
+
+                              } else if (state is SignInErrorState) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(state.error),
+                                  backgroundColor: ColorManage.redError,
+                                ));
+                              }
+                            },
                             buildWhen: (pre, current) {
                               if (current is SignInLoadingState) {
                                 return true;
@@ -166,13 +184,11 @@ class SignInScreen extends StatelessWidget {
                                   : CustomButton(
                                       widget: const Text("Sign In"),
                                       function: () {
-                                        Navigator.pushNamed(context, Routes.LayoutScreen);
-
-                                        // if (formKey.currentState!.validate()) {
-                                        //   AuthCubit.get(context).signIn(
-                                        //       password: passwordController.text,
-                                        //       email: emailController.text);
-                                        // }
+                                        if (formKey.currentState!.validate()) {
+                                          AuthCubit.get(context).signIn(
+                                              password: passwordController.text,
+                                              email: emailController.text);
+                                        }
                                       },
                                       color: ColorManage.primaryYellow,
                                       disable: true);
@@ -213,4 +229,3 @@ class SignInScreen extends StatelessWidget {
     );
   }
 }
-

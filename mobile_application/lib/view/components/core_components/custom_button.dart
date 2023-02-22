@@ -6,7 +6,7 @@ class CustomButton extends StatelessWidget {
     required this.function,
     required this.color,
     this.radius = 16,
-    this.disable =false,
+    this.disable =true,
     this.size = const Size(366, 64),
     Key? key,
   }) : super(key: key);
@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
           backgroundColor: color,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.r)),
-          fixedSize: Size(366.w, 64.h),
+          fixedSize: size,
         ),
         onPressed: disable
             ? () {
