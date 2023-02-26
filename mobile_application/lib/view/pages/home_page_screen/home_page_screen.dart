@@ -106,7 +106,7 @@ class HomePageScreen extends StatelessWidget {
                             SizedBox(
                               width: 20.w,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.add_location_alt,
                               color: ColorManage.primaryBlue,
                             ),

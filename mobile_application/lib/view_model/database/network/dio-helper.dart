@@ -12,6 +12,7 @@ class DioHelper {
       BaseOptions(
         //Here the URL of API.
         baseUrl: baseUrl,
+        connectTimeout: 3000,
         //  receiveDataWhenStatusError: true,
         //Here we Put The Headers Needed in The API.
         headers: {
