@@ -435,7 +435,12 @@ class HotelDetailsScreen extends StatelessWidget {
                              ],
                            ),
                          ),
-                         Text("About"),
+                         // About
+                         Column(
+                           children: [
+                             Text("About"),
+                           ],
+                         ),
                          Text("Review"),
 
                        ]),

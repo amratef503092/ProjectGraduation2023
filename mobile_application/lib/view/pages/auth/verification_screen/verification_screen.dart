@@ -81,7 +81,7 @@ class VerificationEmailScreen extends StatelessWidget {
 
                           //email falid
                           CustomPin(onCompleted: (v) {
-                            Navigator.pushNamed(context, Routes.storeDetailsRoute);
+                            Navigator.pushNamed(context, Routes.welcomePage);
                           }),
                           //password's
                           CustomSmootIndicatior(index: 0, count: 2),
