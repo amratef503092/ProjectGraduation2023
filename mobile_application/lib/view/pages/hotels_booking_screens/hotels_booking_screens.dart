@@ -109,26 +109,30 @@ class HotelBookingScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ListView.builder(
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomTopHotelCard(
-                            save: (){},
-                            functionCard: () {},
-                            image:
-                                "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
-                            title: "A&Em selection hotel",
-                            function: ()
-                            {
-                              Navigator.push(context, MaterialPageRoute(builder:
-                              (context) {
-                                return HotelDetailsScreen();
+                        return Hero(
+                          tag: index,
+
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomTopHotelCard(
+                              save: (){},
+                              functionCard: () {},
+                              image:
+                                  "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
+                              title: "A&Em selection hotel",
+                              function: ()
+                              {
+                                Navigator.push(context, MaterialPageRoute(builder:
+                                (context) {
+                                  return HotelDetailsScreen(index: index,);
+                                },
+                                ));
                               },
-                              ));
-                            },
-                            discount: "80",
-                            price: "90",
-                            rate: 20,
-                            reviwe: "90",
+                              discount: "80",
+                              price: "90",
+                              rate: 20,
+                              reviwe: "90",
+                            ),
                           ),
                         );
                       },

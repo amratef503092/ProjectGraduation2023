@@ -60,6 +60,7 @@ dependencies:
   country_picker: ^2.0.19
   carousel_slider: ^4.2.1
   motion_toast: ^2.6.5
+  expandable_text: ^2.3.0
 
 
 dev_dependencies:
