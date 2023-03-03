@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/bloc/internet_services/internet_service_bloc.dart';
+import 'package:graduation_project/view_model/database/local/cache_helper.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 import 'core/BlocObserver.dart';
 import 'core/resource/routes_manager.dart';
@@ -17,7 +18,9 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await DioHelper.init();
   await EasyLocalization.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  await CacheHelper.init();
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness:   Brightness.dark,
     statusBarColor: Colors.white

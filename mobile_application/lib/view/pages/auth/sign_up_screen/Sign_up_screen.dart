@@ -1,8 +1,6 @@
 import 'package:country_list_pick/country_list_pick.dart';
-import 'package:country_list_pick/country_selection_theme.dart';
-import 'package:country_list_pick/support/code_country.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +9,7 @@ import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
+import 'package:motion_toast/motion_toast.dart';
 
 import '../../../../core/resource/routes_manager.dart';
 import '../../../../core/resource/validator.dart';
@@ -32,17 +31,13 @@ class _SignupScreenState extends State<SignupScreen> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final List<String> items = [
-    "Male",
-    "Female"
-  ];
-  final List<String> status = [
-    "married",
-    "singles "
-  ];
-  String? selectedValue;
-  String ?selectStatusValue;
-  String ? nationality;
+  final List<String> items = ["Male", "Female"];
+  final List<String> status = ["married", "singles "];
+  String? selectedValueGender;
+  String? selectStatusValue;
+  String? nationality;
+  String? birthday;
+
   @override
   Widget build(BuildContext context) {
     // return Scaffold(
@@ -207,7 +202,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     Center(
                         child: Text("Sign Up To Travel",
                             style: getSemiBoldStyle(
-                                color: Colors.white, height: 1, fontSize: 28.h))),
+                                color: Colors.white,
+                                height: 1,
+                                fontSize: 28.h))),
                   ],
                 ),
                 Container(
@@ -231,9 +228,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               //email falid
                               CustomTextField(
                                   iconData: Icon(Icons.email),
-
                                   controller: emailController,
-                                  hint: 'email',
+                                  hint: 'Email',
                                   fieldValidator: emailValidator),
                               const SizedBox(height: 10),
                               //password's
@@ -246,7 +242,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     iconData: const Icon(FontAwesomeIcons.lock),
                                     fieldValidator: passwordValidator,
                                     controller: passwordController,
-                                    hint: 'password',
+                                    hint: 'Password',
                                     password: AuthCubit.get(context).visibility,
                                     passwordTwo: true,
                                     function: () {
@@ -256,16 +252,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                 },
                               ),
 
-                              SizedBox(height:10.h),
+                              SizedBox(height: 10.h),
 
                               CustomTextField(
-                                  iconData: Icon(FontAwesomeIcons.user),
-
+                                  iconData: const Icon(FontAwesomeIcons.user),
                                   controller: nameController,
                                   hint: 'Name',
-                                  fieldValidator: (value){
-                                    if(value.isEmpty)
-                                    {
+                                  fieldValidator: (value) {
+                                    if (value.isEmpty) {
                                       return "Please Enter name";
                                     }
                                   }),
@@ -273,42 +267,44 @@ class _SignupScreenState extends State<SignupScreen> {
                               SizedBox(height: 20.h),
                               Row(
                                 children: [
-                                  SizedBox(width: 12.w,),
-
-                                  Icon(FontAwesomeIcons.venusMars ,
-                                  color: ColorManage.gray,
+                                  SizedBox(
+                                    width: 12.w,
                                   ),
-                                  SizedBox(width: 20.w,),
+                                  const Icon(
+                                    FontAwesomeIcons.venusMars,
+                                    color: ColorManage.gray,
+                                  ),
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
                                   SizedBox(
                                     width: 300,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton2(
-
                                         hint: Text(
                                           'Gender',
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: Theme
-                                                .of(context)
-                                                .hintColor,
+                                            color: Theme.of(context).hintColor,
                                           ),
                                         ),
                                         items: items
                                             .map((item) =>
-                                            DropdownMenuItem<String>(
-                                              value: item,
-                                              child: Text(
-                                                item,
-                                                style: const TextStyle(
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
+                                                DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ))
                                             .toList(),
-                                        value: selectedValue,
+                                        value: selectedValueGender,
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedValue = value as String;
+                                            selectedValueGender =
+                                                value as String;
                                           });
                                         },
                                         buttonHeight: 40,
@@ -321,7 +317,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               SizedBox(height: 10.h),
 
-
                               const Divider(
                                 color: ColorManage.gray,
                                 height: 3,
@@ -330,37 +325,38 @@ class _SignupScreenState extends State<SignupScreen> {
                               SizedBox(height: 10.h),
                               Row(
                                 children: [
-                                  SizedBox(width: 12.w,),
-
-                                  const Icon(FontAwesomeIcons.ring ,
+                                  SizedBox(
+                                    width: 12.w,
+                                  ),
+                                  const Icon(
+                                    FontAwesomeIcons.ring,
                                     color: ColorManage.gray,
                                   ),
-                                  SizedBox(width: 20.w,),
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
                                   SizedBox(
                                     width: 300,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton2(
-
                                         hint: Text(
                                           'Status',
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: Theme
-                                                .of(context)
-                                                .hintColor,
+                                            color: Theme.of(context).hintColor,
                                           ),
                                         ),
                                         items: status
                                             .map((item) =>
-                                            DropdownMenuItem<String>(
-                                              value: item,
-                                              child: Text(
-                                                item,
-                                                style: const TextStyle(
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
+                                                DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ))
                                             .toList(),
                                         value: selectStatusValue,
                                         onChanged: (value) {
@@ -401,13 +397,18 @@ class _SignupScreenState extends State<SignupScreen> {
                                           package: 'country_list_pick',
                                           height: 20,
                                         ),
-                                        SizedBox(width: 20,),
-                                        Text(countryCode.name!,style: TextStyle(
-                                          color: ColorManage.gray
-                                        )),
-                                        SizedBox(width: 215.w,),
-                                        Icon(Icons.arrow_drop_down,
-                                        color: ColorManage.gray,
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(countryCode.name!,
+                                            style: const TextStyle(
+                                                color: ColorManage.gray)),
+                                        SizedBox(
+                                          width: 215.w,
+                                        ),
+                                        const Icon(
+                                          Icons.arrow_drop_down,
+                                          color: ColorManage.gray,
                                         )
                                       ],
                                     );
@@ -432,43 +433,129 @@ class _SignupScreenState extends State<SignupScreen> {
                                   // Whether to allow the widget to set a custom UI overlay
                                   useUiOverlay: true,
                                   // Whether the country list should be wrapped in a SafeArea
-                                  useSafeArea: false
+                                  useSafeArea: false),
+                              const Divider(
+                                color: ColorManage.gray,
+                                height: 3,
+                                thickness: 1,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(1950),
+                                          lastDate: DateTime.now())
+                                      .then((value) {
+                                    setState(() {
+                                      birthday =
+                                          DateFormat.yMd().format(value!);
+                                    });
+                                  });
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 50.h,
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: ColorManage.gray))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          FontAwesomeIcons.calendar,
+                                          color: ColorManage.gray,
+                                        ),
+                                        SizedBox(
+                                          width: 25.w,
+                                        ),
+                                        birthday != null
+                                            ? Text(
+                                                "$birthday",
+                                                style: getRegularStyle(
+                                                    color: ColorManage.gray,
+                                                    fontSize: 16.sp,
+                                                    height: toFigmaHeight(
+                                                        figmaHeight: 24.sp,
+                                                        fontSize: 30.sp)),
+                                              )
+                                            : Text(
+                                                "Select BirthDay",
+                                                style: getRegularStyle(
+                                                    color: ColorManage.gray,
+                                                    fontSize: 16.sp,
+                                                    height: toFigmaHeight(
+                                                        figmaHeight: 24.sp,
+                                                        fontSize: 30.sp)),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 10),
 
                               //sign in button
-                              BlocBuilder<AuthCubit, AuthState>(
-                                buildWhen: (pre, current) {
-                                  if (current is SignInLoadingState) {
-                                    return true;
-                                  } else if (current is SignInSuccessfulState) {
-                                    return true;
-                                  } else if (current is SignInErrorState) {
-                                    return true;
-                                  } else {
-                                    return false;
+                              BlocConsumer<AuthCubit, AuthState>(
+                                listener: (context, state) {
+                                  if (state is SignUpSuccessfulState) {
+                                    MotionToast.success(
+                                      title: const Text(
+                                          "Create  Account Successful"),
+                                      description:
+                                          const Text("Enjoy With Travel X"),
+                                    ).show(context);
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        Routes.VerificationEmailScreen,
+                                        (route) => false);
+                                  } else if (state is SignUpErrorState) {
+                                    MotionToast.error(
+                                      title: Text(state.error),
+                                      description: const Text(
+                                          "Please Try another Email"),
+                                    ).show(context);
                                   }
                                 },
                                 builder: (context, state) {
                                   return (state is SignInLoadingState)
                                       ? const Center(
-                                      child:
-                                      CircularProgressIndicator.adaptive())
+                                          child: CircularProgressIndicator
+                                              .adaptive())
                                       : CustomButton(
-                                      widget: const Text("Sign In"),
-                                      function: () {
-                                        if (formKey.currentState!.validate())
-                                        {
-                                          AuthCubit.get(context).signUp(
-                                            nationality: nationality!,
-                                               status: selectStatusValue!,
-                                               name: nameController.text,
-                                              password: passwordController.text,
-                                              email: emailController.text);
-                                        }
-                                      },
-                                      color: ColorManage.primaryYellow,
-                                      disable: true);
+                                          widget: const Text("Sign Up"),
+                                          function: () {
+                                            if (birthday == null ||
+                                                selectStatusValue == null ||
+                                                selectedValueGender == null) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      "Please Complete  Form"),
+                                                  backgroundColor:
+                                                      ColorManage.redError,
+                                                ),
+                                              );
+                                            }
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              AuthCubit.get(context).signUp(
+                                                  birthday: birthday!,
+                                                  gender: selectedValueGender!
+                                                      .toLowerCase(),
+                                                  nationality: nationality!,
+                                                  status: selectStatusValue!,
+                                                  name: nameController.text,
+                                                  password:
+                                                      passwordController.text,
+                                                  email: emailController.text);
+                                            }
+                                          },
+                                          color: ColorManage.primaryYellow,
+                                          disable: true);
                                 },
                               ),
                               SizedBox(height: 25.h),
@@ -500,7 +587,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                 fontSize: 24.sp))),
                   ],
                 ),
-
               ],
             ),
           ),
@@ -509,4 +595,3 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
-

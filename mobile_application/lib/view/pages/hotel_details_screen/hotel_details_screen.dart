@@ -414,8 +414,8 @@ class HotelDetailsScreen extends StatelessWidget {
                                    SizedBox(
                                      width: 10.w,
                                    ),
-                                   Expanded(
-                                     child: const CustomBottomSheet(
+                                   const Expanded(
+                                     child: CustomBottomSheet(
                                        icon: Icons.bed,
                                        text: "1 room(s)",
                                        widget: SizedBox(

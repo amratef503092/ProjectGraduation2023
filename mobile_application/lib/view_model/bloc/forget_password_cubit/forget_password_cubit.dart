@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../view/components/core_components/custom_pin/custom_pin.dart';
 import '../../../view/pages/auth/forget_password/Recover_password.dart';
 
 part 'forget_password_state.dart';
@@ -12,7 +13,8 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   static ForgetPasswordCubit get(context) => BlocProvider.of<ForgetPasswordCubit>(context);
   List<Widget> widgetForgetPassword =
   [
-    CustomPin(),
+    CustomPin(onCompleted: (v)
+    {} ),
     SizedBox(),
   ];
 }

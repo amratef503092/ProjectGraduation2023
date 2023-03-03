@@ -13,6 +13,7 @@ import '../../view/pages/Setting_Screen/unit_screen/unit_screen.dart';
 import '../../view/pages/auth/forget_password/create_new_password.dart';
 import '../../view/pages/auth/forget_password/forget_password_screen.dart';
 import '../../view/pages/auth/sign_up_screen/Sign_up_screen.dart';
+import '../../view/pages/auth/verification_screen/verification_screen.dart';
 import '../../view/pages/home_page_screen/home_page_screen.dart';
 import '../../view/pages/location_screen/location_screen.dart';
 import '../../view/pages/location_screen/welcome_page.dart';
@@ -37,6 +38,7 @@ class Routes {
   static const String SettingCurrency = "/SettingCurrency";
   static const String UnitScreen = "/UnitScreen";
   static const String LayoutScreen = "/LayoutScreen";
+  static const String VerificationEmailScreen = "/VerificationEmailScreen";
 }
 
 class RouteGenerator {
@@ -91,6 +93,9 @@ class RouteGenerator {
       case Routes.LayoutScreen:
         return MaterialPageRoute(
             builder: (_) =>    const LayoutScreen());
+      case Routes.VerificationEmailScreen:
+        return MaterialPageRoute(
+            builder: (_) =>     VerificationEmailScreen());
 
       default:
         return unDefinedRoute();

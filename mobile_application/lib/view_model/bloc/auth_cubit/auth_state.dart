@@ -19,3 +19,14 @@ class SignInErrorState extends AuthState{
 }
 // SignIn state end
 
+// SignIn state start
+class SignUpoadingState extends AuthState{}
+class SignUpSuccessfulState extends AuthState
+{
+
+}
+class SignUpErrorState extends AuthState{
+  String error;
+  SignUpErrorState({required this.error});
+}
+// SignIn state end

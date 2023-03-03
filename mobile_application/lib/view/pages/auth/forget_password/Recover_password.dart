@@ -12,6 +12,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/resource/validator.dart';
 import '../../../../view_model/bloc/forget_password_cubit/forget_password_cubit.dart';
+import '../../../components/core_components/custom_pin/custom_pin.dart';
 import '../../../components/core_components/custom_text_form_faild.dart';
 import '../../../components/forget_password_components/custom_smoothIndecator.dart';
 
@@ -88,7 +89,9 @@ class RecoverPasswordScreen extends StatelessWidget {
                         SizedBox(height: 20.h),
 
                         //email falid
-                         const CustomPin(),
+                          CustomPin(onCompleted: (v){
+
+                          }),
                         //password's
                         CustomSmootIndicatior(index: 0,count: 2),
 
@@ -163,58 +166,4 @@ class RecoverPasswordScreen extends StatelessWidget {
   }
 }
 
-class CustomPin extends StatelessWidget {
-  const CustomPin({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return PinCodeTextField(
-      length: 4,
-      cursorColor: ColorManage.primaryYellow,
-      keyboardType: TextInputType.number,
-       blinkWhenObscuring: true,
-      textStyle: TextStyle(
-          color: ColorManage.background,
-          fontSize: 20.sp),
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      pinTheme: PinTheme(
-        inactiveColor: ColorManage.primaryBlue,
-        inactiveFillColor: ColorManage.background,
-        shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(14.r),
-        activeFillColor: ColorManage.primaryBlue,
-        selectedFillColor: ColorManage.primaryBlue,
-        activeColor: Colors.white,
-
-      ),
-      animationDuration: const Duration(milliseconds: 300),
-      enableActiveFill: true,
-      animationType: AnimationType.fade,
-      onCompleted: (v) {
-        if (kDebugMode) {
-          print("Completed");
-        }
-      },
-
-      onChanged: (value) {
-        if (kDebugMode) {
-          print(value);
-        }
-        // setState(() {
-        //   currentText = value;
-        // });
-      },
-
-      beforeTextPaste: (text) {
-        if (kDebugMode) {
-          print("Allowing to paste $text");
-        }
-        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-        //but you can show anything you want here, like your pop up saying wrong paste format or etc
-        return true;
-      }, appContext: context,
-    );
-  }
-}
