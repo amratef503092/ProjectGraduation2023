@@ -3,6 +3,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 
 import '../../../core/resource/color_mananger.dart';
@@ -453,7 +454,9 @@ class HotelDetailsScreen extends StatelessWidget {
                                 ),
                                 CustomButton(
                                   widget: Text("Select Room & Book"),
-                                  function: () {},
+                                  function: () {
+                                    Navigator.pushNamed(context, Routes.SelectRoomScreen);
+                                  },
                                   color: ColorManage.primaryYellow,
                                   size: Size(366.w, 52.h),
                                 ),
@@ -626,7 +629,8 @@ class HotelDetailsScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Expanded(child: ListView.builder(itemBuilder: (context, index) {
+                                Expanded(child: ListView.builder(itemBuilder:
+                                    (context, index) {
                                   return SizedBox(
                                     width: double.infinity,
                                     height: 150.h,
