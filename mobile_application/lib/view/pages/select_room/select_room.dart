@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
 
 import '../../../core/resource/color_mananger.dart';
 import '../../components/core_components/custom_body.dart';
@@ -32,7 +33,9 @@ class SelectRoomScreen extends StatelessWidget {
               ],
               title: "Room One",
               save: (){},
-              functionCard: (){},
+              functionCard: (){
+                Navigator.pushNamed(context,Routes.RoomDetailsScreen );
+              },
               rate: 2,
               price: "2",
               discount: "2",

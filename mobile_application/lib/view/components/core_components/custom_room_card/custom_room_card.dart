@@ -214,7 +214,7 @@ class _CustomRoomCardState extends State<CustomRoomCard> {
                   Row(
                     children: [
                       Text(
-                        widget.price,
+                        "${widget.price}\$",
                         style: getRegularStyle(
                             color: ColorManage.redError,
                             height: toFigmaHeight(
@@ -224,9 +224,9 @@ class _CustomRoomCardState extends State<CustomRoomCard> {
                         width: 12.w,
                       ),
                       Text(
-                        "80\$",
+                        "Room/Night",
                         style: getRegularStyle(
-                            textDecoration: TextDecoration.lineThrough,
+                            textDecoration: TextDecoration.none,
                             color: ColorManage.gray,
                             height: toFigmaHeight(
                               figmaHeight: 18.sp,

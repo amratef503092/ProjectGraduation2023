@@ -18,6 +18,7 @@ import '../../view/pages/home_page_screen/home_page_screen.dart';
 import '../../view/pages/location_screen/location_screen.dart';
 import '../../view/pages/location_screen/welcome_page.dart';
 import '../../view/pages/onboarding_screen/onBoarding_screen.dart';
+import '../../view/pages/room_details/room_details_screen.dart';
 import '../../view/pages/select_room/select_room.dart';
 
 class Routes {
@@ -41,6 +42,7 @@ class Routes {
   static const String LayoutScreen = "/LayoutScreen";
   static const String VerificationEmailScreen = "/VerificationEmailScreen";
   static const String SelectRoomScreen = "/SelectRoomScreen";
+  static const String RoomDetailsScreen = "/RoomDetailsScreen";
 }
 
 class RouteGenerator {
@@ -101,6 +103,10 @@ class RouteGenerator {
       case Routes.SelectRoomScreen:
         return MaterialPageRoute(
             builder: (_) =>     SelectRoomScreen());
+      case Routes.RoomDetailsScreen:
+        return MaterialPageRoute(builder: (_) {
+          return RoomDetailsScreen();
+        },);
 
       default:
         return unDefinedRoute();
