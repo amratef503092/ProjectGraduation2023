@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
@@ -168,62 +169,70 @@ class HomePageScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              OpenContainer(
-                closedBuilder: (context, action) {
-                  return Padding(
-                    padding: EdgeInsets.zero,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                            width: double.infinity,
-                            height: 250.h,
-                            child: FlutterMap(
-                              options: MapOptions(
-                                center: LatLng(
-                                    LocationCubit.get(context)
-                                        .position!
-                                        .latitude,
-                                    LocationCubit.get(context)
-                                        .position!
-                                        .longitude),
-                                zoom: 9,
-                              ),
-                              nonRotatedChildren: [
-                                AttributionWidget.defaultWidget(
-                                  source: 'OpenStreetMap contributors',
-                                  onSourceTapped: null,
-                                ),
-                              ],
-                              children: [
-                                TileLayer(
-                                  urlTemplate:
-                                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                  userAgentPackageName: 'com.example.app',
-                                ),
-                              ],
-                            )),
-                        Positioned(
-                          bottom: 20.w,
-                          left: 25.w,
-                          child: Center(
-                            child: CustomButton(
-                              widget: const Text(
-                                "Explore  Nearby Places",
-                              ),
-                              function: () {
-                                action();
-                              },
-                              color: ColorManage.primaryYellow,
-                              disable: true,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
+              BlocConsumer<LocationCubit, LocationState>(
+                listener: (context, state) {
+                  // TODO: implement listener
                 },
-                openBuilder: (context, action) {
-                  return MapScreen();
+                builder: (context, state) {
+                  return (state is GetLocationSuccessful) ?OpenContainer(
+                    closedBuilder: (context, action) {
+                      return Padding(
+                        padding: EdgeInsets.zero,
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                                width: double.infinity,
+                                height: 250.h,
+                                child: FlutterMap(
+                                  options: MapOptions(
+                                    center: LatLng(
+                                        LocationCubit.get(context)
+                                            .position
+                                            ?.latitude ??30.033333,
+                                        LocationCubit.get(context)
+                                            .position
+                                            ?.longitude??31.00),
+                                    zoom: 9,
+                                  ),
+                                  nonRotatedChildren: [
+                                    AttributionWidget.defaultWidget(
+                                      source: 'OpenStreetMap contributors',
+                                      onSourceTapped: null,
+                                    ),
+                                  ],
+                                  children: [
+                                    TileLayer(
+                                      urlTemplate:
+                                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                      userAgentPackageName: 'com.example.app',
+                                    ),
+                                  ],
+                                )),
+                            Positioned(
+                              bottom: 20.w,
+                              left: 25.w,
+                              child: Center(
+                                child: CustomButton(
+                                  widget: const Text(
+                                    "Explore  Nearby Places",
+                                  ),
+                                  function: () {
+                                    action();
+                                  },
+                                  color: ColorManage.primaryYellow,
+                                  disable: true,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                    openBuilder: (context, action) {
+                      return MapScreen();
+                    },
+                  ) :
+                  Center(child: CircularProgressIndicator(),);
                 },
               ),
               SizedBox(
