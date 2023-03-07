@@ -1,7 +1,6 @@
-import 'package:animate_do/animate_do.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
@@ -11,9 +10,11 @@ import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../core/resource/routes_manager.dart';
+import '../../../view_model/bloc/location_cubit/location_cubit.dart';
 import '../../components/core_components/custom_animation_list_view/custom_animation_list_view.dart';
 import '../../components/core_components/custom_card_activity/custom_Card_activity.dart';
 import '../../components/core_components/custom_tow_text_components/custom_two_text.dart';
+import '../map_screen/map_screen.dart';
 
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
@@ -167,48 +168,63 @@ class HomePageScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              Padding(
-                padding: EdgeInsets.zero,
-                child: Stack(
-                  children: [
-                    SizedBox(
-                        width: double.infinity,
-                        height: 250.h,
-                        child: FlutterMap(
-                          options: MapOptions(
-                            center: LatLng(51.509364, -0.128928),
-                            zoom: 9.2,
-                          ),
-                          nonRotatedChildren: [
-                            AttributionWidget.defaultWidget(
-                              source: 'OpenStreetMap contributors',
-                              onSourceTapped: null,
+              OpenContainer(
+                closedBuilder: (context, action) {
+                  return Padding(
+                    padding: EdgeInsets.zero,
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                            width: double.infinity,
+                            height: 250.h,
+                            child: FlutterMap(
+                              options: MapOptions(
+                                center: LatLng(
+                                    LocationCubit.get(context)
+                                        .position!
+                                        .latitude,
+                                    LocationCubit.get(context)
+                                        .position!
+                                        .longitude),
+                                zoom: 9,
+                              ),
+                              nonRotatedChildren: [
+                                AttributionWidget.defaultWidget(
+                                  source: 'OpenStreetMap contributors',
+                                  onSourceTapped: null,
+                                ),
+                              ],
+                              children: [
+                                TileLayer(
+                                  urlTemplate:
+                                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                  userAgentPackageName: 'com.example.app',
+                                ),
+                              ],
+                            )),
+                        Positioned(
+                          bottom: 20.w,
+                          left: 25.w,
+                          child: Center(
+                            child: CustomButton(
+                              widget: const Text(
+                                "Explore  Nearby Places",
+                              ),
+                              function: () {
+                                action();
+                              },
+                              color: ColorManage.primaryYellow,
+                              disable: true,
                             ),
-                          ],
-                          children: [
-                            TileLayer(
-                              urlTemplate:
-                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'com.example.app',
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                      bottom: 20.w,
-                      left: 25.w,
-                      child: Center(
-                        child: CustomButton(
-                          widget: const Text(
-                            "Explore  Nearby Places",
                           ),
-                          function: () {},
-                          color: ColorManage.primaryYellow,
-                          disable: true,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+                openBuilder: (context, action) {
+                  return MapScreen();
+                },
               ),
               SizedBox(
                 height: 20.h,
@@ -249,7 +265,7 @@ class HomePageScreen extends StatelessWidget {
                                       },
                                       title: "The Best Restaurant in Town",
                                       image:
-                                      "https://m5.paperblog.com/i/282/2821611/nature-background-pictures-free-photo-nature--L-pUxlV9.jpeg",
+                                          "https://m5.paperblog.com/i/282/2821611/nature-background-pictures-free-photo-nature--L-pUxlV9.jpeg",
                                       functionSave: () {
                                         print("hi save");
                                       },
@@ -284,8 +300,6 @@ class HomePageScreen extends StatelessWidget {
     );
   }
 }
-
-
 
 class flutterMap extends StatelessWidget {
   const flutterMap({

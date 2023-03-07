@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/bloc/internet_services/internet_service_bloc.dart';
+import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 import 'package:graduation_project/view_model/database/local/cache_helper.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 import 'core/BlocObserver.dart';
@@ -57,7 +58,8 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => InternetServiceBloc()),
-          BlocProvider(create: (context)=>AuthCubit())
+          BlocProvider(create: (context)=>AuthCubit()),
+            BlocProvider(create: (context) => LocationCubit()..determinePosition(),)
           ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
             listener: (context, state) {
