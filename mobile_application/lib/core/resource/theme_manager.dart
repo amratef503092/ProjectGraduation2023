@@ -18,5 +18,11 @@ ThemeData getTheme() {
       textTheme: TextTheme(
         headline1: TextStyle(
             fontWeight: FontWeight.w800, fontSize: 32.sp, height: 0.48),
-      ));
+      ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      },
+    ),
+  );
 }

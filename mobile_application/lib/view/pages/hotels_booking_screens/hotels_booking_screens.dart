@@ -1,16 +1,30 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
-import 'package:graduation_project/view/components/core_components/custom_button.dart';
 
+import '../../components/core_components/custom_animation_list_view/custom_animation_list_view.dart';
 import '../../components/core_components/custom_card_bookling/custom_card_booking.dart';
 import '../hotel_details_screen/hotel_details_screen.dart';
 import 'componanets/custom_hotel_card/custom_hotel_card.dart';
 
-class HotelBookingScreen extends StatelessWidget {
+class HotelBookingScreen extends StatefulWidget {
   const HotelBookingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HotelBookingScreen> createState() => _HotelBookingScreenState();
+}
+
+class _HotelBookingScreenState extends State<HotelBookingScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration(milliseconds: 300));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,110 +95,139 @@ class HotelBookingScreen extends StatelessWidget {
             SizedBox(
               height: 320.h,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Top Accomodations In Hochiminh City",
-                    style: getMediumStyle(
-                        color: ColorManage.primaryBlue,
-                        fontSize: 28,
-                        height:
-                            toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                  ),
-                  Text(
-                    "Complete your holiday by staying here",
-                    style: getRegularStyle(
-                        color: ColorManage.black,
-                        height:
-                            toFigmaHeight(figmaHeight: 25.sp, fontSize: 16.sp)),
-                  ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  SizedBox(
-                    height: 400.h,
-                    width: double.infinity,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return Hero(
-                          tag: index,
-
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomTopHotelCard(
-                              save: (){},
-                              functionCard: () {},
-                              image:
-                                  "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
-                              title: "A&Em selection hotel",
-                              function: ()
-                              {
-                                Navigator.push(context, MaterialPageRoute(builder:
-                                (context) {
-                                  return HotelDetailsScreen(index: index,);
-                                },
-                                ));
-                              },
-                              discount: "80",
-                              price: "90",
-                              rate: 20,
-                              reviwe: "90",
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
+            PageTransitionSwitcher(
+              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+                return FadeThroughTransition(
+                  animation: primaryAnimation,
+                  secondaryAnimation: secondaryAnimation,
+                  child: child,
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Top Accomodations In Hochiminh City",
+                      style: getMediumStyle(
+                          color: ColorManage.primaryBlue,
+                          fontSize: 28,
+                          height: toFigmaHeight(
+                              figmaHeight: 36.sp, fontSize: 28.sp)),
                     ),
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  Text(
-                    "All Accomodations in Hochiminh City",
-                    style: getMediumStyle(
-                        color: ColorManage.primaryBlue,
-                        fontSize: 28,
-                        height:
-                            toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                  ),
-                  Text(
-                    "Practical facilities, enjoyable stay",
-                    style: getRegularStyle(
-                        color: ColorManage.black,
-                        height:
-                            toFigmaHeight(figmaHeight: 25.sp, fontSize: 16.sp)),
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: CustomTopHotelCard(
-                          save: (){},
-                          cardHeight: 340,
-                          cardWidth: 270,
-                          imageWidth: 366.w,
-                          imageHeight: 145,
-                          functionCard: () {},
-                          image:
-                              "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
-                          title: "A&Em selection hotel",
-                          function: () {},
-                          discount: "80",
-                          price: "90",
-                          rate: 20,
-                          reviwe: "90",
-                        ),
-                      );
-                    },
-                    itemCount: 10,
-                  )
-                ],
+                    Text(
+                      "Complete your holiday by staying here",
+                      style: getRegularStyle(
+                          color: ColorManage.black,
+                          height: toFigmaHeight(
+                              figmaHeight: 25.sp, fontSize: 16.sp)),
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    SizedBox(
+                      height: 400.h,
+                      width: double.infinity,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return AnimationListView(
+                            index: index,
+                            widget: OpenContainer(
+                              transitionDuration: Duration(seconds: 1),
+                              transitionType:
+                              ContainerTransitionType.fadeThrough,
+                              closedBuilder: (context, action) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CustomTopHotelCard(
+                                    save: () {},
+                                    functionCard: () {},
+                                    image:
+                                    "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
+                                    title: "A&Em selection hotel",
+                                    function: () {
+                                      action();
+                                    },
+                                    discount: "80",
+                                    price: "90",
+                                    rate: 20,
+                                    reviwe: "90",
+                                  ),
+                                );
+                              },
+                              openBuilder: (context, action) {
+                                return HotelDetailsScreen(
+                                  index: index,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        itemCount: 10,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    Text(
+                      "All Accomodations in Hochiminh City",
+                      style: getMediumStyle(
+                          color: ColorManage.primaryBlue,
+                          fontSize: 28,
+                          height: toFigmaHeight(
+                              figmaHeight: 36.sp, fontSize: 28.sp)),
+                    ),
+                    Text(
+                      "Practical facilities, enjoyable stay",
+                      style: getRegularStyle(
+                          color: ColorManage.black,
+                          height: toFigmaHeight(
+                              figmaHeight: 25.sp, fontSize: 16.sp)),
+                    ),
+                    AnimationLimiter(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return OpenContainer(
+                              transitionDuration: Duration(seconds: 1),
+                              openBuilder: (context, action) =>
+                                  HotelDetailsScreen(
+                                    index: index,
+                                  ),
+                              closedBuilder: (context, action) =>
+                                  AnimationListView(
+                                    index: index,
+                                    widget:  Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      child: CustomTopHotelCard(
+                                        save: () {},
+                                        cardHeight: 340,
+                                        cardWidth: 270,
+                                        imageWidth: 366.w,
+                                        imageHeight: 145,
+                                        functionCard: () {
+                                          action();
+                                        },
+                                        image:
+                                        "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
+                                        title: "A&Em selection hotel",
+                                        function: () {},
+                                        discount: "80",
+                                        price: "90",
+                                        rate: 20,
+                                        reviwe: "90",
+                                      ),
+                                    ),
+                                  ));
+                        },
+                        itemCount: 10,
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],
@@ -193,6 +236,7 @@ class HotelBookingScreen extends StatelessWidget {
     ));
   }
 }
+
 
 
 class CustomBottomSheet extends StatelessWidget {

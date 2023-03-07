@@ -1,21 +1,17 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 
 import '../../../core/resource/assets_manager.dart';
 import '../../../core/resource/color_mananger.dart';
 import '../../../core/resource/style_manager.dart';
-import '../hotels_booking_screens/hotels_booking_screens.dart';
 
 class RoomDetailsScreen extends StatelessWidget {
-  RoomDetailsScreen({Key? key, }) : super(key: key);
-
+  RoomDetailsScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,7 @@ class RoomDetailsScreen extends StatelessWidget {
                             autoPlayInterval: Duration(seconds: 3),
                             onPageChanged: (index, reason) {},
                             autoPlayAnimationDuration:
-                            Duration(milliseconds: 800),
+                                Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enlargeCenterPage: true,
                             scrollDirection: Axis.horizontal,
@@ -44,8 +40,7 @@ class RoomDetailsScreen extends StatelessWidget {
                           items: const [
                             Image(
                               image: NetworkImage(
-                                "https://i.travelapi.com/hotels/1000000/190000/185500/185418/63c38c05_z.jpg"
-                              ),
+                                  "https://i.travelapi.com/hotels/1000000/190000/185500/185418/63c38c05_z.jpg"),
                               fit: BoxFit.fitWidth,
                               width: double.infinity,
                             )
@@ -58,8 +53,7 @@ class RoomDetailsScreen extends StatelessWidget {
                         width: 47.w,
                         height: 20.h,
                         decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(3.r)),
+                          borderRadius: BorderRadius.all(Radius.circular(3.r)),
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.topRight,
@@ -74,7 +68,7 @@ class RoomDetailsScreen extends StatelessWidget {
                               spreadRadius: 10,
                               blurRadius: 20,
                               offset:
-                              Offset(0, 2), // changes position of shadow
+                                  Offset(0, 2), // changes position of shadow
                             ),
                           ],
                         ),
@@ -177,16 +171,16 @@ class RoomDetailsScreen extends StatelessWidget {
                         },
                         child: true
                             ? const Center(
-                          child: Icon(
-                            Icons.bookmark_border,
-                            color: ColorManage.background,
-                          ),
-                        )
+                                child: Icon(
+                                  Icons.bookmark_border,
+                                  color: ColorManage.background,
+                                ),
+                              )
                             : Center(
-                            child: Icon(
-                              Icons.bookmark_border,
-                              color: ColorManage.background,
-                            ))),
+                                child: Icon(
+                                Icons.bookmark_border,
+                                color: ColorManage.background,
+                              ))),
                   ),
                 ),
                 // share button in the activity
@@ -201,8 +195,9 @@ class RoomDetailsScreen extends StatelessWidget {
                         //     'check out my website https://example.com',
                         //     subject: 'Look what I made!');
                       },
-                      child: Icon(Icons.share_outlined,
-                      color: ColorManage.background,
+                      child: const Icon(
+                        Icons.share_outlined,
+                        color: ColorManage.background,
                       ),
                     ),
                   ),
@@ -220,8 +215,9 @@ class RoomDetailsScreen extends StatelessWidget {
                         //     'check out my website https://example.com',
                         //     subject: 'Look what I made!');
                       },
-                      child: const Icon(Icons.arrow_back_ios_new,
-                      color: ColorManage.background,
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: ColorManage.background,
                       ),
                     ),
                   ),
@@ -270,13 +266,14 @@ class RoomDetailsScreen extends StatelessWidget {
               ],
             ),
             Column(
-              children:
-              [
-                Text("Deluxe Room, 1 King Bed",
-                style: getBoldStyle(color: ColorManage.primaryBlue,
-                    fontSize: 28.sp,
-                    height: toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-
+              children: [
+                Text(
+                  "Deluxe Room, 1 King Bed",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -286,7 +283,9 @@ class RoomDetailsScreen extends StatelessWidget {
                       width: 5.w,
                     ),
                     Text("1 guest(s)"),
-                    SizedBox(width: 10.w,),
+                    SizedBox(
+                      width: 10.w,
+                    ),
                     SvgPicture.asset(AssetsManager.bedIcon),
                     SizedBox(
                       width: 5.w,
@@ -296,48 +295,55 @@ class RoomDetailsScreen extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20.h,),
+            SizedBox(
+              height: 20.h,
+            ),
             Text("Room Information"),
-
           ],
         ),
       ),
       bottomSheet: Container(
         width: double.infinity,
-
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: ColorManage.variantBlue1
-          )
-        ),
+        decoration:
+            BoxDecoration(border: Border.all(color: ColorManage.variantBlue1)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children:
-          [
+          children: [
             const Text("Total Price for 4-5 Oct 2020, 1 Night(s), 1 Room(s)"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text("29\$ ", style: getBoldStyle(color: ColorManage.redError,
-                      height: toFigmaHeight(figmaHeight: 26, fontSize: 30.sp)),),
-                  SizedBox(width: 20.w,),
-                  Text("50\$ ", style: getBoldStyle(color: ColorManage.gray,
-                      textDecoration: TextDecoration.lineThrough,
-                      height: toFigmaHeight(figmaHeight: 26, fontSize: 30.sp)),),
+                  Text(
+                    "29\$ ",
+                    style: getBoldStyle(
+                        color: ColorManage.redError,
+                        height:
+                            toFigmaHeight(figmaHeight: 26, fontSize: 30.sp)),
+                  ),
+                  SizedBox(
+                    width: 20.w,
+                  ),
+                  Text(
+                    "50\$ ",
+                    style: getBoldStyle(
+                        color: ColorManage.gray,
+                        textDecoration: TextDecoration.lineThrough,
+                        height:
+                            toFigmaHeight(figmaHeight: 26, fontSize: 30.sp)),
+                  ),
                   const Spacer(),
                   CustomButton(
-                      size: const Size(80,40),
-                      widget: const Text("Book"), function: (){}
-                      , color: ColorManage.primaryYellow)
+                      size: const Size(80, 40),
+                      widget: const Text("Book"),
+                      function: () {},
+                      color: ColorManage.primaryYellow)
                 ],
               ),
             )
-
           ],
         ),
       ),
     );
   }
 }
-
