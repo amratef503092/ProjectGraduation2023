@@ -15,7 +15,7 @@ class CustomPin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PinCodeTextField(
-      length: 4,
+      length: 6,
       cursorColor: ColorManage.primaryYellow,
       keyboardType: TextInputType.number,
       blinkWhenObscuring: true,

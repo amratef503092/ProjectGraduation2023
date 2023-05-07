@@ -10,7 +10,15 @@ class GetInterstsDataLoadingState extends InterstedState{
 class GetInterstsDataErrorState extends InterstedState{
 
 }
-class GetInterstsDataSuccessfulState extends InterstedState{
 
+class InterstedLoadingState extends InterstedState{}
+class InterstedSuccessfulState extends InterstedState
+{
+  InterstedModel interstedModel;
+  InterstedSuccessfulState({required this.interstedModel});
+}
+class InterstedErrorState extends InterstedState{
+  String error;
+  InterstedErrorState({required this.error});
 }
 

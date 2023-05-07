@@ -1,12 +1,12 @@
 class InterstedModel {
   InterstedModel({
-      this.status, 
       this.message, 
+      this.statusCode, 
       this.data,});
 
   InterstedModel.fromJson(dynamic json) {
-    status = json['status'];
     message = json['message'];
+    statusCode = json['statusCode'];
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
@@ -14,20 +14,20 @@ class InterstedModel {
       });
     }
   }
-  String? status;
   String? message;
+  num? statusCode;
   List<Data>? data;
-InterstedModel copyWith({  String? status,
-  String? message,
+InterstedModel copyWith({  String? message,
+  num? statusCode,
   List<Data>? data,
-}) => InterstedModel(  status: status ?? this.status,
-  message: message ?? this.message,
+}) => InterstedModel(  message: message ?? this.message,
+  statusCode: statusCode ?? this.statusCode,
   data: data ?? this.data,
 );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['status'] = status;
     map['message'] = message;
+    map['statusCode'] = statusCode;
     if (data != null) {
       map['data'] = data?.map((v) => v.toJson()).toList();
     }
@@ -39,7 +39,9 @@ InterstedModel copyWith({  String? status,
 class Data {
   Data({
       this.id, 
-      this.name,});
+      this.name,
+    this.select = false
+  });
 
   Data.fromJson(dynamic json) {
     id = json['id'];
@@ -48,12 +50,8 @@ class Data {
   }
   num? id;
   String? name;
-  bool ? select;
-Data copyWith({  num? id,
-  String? name,
-}) => Data(  id: id ?? this.id,
-  name: name ?? this.name,
-);
+  bool ?select ;
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;

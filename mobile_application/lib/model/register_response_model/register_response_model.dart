@@ -39,12 +39,12 @@ class Data {
       this.token,});
 
   Data.fromJson(dynamic json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
     token = json['token'];
   }
-  User? user;
+  UserModel? user;
   String? token;
-Data copyWith({  User? user,
+Data copyWith({  UserModel? user,
   String? token,
 }) => Data(  user: user ?? this.user,
   token: token ?? this.token,

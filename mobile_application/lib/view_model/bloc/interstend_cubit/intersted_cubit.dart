@@ -5,31 +5,37 @@ import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 import 'package:meta/meta.dart';
 
 import '../../database/network/end_points.dart';
+import '../../repo/interseted_repo/intersted_repo.dart';
 
 part 'intersted_state.dart';
 
 class InterstedCubit extends Cubit<InterstedState> {
-  InterstedCubit() : super(InterstedInitial());
+  InterstedCubit(this.interstedRepo) : super(InterstedInitial());
 
   static InterstedCubit get(context) =>
       BlocProvider.of<InterstedCubit>(context);
-  InterstedModel ?interstedModel;
+  final InterstedRepo interstedRepo;
+
   Future<void> getInterestsData() async
   {
-    emit(GetInterstsDataLoadingState());
-  await  DioHelper.getData(url: Intersted).then((value) {
-    interstedModel = InterstedModel.fromJson(value.data);
-    emit(GetInterstsDataSuccessfulState());
-
-  }).catchError((error)
-  {
-    if(error is DioError){
-      emit(GetInterstsDataErrorState());
-
-    }else{
-      emit(GetInterstsDataErrorState());
-    }
-  });
-
+    emit(InterstedLoadingState());
+    var result = await interstedRepo.getInterstedData();
+    result.fold((error) {
+      emit(InterstedErrorState(error: error.toString()));
+    }, (data) {
+      emit(InterstedSuccessfulState(interstedModel: data));
+    });
   }
+  //
+  Future<void> userDoIntersted() async
+  {
+    emit(InterstedLoadingState());
+    var result = await interstedRepo.getInterstedData();
+    result.fold((error) {
+      emit(InterstedErrorState(error: error.toString()));
+    }, (data) {
+      emit(InterstedSuccessfulState(interstedModel: data));
+    });
+  }
+
 }

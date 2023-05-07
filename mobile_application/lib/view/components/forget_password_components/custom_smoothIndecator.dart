@@ -15,7 +15,6 @@ class CustomSmootIndicatior extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmoothIndicator(
       count: count,
-      axisDirection: Axis.horizontal,
       onDotClicked: (index) {},
       effect:  const ExpandingDotsEffect(
         dotHeight: 10,
@@ -25,7 +24,7 @@ class CustomSmootIndicatior extends StatelessWidget {
         expansionFactor: 5,
         spacing: 5,
 
-      ), offset: index,
+      ), offset: index, size:Size(200, 50) ,
     );
   }
 }

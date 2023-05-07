@@ -184,7 +184,8 @@ class SignInScreen extends StatelessWidget {
                                   : CustomButton(
                                       widget: const Text("Sign In"),
                                       function: () {
-                                        if (formKey.currentState!.validate()) {
+                                        if (formKey.currentState!.validate())
+                                        {
                                           AuthCubit.get(context).signIn(
                                               password: passwordController.text,
                                               email: emailController.text);
@@ -212,7 +213,8 @@ class SignInScreen extends StatelessWidget {
                       style: getSemiBoldStyle(
                           color: Colors.white, height: 1, fontSize: 24.sp)),
                   InkWell(
-                      onTap: () {
+                      onTap: ()
+                      {
                         Navigator.pushNamed(context, Routes.signUp);
                       },
                       child: Text("Create",

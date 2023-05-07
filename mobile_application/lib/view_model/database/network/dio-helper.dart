@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'end_points.dart';
 
@@ -39,6 +40,13 @@ class DioHelper {
     // return await dio.get(
     //   url,
     // );
+    debugPrint("-------------End Point----------------");
+    debugPrint(url);
+    debugPrint("-------------End Point----------------");
+
+    debugPrint("-------------Request Data----------------");
+    debugPrint('data is $queryParameters');
+    debugPrint("-------------Request Data----------------");
     try {
       dio.options.headers = {
         'Authorization': 'Bearer ${token ?? ''}',
@@ -48,9 +56,15 @@ class DioHelper {
         queryParameters: queryParameters,
         onReceiveProgress: onReceiveProgress,
       );
+      debugPrint("-------------Response Data----------------");
+      debugPrint('response is => ${response.data}');
+      debugPrint("-------------Response Data----------------");
       return response;
-    } catch (e) {
-      rethrow;
+    } on DioError catch (e) {
+      debugPrint("-------------Error Data----------------");
+      debugPrint('error is => ${e.response!.data}');
+      debugPrint("-------------Error Data----------------");
+      rethrow ;
     }
   }
 
@@ -62,22 +76,39 @@ class DioHelper {
     String? token,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
-  }) async {
-    try {
+  }) async
+  {
+
       dio.options.headers = {
         'Authorization': 'Bearer ${token ?? ''}',
         "Accept": "application/json",
         "Access-Control-Allow-Origin": "*"
       };
-      final Response response = await dio.post(
-        url,
-        data: data,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
-      );
-      return response;
-    } catch (e) {
-      rethrow;
+      debugPrint("-------------End Point----------------");
+      debugPrint(url);
+      debugPrint("-------------End Point----------------");
+
+      debugPrint("-------------Request Data----------------");
+      debugPrint('data is $data');
+      debugPrint("-------------Request Data----------------");
+      try{
+        final Response response = await dio.post(
+          url,
+          data: data,
+          onSendProgress: onSendProgress,
+          onReceiveProgress: onReceiveProgress,
+        );
+        debugPrint("-------------Response Data----------------");
+        debugPrint('response is => ${response.data}');
+        debugPrint("-------------Response Data----------------");
+        return response;
+      } on DioError catch (e) {
+        debugPrint("-------------Error Data------------------");
+        debugPrint('error is ${e.response!.data}');
+        debugPrint("-------------Error Data------------------");
+        rethrow;
+      }
+
     }
     // dio.options.headers = {
     //   'Authorization': 'Bearer ${token ?? ''}',
@@ -93,7 +124,7 @@ class DioHelper {
     //         color: Colors.red);
     //   }
     // });
-  }
+
 
   //This Function That's Used to Update Some Date based on URL(End Points) and Send what's you need to Update as Map.
   static Future<Response> putData({

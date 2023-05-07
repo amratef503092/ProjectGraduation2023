@@ -54,7 +54,7 @@ class HomePageScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Hi ${AuthCubit.get(context).loginModel!.data!.user!.name}",
+                            "Hi ${AuthCubit.get(context).loginModel!.user!.name}",
                             style: TextStyle(
                                 color: ColorManage.black,
                                 fontSize: 20.sp,
