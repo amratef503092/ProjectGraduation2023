@@ -14,6 +14,7 @@ import 'package:graduation_project/view_model/repo/register_repo/register_repo.d
 import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo.dart';
 
 import 'core/BlocObserver.dart';
+import 'core/constatnts.dart';
 import 'core/resource/color_mananger.dart';
 import 'core/resource/routes_manager.dart';
 import 'core/resource/theme_manager.dart';
@@ -25,7 +26,7 @@ void main() async {
   await DioHelper.init();
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
-  setup();
+  await setup();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
@@ -99,7 +100,7 @@ class MyApp extends StatelessWidget {
               locale: context.locale,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: RouteGenerator.getRoute,
-              initialRoute: Routes.onBoarding,
+              initialRoute: getUserID()==null ? Routes.onBoarding : Routes.HomePageScreen,
               theme: getTheme(),
             ),
           ),

@@ -15,7 +15,7 @@ class InterstedCubit extends Cubit<InterstedState> {
   static InterstedCubit get(context) =>
       BlocProvider.of<InterstedCubit>(context);
   final InterstedRepo interstedRepo;
-
+ InterstedModel ?interstedModel;
   Future<void> getInterestsData() async
   {
     emit(InterstedLoadingState());
@@ -23,6 +23,7 @@ class InterstedCubit extends Cubit<InterstedState> {
     result.fold((error) {
       emit(InterstedErrorState(error: error.toString()));
     }, (data) {
+      interstedModel = data;
       emit(InterstedSuccessfulState(interstedModel: data));
     });
   }
@@ -37,5 +38,16 @@ class InterstedCubit extends Cubit<InterstedState> {
       emit(InterstedSuccessfulState(interstedModel: data));
     });
   }
-
+  Future<void> sendUserInters({
+  required List<num> id
+}) async
+  {
+    emit(InterstedLoadingState());
+    var result = await interstedRepo.sendUserIntersted(id);
+    result.fold((error) {
+      emit(SendUserInterstedErrorState(error: error.toString()));
+    }, (data) {
+      emit(SendUserInterstedSuccessfulState(message: data ));
+    });
+  }
 }

@@ -30,10 +30,10 @@ class CacheHelper {
     return await SharedPreferences.getInstance();
   }
 
-  static String? getDataString({
+  static  getDataString({
     required String key,
   }) {
-    return sharedPreferences.getString(key);
+    return sharedPreferences.get(key);
   }
 
   static bool? getDataBool({

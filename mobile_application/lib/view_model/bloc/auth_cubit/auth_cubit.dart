@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/model/login_model/login_model.dart';
 import 'package:graduation_project/model/user_model/user_model.dart';
+import 'package:graduation_project/view_model/database/local/cache_helper.dart';
 import 'package:graduation_project/view_model/repo/login_repo/login_repo.dart';
 
+import '../../../core/constatnts.dart';
 import '../../../model/registre_model/register_model.dart';
 import '../../repo/register_repo/register_repo.dart';
 import '../../repo/verifyEmail/verify_email_repo.dart';
@@ -39,12 +41,15 @@ class AuthCubit extends Cubit<AuthState> {
     var result = await loginRepo.login(email, password);
     result.fold((failure) {
       emit(SignInErrorState(error: failure.message));
-    }, (responseLoginData) {
+    }, (responseLoginData) async {
       loginModel = responseLoginData;
+      await CacheHelper.put(key: name, value: loginModel!.user!.name);
+      await CacheHelper.put(key: userID, value: loginModel!.user!.id);
       emit(SignInSuccessfulState(loginModel: responseLoginData));
     });
   }
-  String?email;
+
+  String? email;
   RegisterModel? registerModel;
 
   Future<void> signUp(User user) async {
@@ -52,8 +57,10 @@ class AuthCubit extends Cubit<AuthState> {
     var result = await registerRepo.register(user);
     result.fold((failure) {
       emit(SignUpErrorState(error: failure.message));
-    }, (responseRegisterData) {
+    }, (responseRegisterData) async {
       registerModel = responseRegisterData;
+      await CacheHelper.put(key: 'name', value: loginModel!.user!.name);
+
       emit(SignUpSuccessfulState(registerModel: responseRegisterData));
     });
   }
@@ -66,8 +73,7 @@ class AuthCubit extends Cubit<AuthState> {
         (r) => emit(SendOtpVerifyEmailSuccessfulState(message: r)));
   }
 
-  Future<void> verifyEmail(String otp) async
-  {
+  Future<void> verifyEmail(String otp) async {
     emit(VerifyEmailLoadingState());
     var result = await verifyEmailRepo.verifyEmail(email!, otp);
     result.fold(

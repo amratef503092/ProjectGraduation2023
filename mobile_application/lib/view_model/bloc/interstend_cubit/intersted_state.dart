@@ -22,3 +22,15 @@ class InterstedErrorState extends InterstedState{
   InterstedErrorState({required this.error});
 }
 
+class SendUserInterstedLoadingState extends InterstedState{
+
+}
+class SendUserInterstedErrorState extends InterstedState{
+  String error;
+  SendUserInterstedErrorState({required this.error});
+}
+class SendUserInterstedSuccessfulState extends InterstedState
+{
+  String message;
+  SendUserInterstedSuccessfulState({required this.message});
+}

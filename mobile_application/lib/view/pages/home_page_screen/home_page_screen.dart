@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/core/constatnts.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
@@ -54,7 +55,7 @@ class HomePageScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Hi ${AuthCubit.get(context).loginModel!.user!.name}",
+                            "Hi ${userName()}",
                             style: TextStyle(
                                 color: ColorManage.black,
                                 fontSize: 20.sp,

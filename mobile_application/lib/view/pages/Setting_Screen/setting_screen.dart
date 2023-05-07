@@ -66,52 +66,17 @@ class SettingScreen extends StatelessWidget {
                         height: 20.h,
                       ),
                       CustomCardSetting(
-                        onTap: () {},
-                        title: "Language",
-                        select: "English",
+                        onTap: ()
+                        {
+                          Navigator.pushNamed(context, Routes.welcomePage);
+                        },
+                        title: "Interstes ",
+                        select: "select",
                       ),
                       SizedBox(
                         height: 20.h,
                       ),
-                      CustomCardSetting(
-                        onTap: () {},
-                        title: "Language",
-                        select: "English",
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Text(
-                        "Preferences",
-                        style: getSemiBoldStyle(
-                            fontSize: 24.sp,
-                            color: ColorManage.primaryBlue,
-                            height: 1),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CustomCardSetting(
-                        onTap: () {},
-                        title: "Language",
-                        select: "English",
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CustomCardSetting(
-                        onTap: () {},
-                        title: "Language",
-                        select: "English",
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CustomCardSetting(
-                        onTap: () {},
-                        title: "Language",
-                        select: "English",
-                      ),
+
                     ],
                   ),
                 ),

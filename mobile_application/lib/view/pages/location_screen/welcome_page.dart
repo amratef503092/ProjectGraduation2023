@@ -7,9 +7,11 @@ import 'package:graduation_project/view/components/forget_password_components/cu
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/repo/interseted_repo/intersted_repo.dart';
 
+import '../../../core/constatnts.dart';
 import '../../../core/resource/color_mananger.dart';
 import '../../../core/service_locator/service_locator.dart';
 import '../../../view_model/bloc/interstend_cubit/intersted_cubit.dart';
+import '../../../view_model/repo/login_repo/login_repo.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -29,11 +31,11 @@ class _WelcomePageState extends State<WelcomePage> {
           // TODO: implement listener
         },
         builder: (context, state) {
-          return SafeArea(
+          return (state is InterstedSuccessfulState) ? SafeArea(
             child: Scaffold(
               appBar: AppBar(),
-              body: (state is InterstedSuccessfulState)
-                  ? Padding(
+              body:
+                  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +51,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 SizedBox(
                                   height: 0.05.sh,
                                 ),
-                                Text("Welcome ${AuthCubit.get(context).registerModel!.user!.name}",
+                                Text("Welcome ${ userName()}",
                                     style: getBoldStyle(
                                       color: ColorManage.primaryBlue,
                                       height: 1,
@@ -135,7 +137,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                                     height: 1,
                                                     fontSize: 16.h,
                                                   )),
-                                              Spacer(),
+                                              const Spacer(),
                                               (state.interstedModel.data![index]
                                                       .select!)
                                                   ? Icon(
@@ -161,19 +163,17 @@ class _WelcomePageState extends State<WelcomePage> {
                               child: CustomSmootIndicatior(index: 0, count: 2))
                         ],
                       ),
-                    )
-                  : const Center(
-                      child: CircularProgressIndicator.adaptive(),
                     ),
               bottomSheet: GestureDetector(
-                onTap: () {
-                  // Navigator.pushNamed(context, Routes.location);
-                  //
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    Routes.signIn,
-                    (route) => false,
-                  );
+                onTap: ()
+                {
+                  List<num> select = [];
+                  for (int i = 0; i < state.interstedModel.data!.length; i++) {
+                    if (state.interstedModel.data![i].select!) {
+                      select.add(state.interstedModel.data![i].id!);
+                    }
+                  }
+                  InterstedCubit.get(context).sendUserInters(id: select);
                 },
                 child: Container(
                   height: 0.1.sh,
@@ -196,6 +196,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
             ),
+          ) :  const Center(
+          child: CircularProgressIndicator.adaptive(),
           );
         },
       ),
