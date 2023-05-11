@@ -10,16 +10,16 @@ class InterstedModel {
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
+        data?.add(CategoryModel.fromJson(v));
       });
     }
   }
   String? message;
   num? statusCode;
-  List<Data>? data;
+  List<CategoryModel>? data;
 InterstedModel copyWith({  String? message,
   num? statusCode,
-  List<Data>? data,
+  List<CategoryModel>? data,
 }) => InterstedModel(  message: message ?? this.message,
   statusCode: statusCode ?? this.statusCode,
   data: data ?? this.data,
@@ -36,14 +36,14 @@ InterstedModel copyWith({  String? message,
 
 }
 
-class Data {
-  Data({
+class CategoryModel {
+  CategoryModel({
       this.id, 
       this.name,
     this.select = false
   });
 
-  Data.fromJson(dynamic json) {
+  CategoryModel.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
     select = false;

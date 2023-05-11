@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:graduation_project/core/errors/faliuar.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
-
 import '../../../core/constatnts.dart';
 import '../../../model/interested_model/intersted_model.dart';
 import '../../database/network/end_points.dart';

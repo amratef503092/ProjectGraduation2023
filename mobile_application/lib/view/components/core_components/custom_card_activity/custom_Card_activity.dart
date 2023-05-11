@@ -32,12 +32,12 @@ class CustomCardActivity extends StatelessWidget {
         function();
       },
       child: Container(
-        height: 300.h,
-        width: 270.w,
+        height: 400.h,
+        width: 400.w,
         decoration: BoxDecoration(
           color: ColorManage.background,
           borderRadius: BorderRadius.circular(20.r),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
                 offset: Offset(0, 4),
                 blurRadius: 30,

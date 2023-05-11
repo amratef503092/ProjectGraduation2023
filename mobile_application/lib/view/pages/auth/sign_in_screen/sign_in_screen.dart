@@ -89,7 +89,12 @@ class SignInScreen extends StatelessWidget {
                             builder: (context, state) {
                               return CustomTextField(
                                 iconData: const Icon(FontAwesomeIcons.lock),
-                                fieldValidator: passwordValidator,
+                                fieldValidator: (value){
+                                  if(value!.isEmpty)
+                                    {
+                                      return 'password is empty';
+                                    }
+                                },
                                 controller: passwordController,
                                 hint: 'password',
                                 password: AuthCubit.get(context).visibility,

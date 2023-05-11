@@ -68,6 +68,7 @@ dependencies:
   flutter_map_location_marker: ^5.2.1
   dartz: ^0.10.1
   get_it: ^7.4.1
+  geocoding: ^2.1.0
 
 
 dev_dependencies:

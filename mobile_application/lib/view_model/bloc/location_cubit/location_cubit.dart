@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
+import 'package:geocoding/geocoding.dart';
 
 part 'location_state.dart';
 
@@ -48,5 +49,30 @@ class LocationCubit extends Cubit<LocationState> {
 
     position =  await Geolocator.getCurrentPosition();
     emit(GetLocationSuccessful());
+  }
+  double getLocation(double lat1, double lang2)
+  {
+
+    double distance  = Geolocator.distanceBetween(
+        position!.latitude,
+        position!.longitude,
+        lat1,
+        lang2
+    );
+    return distance;
+  }
+  Future<void> getPlaceMark(double lat1, double lang2) async
+  {
+    emit(GetAddressFromLatLngLoading());
+    await placemarkFromCoordinates(lat1, lang2).
+    then((value)
+    {
+      print(value[0].street);
+      emit(GetAddressFromLatLngSuccessful(value));
+    }).catchError((error){
+      emit(GetAddressFromLatLngError('error'));
+    });
+
+
   }
 }

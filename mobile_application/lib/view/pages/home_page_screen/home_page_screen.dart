@@ -8,14 +8,14 @@ import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 import 'package:graduation_project/view/components/core_components/custom_text_form_faild.dart';
-import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
+import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../core/resource/routes_manager.dart';
 import '../../../view_model/bloc/location_cubit/location_cubit.dart';
 import '../../components/core_components/custom_animation_list_view/custom_animation_list_view.dart';
 import '../../components/core_components/custom_card_activity/custom_Card_activity.dart';
-import '../../components/core_components/custom_tow_text_components/custom_two_text.dart';
+import '../activity_details_screen/activity_details_screen.dart';
 import '../map_screen/map_screen.dart';
 
 class HomePageScreen extends StatelessWidget {
@@ -171,137 +171,152 @@ class HomePageScreen extends StatelessWidget {
                 height: 20.h,
               ),
               BlocConsumer<LocationCubit, LocationState>(
+                buildWhen: (previous, current) {
+                  return current is GetLocationSuccessful;
+                },
                 listener: (context, state) {
                   // TODO: implement listener
                 },
                 builder: (context, state) {
-                  return (state is GetLocationSuccessful) ?OpenContainer(
-                    closedBuilder: (context, action) {
-                      return Padding(
-                        padding: EdgeInsets.zero,
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                                width: double.infinity,
-                                height: 250.h,
-                                child: FlutterMap(
-                                  options: MapOptions(
-                                    center: LatLng(
-                                        LocationCubit.get(context)
-                                            .position
-                                            ?.latitude ??30.033333,
-                                        LocationCubit.get(context)
-                                            .position
-                                            ?.longitude??31.00),
-                                    zoom: 9,
-                                  ),
-                                  nonRotatedChildren: [
-                                    AttributionWidget.defaultWidget(
-                                      source: 'OpenStreetMap contributors',
-                                      onSourceTapped: null,
+                  return (state is GetLocationSuccessful)
+                      ? OpenContainer(
+                          closedBuilder: (context, action) {
+                            return Padding(
+                              padding: EdgeInsets.zero,
+                              child: Stack(
+                                children: [
+                                  SizedBox(
+                                      width: double.infinity,
+                                      height: 250.h,
+                                      child: FlutterMap(
+                                        options: MapOptions(
+                                          center: LatLng(
+                                              LocationCubit.get(context)
+                                                      .position
+                                                      ?.latitude ??
+                                                  30.033333,
+                                              LocationCubit.get(context)
+                                                      .position
+                                                      ?.longitude ??
+                                                  31.00),
+                                          zoom: 9,
+                                        ),
+                                        nonRotatedChildren: [
+                                          AttributionWidget.defaultWidget(
+                                            source:
+                                                'OpenStreetMap contributors',
+                                            onSourceTapped: null,
+                                          ),
+                                        ],
+                                        children: [
+                                          TileLayer(
+                                            urlTemplate:
+                                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                            userAgentPackageName:
+                                                'com.example.app',
+                                          ),
+                                        ],
+                                      )),
+                                  Positioned(
+                                    bottom: 20.w,
+                                    left: 25.w,
+                                    child: Center(
+                                      child: CustomButton(
+                                        widget: const Text(
+                                          "Explore  Nearby Places",
+                                        ),
+                                        function: () {
+                                          action();
+                                        },
+                                        color: ColorManage.primaryYellow,
+                                        disable: true,
+                                      ),
                                     ),
-                                  ],
-                                  children: [
-                                    TileLayer(
-                                      urlTemplate:
-                                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                      userAgentPackageName: 'com.example.app',
-                                    ),
-                                  ],
-                                )),
-                            Positioned(
-                              bottom: 20.w,
-                              left: 25.w,
-                              child: Center(
-                                child: CustomButton(
-                                  widget: const Text(
-                                    "Explore  Nearby Places",
-                                  ),
-                                  function: () {
-                                    action();
-                                  },
-                                  color: ColorManage.primaryYellow,
-                                  disable: true,
-                                ),
+                                  )
+                                ],
                               ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                    openBuilder: (context, action) {
-                      return MapScreen();
-                    },
-                  ) :
-                  Center(child: CircularProgressIndicator(),);
+                            );
+                          },
+                          openBuilder: (context, action) {
+                            return const MapScreen();
+                          },
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(),
+                        );
                 },
               ),
               SizedBox(
                 height: 20.h,
               ),
-              SizedBox(
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return AnimationListView(
-                      index: index,
-                      widget: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: padding.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomTextWidget(
-                              title: "Go Eat & Drink",
-                              function: () {},
-                              titleTwo: "See All",
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            SizedBox(
-                              height: 300.h,
-                              child: ListView.separated(
-                                itemCount: 10,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: CustomCardActivity(
-                                      function: () {
-                                        print("Hi");
-                                      },
-                                      title: "The Best Restaurant in Town",
-                                      image:
-                                          "https://m5.paperblog.com/i/282/2821611/nature-background-pictures-free-photo-nature--L-pUxlV9.jpeg",
-                                      functionSave: () {
-                                        print("hi save");
-                                      },
-                                      location: "1.3 km",
-                                      rating: 4.5,
-                                      review: "100",
-                                      time: "10:00 AM - 10:00 PM",
-                                    ),
+              BlocConsumer<ActivityCubit, ActivityState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  ActivityCubit cubit = ActivityCubit.get(context);
+                  return SizedBox(
+                    child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: cubit.activityModel?.data.length ?? 0,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return AnimationListView(
+                          index: index,
+                          widget: Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: padding.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+                                OpenContainer(
+                                  transitionDuration: const Duration(seconds: 1),
+                                  transitionType: ContainerTransitionType.fade,
+                                  closedBuilder: (context, action) =>  CustomCardActivity(
+                                  function: () {
+                                    action();
+                                  },
+                                  title: cubit.activityModel?.data[index]
+                                      .activityName ??
+                                      "",
+                                  image: cubit
+                                      .activityModel!.data[index].images[0]
+                                      .toString(),
+                                  functionSave: () {},
+                                  location:
+                                  "${LocationCubit.get(context).getLocation(double.parse(cubit.activityModel!.data[index].location[0]), double.parse(cubit.activityModel!.data[index].location[1])).toStringAsFixed(2)} ",
+                                  rating: cubit.activityModel!.data[index].rate
+                                      .toDouble(),
+                                  review: cubit
+                                      .activityModel!.data[index].review.length
+                                      .toString(),
+                                  time:
+                                  "${cubit.activityModel!.data[index].openTime} AM - ${cubit.activityModel!.data[index].closeTime} PM",
+                                ), openBuilder: (context, action) {
+                                  return ActivityDetailsScreen(
+                                    activityModel:
+                                    cubit.activityModel!.data[index],
                                   );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: 30.w,
-                                  );
-                                },
-                              ),
+                                },),
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: 5.h,
+                        );
+                      },
+                    ),
+                  );
+                },
               )
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/view/pages/activity_details_screen/activity_details_screen.dart';
 import 'package:graduation_project/view/pages/auth/forget_password/Recover_password.dart';
 import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
@@ -43,70 +44,58 @@ class Routes {
   static const String VerificationEmailScreen = "/VerificationEmailScreen";
   static const String SelectRoomScreen = "/SelectRoomScreen";
   static const String RoomDetailsScreen = "/RoomDetailsScreen";
+  static const String ActivityDetailsScreen = "/ActivityDetailsScreen";
 }
 
 class RouteGenerator {
-  static Route<dynamic> getRoute(RouteSettings routeSettings)
-  {
+  static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.onBoarding:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (_) => OnBoardingCubit(),
-                  child:  OnBoardingScreen(),
+                  child: OnBoardingScreen(),
                 ));
       case Routes.homeScreen:
-        return MaterialPageRoute(
-            builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.signIn:
-        return MaterialPageRoute(
-            builder: (_) =>  SignInScreen());
+        return MaterialPageRoute(builder: (_) => SignInScreen());
       case Routes.signUp:
+        return MaterialPageRoute(builder: (_) => SignupScreen());
+      case Routes.forgotPasswordRoute:
+        return MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
+      case Routes.recoverPassword:
+        return MaterialPageRoute(builder: (_) => RecoverPasswordScreen());
+      case Routes.createNewPassword:
         return MaterialPageRoute(
-            builder: (_) =>   SignupScreen());
-        case Routes.forgotPasswordRoute:
-        return MaterialPageRoute(
-            builder: (_) =>   ForgetPasswordScreen());
-        case Routes.recoverPassword:
-        return MaterialPageRoute(
-            builder: (_) =>   RecoverPasswordScreen());
-        case Routes.createNewPassword:
-        return MaterialPageRoute(
-            builder: (_) =>   const CreateNewPasswordScreen());
-        case Routes.welcomePage:
-        return MaterialPageRoute(
-            builder: (_) =>   const WelcomePage());
-        case Routes.location:
-        return MaterialPageRoute(
-            builder: (_) =>    LocationScreen());
-        case Routes.HomePageScreen:
-        return MaterialPageRoute(
-            builder: (_) =>     HomePageScreen());
-        case Routes.settingScreen:
-        return MaterialPageRoute(
-            builder: (_) =>    const SettingScreen());
-        case Routes.LanguageScreen:
-        return MaterialPageRoute(
-            builder: (_) =>    const LanguageScreen());
-        case Routes.SettingCurrency:
-        return MaterialPageRoute(
-            builder: (_) =>    const SettingCurrency());
-        case Routes.UnitScreen:
-        return MaterialPageRoute(
-            builder: (_) =>    const UnitScreen());
+            builder: (_) => const CreateNewPasswordScreen());
+      case Routes.welcomePage:
+        return MaterialPageRoute(builder: (_) => const WelcomePage());
+      case Routes.location:
+        return MaterialPageRoute(builder: (_) => LocationScreen());
+      case Routes.HomePageScreen:
+        return MaterialPageRoute(builder: (_) => HomePageScreen());
+      case Routes.settingScreen:
+        return MaterialPageRoute(builder: (_) => const SettingScreen());
+      case Routes.LanguageScreen:
+        return MaterialPageRoute(builder: (_) => const LanguageScreen());
+      case Routes.SettingCurrency:
+        return MaterialPageRoute(builder: (_) => const SettingCurrency());
+      case Routes.UnitScreen:
+        return MaterialPageRoute(builder: (_) => const UnitScreen());
       case Routes.LayoutScreen:
-        return MaterialPageRoute(
-            builder: (_) =>    const LayoutScreen());
+        return MaterialPageRoute(builder: (_) => const LayoutScreen());
       case Routes.VerificationEmailScreen:
-        return MaterialPageRoute(
-            builder: (_) =>     VerificationEmailScreen());
+        return MaterialPageRoute(builder: (_) => VerificationEmailScreen());
       case Routes.SelectRoomScreen:
-        return MaterialPageRoute(
-            builder: (_) =>     SelectRoomScreen());
+        return MaterialPageRoute(builder: (_) => SelectRoomScreen());
       case Routes.RoomDetailsScreen:
-        return MaterialPageRoute(builder: (_) {
-          return RoomDetailsScreen();
-        },);
+        return MaterialPageRoute(
+          builder: (_) {
+            return RoomDetailsScreen();
+          },
+        );
+
 
       default:
         return unDefinedRoute();

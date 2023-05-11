@@ -12,6 +12,7 @@ const String sendOtpEndPoint = '/email/otp';
 const String verifyEmailEndPoint = '/email/verify';
 const String getInterstedEndPoint = '/category';
 const String sendInterstedEndPoint = '/InterstedUser/add';
+const String getActivityEndPoints = '/activiy';
 
 // const refresh = 'auth/token';
 // const forgetPassword = '/api/v1/auth/forget-password';

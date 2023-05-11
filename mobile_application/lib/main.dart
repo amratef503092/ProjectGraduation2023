@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/bloc/internet_services/internet_service_bloc.dart';
 import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 import 'package:graduation_project/view_model/database/local/cache_helper.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
+import 'package:graduation_project/view_model/repo/activity_repo/activity_repo.dart';
 import 'package:graduation_project/view_model/repo/login_repo/login_repo.dart';
 import 'package:graduation_project/view_model/repo/register_repo/register_repo.dart';
 import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo.dart';
@@ -70,7 +72,10 @@ class MyApp extends StatelessWidget {
                     sl.get<RegisterRepoImpl>(), sl.get<VerifyEmailRepoImpl>())),
             BlocProvider(
               create: (context) => LocationCubit()..determinePosition(),
-            )
+            ),
+            BlocProvider(
+              create: (context) => ActivityCubit(sl.get<ActivityRepImpl>())..getActivity(),
+            ),
           ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
             listener: (context, state) {
