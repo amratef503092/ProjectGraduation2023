@@ -6,7 +6,7 @@ class ReviewActivityModel {
   final String comment;
 
   final String created_at;
-  final UserModel user;
+  final User user;
 
   ReviewActivityModel({
     required this.rate,
@@ -20,6 +20,6 @@ class ReviewActivityModel {
         rate: json['rate'],
         comment: json['comment'],
         created_at: json['created_at'],
-        user: UserModel.fromJson(json['user']),
+        user: User.fromJson(json['user']),
       );
 }

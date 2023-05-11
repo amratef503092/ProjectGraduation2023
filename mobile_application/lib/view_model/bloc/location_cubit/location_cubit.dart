@@ -61,12 +61,15 @@ class LocationCubit extends Cubit<LocationState> {
     );
     return distance;
   }
+   List<Placemark> ?  address;
+
   Future<void> getPlaceMark(double lat1, double lang2) async
   {
     emit(GetAddressFromLatLngLoading());
     await placemarkFromCoordinates(lat1, lang2).
     then((value)
     {
+      address = value;
       print(value[0].street);
       emit(GetAddressFromLatLngSuccessful(value));
     }).catchError((error){

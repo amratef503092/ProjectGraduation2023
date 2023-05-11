@@ -83,7 +83,7 @@ class User {
   List<String>? location;
   String? createdAt;
   String? updatedAt;
-  dynamic profileImage;
+  String ?profileImage;
   String ? password;
   String ? passwordConfirmation;
 
@@ -125,7 +125,7 @@ User copyWith({  num? id,
     map['location'] = jsonEncode(location);
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
-    map['profile_image'] = profileImage;
+    map['profile_image'] = profileImage  ?? "https://i.stack.imgur.com/34AD2.jpg";
     map['password'] = password;
     map['password_confirmation'] = passwordConfirmation;
     return map;

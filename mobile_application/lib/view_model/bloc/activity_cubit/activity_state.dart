@@ -13,3 +13,6 @@ class GetActivityError extends ActivityState {
   final String error;
   GetActivityError(this.error);
 }
+class NumberOfPeopleAdd extends ActivityState {}
+class NumberOfPeopleSub extends ActivityState {}
+

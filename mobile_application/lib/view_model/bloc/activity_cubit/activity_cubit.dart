@@ -21,4 +21,18 @@ class ActivityCubit extends Cubit<ActivityState> {
       emit(GetActivitySuccess(activityData));
     });
   }
+  int numberOfPeople = 1;
+  void numberOfPeopleAdd()
+  {
+    numberOfPeople++;
+    emit(NumberOfPeopleAdd());
+  }
+  void numberOfPeopleSub()
+  {
+   if(numberOfPeople > 1) {
+     numberOfPeople--;
+   }
+    emit(NumberOfPeopleSub());
+  }
+
 }

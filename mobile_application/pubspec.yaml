@@ -69,6 +69,9 @@ dependencies:
   dartz: ^0.10.1
   get_it: ^7.4.1
   geocoding: ^2.1.0
+  draggable_home: ^1.0.4
+  scroll_page_view: ^1.0.2
+  photo_view: ^0.14.0
 
 
 dev_dependencies:

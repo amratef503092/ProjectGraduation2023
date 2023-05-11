@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/model/acitvity_model/activity_model.dart';
 import 'package:graduation_project/view/pages/activity_details_screen/activity_details_screen.dart';
 import 'package:graduation_project/view/pages/auth/forget_password/Recover_password.dart';
 import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen.dart';
@@ -15,6 +16,7 @@ import '../../view/pages/auth/forget_password/create_new_password.dart';
 import '../../view/pages/auth/forget_password/forget_password_screen.dart';
 import '../../view/pages/auth/sign_up_screen/Sign_up_screen.dart';
 import '../../view/pages/auth/verification_screen/verification_screen.dart';
+import '../../view/pages/booked_activity_screen/booked_activity_screen.dart';
 import '../../view/pages/home_page_screen/home_page_screen.dart';
 import '../../view/pages/location_screen/location_screen.dart';
 import '../../view/pages/location_screen/welcome_page.dart';
@@ -45,6 +47,7 @@ class Routes {
   static const String SelectRoomScreen = "/SelectRoomScreen";
   static const String RoomDetailsScreen = "/RoomDetailsScreen";
   static const String ActivityDetailsScreen = "/ActivityDetailsScreen";
+  static const String BookedActivityScreen = "/BookedActivityScreen";
 }
 
 class RouteGenerator {
@@ -88,11 +91,17 @@ class RouteGenerator {
       case Routes.VerificationEmailScreen:
         return MaterialPageRoute(builder: (_) => VerificationEmailScreen());
       case Routes.SelectRoomScreen:
-        return MaterialPageRoute(builder: (_) => SelectRoomScreen());
+        return MaterialPageRoute(builder: (_) => const SelectRoomScreen());
       case Routes.RoomDetailsScreen:
         return MaterialPageRoute(
           builder: (_) {
             return RoomDetailsScreen();
+          },
+        );
+      case Routes.BookedActivityScreen:
+        return MaterialPageRoute(
+          builder: (_) {
+            return  BookedActivityScreen(activityModel: routeSettings.arguments as ActivityModel,);
           },
         );
 

@@ -11,6 +11,10 @@ class AssetsManager {
   static String lottieHomePage = '$lottie/travel.json';
   static String bedIcon = "$icon/Bed.svg";
   static String peopleIcon = "$icon/people.svg";
+  static String cashIcon = "$icon/cachIcon.png";
+  static String visaIcon = "$icon/icons8-visa-500.png";
+
+
 
 
 
