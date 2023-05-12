@@ -5,6 +5,7 @@ import 'package:graduation_project/view_model/repo/interseted_repo/intersted_rep
 import 'package:graduation_project/view_model/repo/register_repo/register_repo.dart';
 import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo.dart';
 
+import '../../view_model/repo/booked_activity_repo/booked_activity_repo.dart';
 import '../../view_model/repo/login_repo/login_repo.dart';
 
 final sl = GetIt.instance;
@@ -15,7 +16,8 @@ Future<void> setup() async {
   sl.registerLazySingleton<VerifyEmailRepoImpl>(() => VerifyEmailRepoImpl());
   sl.registerLazySingleton<InterstedRepoImpl>(() => InterstedRepoImpl());
   sl.registerLazySingleton<ActivityRepImpl>(() => ActivityRepImpl());
+  sl.registerLazySingleton<BookedActivityRepoImpl>(
+      () => BookedActivityRepoImpl());
 
   // cubit
-
 }

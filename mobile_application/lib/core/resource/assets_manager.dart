@@ -1,7 +1,6 @@
 String path = 'assets/images';
-String lottie ='assets/Lottie';
-String icon ='assets/icons';
-
+String lottie = 'assets/Lottie';
+String icon = 'assets/icons';
 
 class AssetsManager {
   static String onBoardingImageOne = '$path/ImageOnboardingOne.svg';
@@ -13,9 +12,5 @@ class AssetsManager {
   static String peopleIcon = "$icon/people.svg";
   static String cashIcon = "$icon/cachIcon.png";
   static String visaIcon = "$icon/icons8-visa-500.png";
-
-
-
-
-
+  static String confiremd = "$path/confirmed_bro.svg";
 }

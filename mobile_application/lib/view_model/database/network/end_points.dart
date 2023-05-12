@@ -13,7 +13,7 @@ const String verifyEmailEndPoint = '/email/verify';
 const String getInterstedEndPoint = '/category';
 const String sendInterstedEndPoint = '/InterstedUser/add';
 const String getActivityEndPoints = '/activiy';
-
+const String bookedActivitiyEndPoint = '/activiy/booked/bookActivity';
 // const refresh = 'auth/token';
 // const forgetPassword = '/api/v1/auth/forget-password';
 // const resetPassword = '/api/v1/auth/reset-password';

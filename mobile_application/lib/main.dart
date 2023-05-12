@@ -74,7 +74,8 @@ class MyApp extends StatelessWidget {
               create: (context) => LocationCubit()..determinePosition(),
             ),
             BlocProvider(
-              create: (context) => ActivityCubit(sl.get<ActivityRepImpl>())..getActivity(),
+              create: (context) =>
+                  ActivityCubit(sl.get<ActivityRepImpl>())..getActivity(),
             ),
           ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
@@ -105,7 +106,8 @@ class MyApp extends StatelessWidget {
               locale: context.locale,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: RouteGenerator.getRoute,
-              initialRoute: getUserID()==null ? Routes.onBoarding : Routes.HomePageScreen,
+              initialRoute:
+                  getUserID() == null ? Routes.onBoarding : Routes.LayoutScreen,
               theme: getTheme(),
             ),
           ),

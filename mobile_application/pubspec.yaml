@@ -72,6 +72,7 @@ dependencies:
   draggable_home: ^1.0.4
   scroll_page_view: ^1.0.2
   photo_view: ^0.14.0
+  flutter_credit_card: ^3.0.6
 
 
 dev_dependencies:

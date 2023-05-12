@@ -16,6 +16,7 @@ import '../../view/pages/auth/forget_password/create_new_password.dart';
 import '../../view/pages/auth/forget_password/forget_password_screen.dart';
 import '../../view/pages/auth/sign_up_screen/Sign_up_screen.dart';
 import '../../view/pages/auth/verification_screen/verification_screen.dart';
+import '../../view/pages/booked/main_page.dart';
 import '../../view/pages/booked_activity_screen/booked_activity_screen.dart';
 import '../../view/pages/home_page_screen/home_page_screen.dart';
 import '../../view/pages/location_screen/location_screen.dart';
@@ -48,6 +49,7 @@ class Routes {
   static const String RoomDetailsScreen = "/RoomDetailsScreen";
   static const String ActivityDetailsScreen = "/ActivityDetailsScreen";
   static const String BookedActivityScreen = "/BookedActivityScreen";
+  static const String mainBookedDetialesScreen = "/mainBookedDetialesScreen";
 }
 
 class RouteGenerator {
@@ -101,10 +103,17 @@ class RouteGenerator {
       case Routes.BookedActivityScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return  BookedActivityScreen(activityModel: routeSettings.arguments as ActivityModel,);
+            return BookedActivityScreen(
+              activityModel: routeSettings.arguments as ActivityModel,
+            );
           },
         );
-
+      case Routes.mainBookedDetialesScreen:
+        return MaterialPageRoute(
+          builder: (_) {
+            return MainPageBookedScreen();
+          },
+        );
 
       default:
         return unDefinedRoute();
