@@ -441,15 +441,52 @@ class HotelDetailsScreen extends StatelessWidget {
                                             width: 10.w,
                                           ),
                                           Expanded(
-                                            child: CustomBottomSheet(
-                                              function: () {},
-                                              icon: Icons.nightlight_outlined,
-                                              text: "1 night(s)",
-                                              widget: const SizedBox(
-                                                  width: double.infinity,
-                                                  child: Text("Location")),
-                                            ),
-                                          ),
+                                              child: BlocConsumer<
+                                                  BookingHotelCubit,
+                                                  BookingHotelState>(
+                                            listener: (context, state) {},
+                                            builder: (context, state) {
+                                              BookingHotelCubit cubit =
+                                                  BookingHotelCubit.get(
+                                                      context);
+                                              return CustomBottomSheet(
+                                                function: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        AlertDialog(
+                                                      content: SizedBox(
+                                                        width: 200.w,
+                                                        height: 300.h,
+                                                        child: ListView.builder(
+                                                          itemBuilder:
+                                                              (context, index) {
+                                                            return TextButton(
+                                                                onPressed: () {
+                                                                  cubit.settimeOfNight(
+                                                                      "$index night(s)");
+
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child: Text(
+                                                                    "$index night(s)"));
+                                                          },
+                                                          itemCount: 10,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                icon: Icons.nightlight_outlined,
+                                                text: cubit.timeOfNight ??
+                                                    "Select Days",
+                                                widget: const SizedBox(
+                                                    width: double.infinity,
+                                                    child: Text("Location")),
+                                              );
+                                            },
+                                          ))
                                         ],
                                       ),
                                       SizedBox(
