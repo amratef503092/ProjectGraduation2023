@@ -98,8 +98,8 @@ class ActivityDetailsScreen extends StatelessWidget {
                 BlocProvider<LocationCubit>.value(
                   value: LocationCubit.get(context)
                     ..getPlaceMark(
-                      double.parse(activityModel!.location[0]),
-                      double.parse(activityModel!.location[1]),
+                      activityModel!.location[0].toDouble(),
+                      activityModel!.location[1].toDouble(),
                     ),
                   child: BlocConsumer<LocationCubit, LocationState>(
                     buildWhen: (previous, current) {
@@ -314,11 +314,14 @@ class ActivityDetailsScreen extends StatelessWidget {
                           fontSize: 18.sp),
                     ),
                     const Spacer(),
-                   IconButton(onPressed: ()
-                   {
-                     ActivityCubit.get(context).numberOfPeopleSub();
-
-                   }, icon: const Icon(Icons.remove_circle_outline,color: ColorManage.background,)),
+                    IconButton(
+                        onPressed: () {
+                          ActivityCubit.get(context).numberOfPeopleSub();
+                        },
+                        icon: const Icon(
+                          Icons.remove_circle_outline,
+                          color: ColorManage.background,
+                        )),
                     Text(
                       "${ActivityCubit.get(context).numberOfPeople} ",
                       style: getBoldStyle(
@@ -326,11 +329,14 @@ class ActivityDetailsScreen extends StatelessWidget {
                           height: 1,
                           fontSize: 18.sp),
                     ),
-                    IconButton(onPressed: ()
-                    {
-                      ActivityCubit.get(context).numberOfPeopleAdd();
-
-                    }, icon: const Icon(Icons.add_circle_outline,color: ColorManage.background,)),
+                    IconButton(
+                        onPressed: () {
+                          ActivityCubit.get(context).numberOfPeopleAdd();
+                        },
+                        icon: const Icon(
+                          Icons.add_circle_outline,
+                          color: ColorManage.background,
+                        )),
                   ],
                 );
               },

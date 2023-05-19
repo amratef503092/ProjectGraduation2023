@@ -172,7 +172,9 @@ class HomePageScreen extends StatelessWidget {
               ),
               BlocConsumer<LocationCubit, LocationState>(
                 buildWhen: (previous, current) {
-                  return current is GetLocationSuccessful;
+                  return current is GetLocationSuccessful ||
+                      current is GetLocationLoading ||
+                      current is GetActivityError;
                 },
                 listener: (context, state) {
                   // TODO: implement listener
@@ -273,34 +275,39 @@ class HomePageScreen extends StatelessWidget {
                                   height: 20.h,
                                 ),
                                 OpenContainer(
-                                  transitionDuration: const Duration(seconds: 1),
+                                  transitionDuration:
+                                      const Duration(seconds: 1),
                                   transitionType: ContainerTransitionType.fade,
-                                  closedBuilder: (context, action) =>  CustomCardActivity(
-                                  function: () {
-                                    action();
+                                  closedBuilder: (context, action) =>
+                                      CustomCardActivity(
+                                    function: () {
+                                      action();
+                                    },
+                                    title: cubit.activityModel?.data[index]
+                                            .activityName ??
+                                        "",
+                                    image: cubit
+                                        .activityModel!.data[index].images[0]
+                                        .toString(),
+                                    functionSave: () {},
+                                    location:
+                                        "${LocationCubit.get(context).getLocation(cubit.activityModel!.data[index].location[0].toDouble(), cubit.activityModel!.data[index].location[1].toDouble()).toStringAsFixed(2)} ",
+                                    rating: cubit
+                                        .activityModel!.data[index].rate
+                                        .toDouble(),
+                                    review: cubit.activityModel!.data[index]
+                                        .review.length
+                                        .toString(),
+                                    time:
+                                        "${cubit.activityModel!.data[index].openTime} AM - ${cubit.activityModel!.data[index].closeTime} PM",
+                                  ),
+                                  openBuilder: (context, action) {
+                                    return ActivityDetailsScreen(
+                                      activityModel:
+                                          cubit.activityModel!.data[index],
+                                    );
                                   },
-                                  title: cubit.activityModel?.data[index]
-                                      .activityName ??
-                                      "",
-                                  image: cubit
-                                      .activityModel!.data[index].images[0]
-                                      .toString(),
-                                  functionSave: () {},
-                                  location:
-                                  "${LocationCubit.get(context).getLocation(double.parse(cubit.activityModel!.data[index].location[0]), double.parse(cubit.activityModel!.data[index].location[1])).toStringAsFixed(2)} ",
-                                  rating: cubit.activityModel!.data[index].rate
-                                      .toDouble(),
-                                  review: cubit
-                                      .activityModel!.data[index].review.length
-                                      .toString(),
-                                  time:
-                                  "${cubit.activityModel!.data[index].openTime} AM - ${cubit.activityModel!.data[index].closeTime} PM",
-                                ), openBuilder: (context, action) {
-                                  return ActivityDetailsScreen(
-                                    activityModel:
-                                    cubit.activityModel!.data[index],
-                                  );
-                                },),
+                                ),
                                 SizedBox(
                                   height: 20.h,
                                 ),

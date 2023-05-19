@@ -8,11 +8,10 @@ part 'location_state.dart';
 
 class LocationCubit extends Cubit<LocationState> {
   LocationCubit() : super(LocationInitial());
-  static LocationCubit get(context)=>BlocProvider.of<LocationCubit>(context);
-  Position ? position ;
+  static LocationCubit get(context) => BlocProvider.of<LocationCubit>(context);
+  Position? position;
 
-  Future<void> determinePosition() async
-  {
+  Future<void> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
     emit(GetLocationLoading());
@@ -47,35 +46,28 @@ class LocationCubit extends Cubit<LocationState> {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
 
-    position =  await Geolocator.getCurrentPosition();
+    position = await Geolocator.getCurrentPosition();
     emit(GetLocationSuccessful());
   }
-  double getLocation(double lat1, double lang2)
-  {
 
-    double distance  = Geolocator.distanceBetween(
-        position!.latitude,
-        position!.longitude,
-        lat1,
-        lang2
-    );
+  double getLocation(double lat1, double lang2) {
+    emit(GetLocationLoading());
+    double distance = Geolocator.distanceBetween(
+        position!.latitude, position!.longitude, lat1, lang2);
+
     return distance;
   }
-   List<Placemark> ?  address;
 
-  Future<void> getPlaceMark(double lat1, double lang2) async
-  {
+  List<Placemark>? address;
+
+  Future<void> getPlaceMark(double lat1, double lang2) async {
     emit(GetAddressFromLatLngLoading());
-    await placemarkFromCoordinates(lat1, lang2).
-    then((value)
-    {
+    await placemarkFromCoordinates(lat1, lang2).then((value) {
       address = value;
       print(value[0].street);
       emit(GetAddressFromLatLngSuccessful(value));
-    }).catchError((error){
+    }).catchError((error) {
       emit(GetAddressFromLatLngError('error'));
     });
-
-
   }
 }

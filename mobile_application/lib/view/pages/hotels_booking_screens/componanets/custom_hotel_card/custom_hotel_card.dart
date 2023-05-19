@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 
 import '../../../../../core/resource/color_mananger.dart';
 import '../../../../../core/resource/style_manager.dart';
 import '../../../../components/core_components/custom_button.dart';
+
 class CustomTopHotelCard extends StatelessWidget {
-  const CustomTopHotelCard({
-    super.key,
-    required this.function,
-    required this.image,
-    required this.discount,
-    required  this.price,
-    required this.rate,
-    required this.reviwe,
-    required this.title,
-    required this.functionCard,
-    this.imageHeight = 145,
-    this.imageWidth = 270,
-    this.cardHeight =337 ,
-    this.cardWidth = 271,
-    required this.save,
-  });
+  const CustomTopHotelCard(
+      {super.key,
+      required this.function,
+      required this.image,
+      required this.discount,
+      required this.price,
+      required this.rate,
+      required this.reviwe,
+      required this.title,
+      required this.functionCard,
+      this.imageHeight = 145,
+      this.imageWidth = 270,
+      this.cardHeight = 337,
+      this.cardWidth = 271,
+      required this.save,
+      required this.lang,
+      required this.lat});
   final String image;
   final double rate;
   final String reviwe;
@@ -35,13 +39,13 @@ class CustomTopHotelCard extends StatelessWidget {
   final double cardHeight;
   final double cardWidth;
   final Function save;
-
+  final double lang;
+  final double lat;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()
-      {
+      onTap: () {
         functionCard();
       },
       child: Container(
@@ -58,42 +62,38 @@ class CustomTopHotelCard extends StatelessWidget {
             ]),
         child: Column(
           children: [
-            Expanded(
-
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(14.r),
-                    child: Image
-                      (
-                      image: NetworkImage(image),
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(14.r),
+                  child: Image(
+                    image: NetworkImage(image),
                     fit: BoxFit.cover,
-                      width: imageWidth,
-                      height: imageHeight,
-
-                    ),
+                    width: imageWidth,
+                    height: imageHeight,
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                        width: 32.w,
-                        height: 32.h,
-                        decoration: const BoxDecoration(
-                          color: ColorManage.background,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(Icons.bookmark_border,
-                          size: 14.sp,
-                          color: ColorManage.primaryYellow,
-                        ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Container(
+                      width: 32.w,
+                      height: 32.h,
+                      decoration: const BoxDecoration(
+                        color: ColorManage.background,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.bookmark_border,
+                        size: 14.sp,
+                        color: ColorManage.primaryYellow,
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
             Expanded(
               child: Padding(
@@ -121,7 +121,7 @@ class CustomTopHotelCard extends StatelessWidget {
                           direction: Axis.horizontal,
                           itemCount: 5,
                           itemPadding:
-                          const EdgeInsets.symmetric(horizontal: 1.0),
+                              const EdgeInsets.symmetric(horizontal: 1.0),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -136,59 +136,38 @@ class CustomTopHotelCard extends StatelessWidget {
                           style: getRegularStyle(
                               color: ColorManage.gray,
                               height: toFigmaHeight(
-                                  figmaHeight: 16.sp,
-                                  fontSize: 16.sp)),
+                                  figmaHeight: 16.sp, fontSize: 16.sp)),
                         )
                       ],
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.location_on_outlined,
-                          size: 20.sp,
-                          color: ColorManage.primaryBlue,
-                        ),
-                        Text(
-                          "1.3 km from current location",
-                          style: getRegularStyle(
-                              color: ColorManage.black,
-                              height: toFigmaHeight(
-                                  figmaHeight: 18.sp,
-                                  fontSize: 20.sp)),
-                        )
-                      ],
+                    BlocConsumer<LocationCubit, LocationState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        return Row(
+                          children: [
+                            Icon(
+                              Icons.location_on_outlined,
+                              size: 20.sp,
+                              color: ColorManage.primaryBlue,
+                            ),
+                            Text(
+                              "${LocationCubit.get(context).getLocation(lang, lat).toStringAsFixed(1)} km from current location",
+                              style: getRegularStyle(
+                                  color: ColorManage.black,
+                                  height: toFigmaHeight(
+                                      figmaHeight: 18.sp, fontSize: 20.sp)),
+                            )
+                          ],
+                        );
+                      },
                     ),
-                    Row(
-                      children: [
-
-                        Text(
-                          "$price",
-                          style: getRegularStyle(
-                              color: ColorManage.redError,
-                              height: toFigmaHeight(
-                                  figmaHeight: 18.sp,
-                                  fontSize: 20.sp)),
-                        ),
-                        SizedBox(width:12.w ,),
-                        Text(
-                          "80\$",
-                          style: getRegularStyle(
-                              textDecoration: TextDecoration.lineThrough,
-                              color: ColorManage.gray,
-                              height: toFigmaHeight(
-                                figmaHeight: 18.sp,
-                                fontSize: 20.sp,
-                              )),
-                        ),
-                        Spacer(),
-                        CustomButton(widget: Text("Book"),
-                            size: Size(80.w,40.h),
-                            function: (){
-                              function();
-                            }, color: ColorManage.primaryYellow)
-                      ],
-                    )
-
+                    CustomButton(
+                        widget: Text("Book"),
+                        size: Size(80.w, 40.h),
+                        function: () {
+                          function();
+                        },
+                        color: ColorManage.primaryYellow)
                   ],
                 ),
               ),

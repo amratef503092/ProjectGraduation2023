@@ -25,10 +25,9 @@ class ServerFailure extends Failure {
         return ServerFailure(message: "Request Canceled");
 
       case DioErrorType.other:
-        if(dioError.message.contains("SocketException")){
+        if (dioError.message.contains("SocketException")) {
           return ServerFailure(message: "No Internet Connection");
-        }else
-        {
+        } else {
           return ServerFailure(message: "Something Went Wrong");
         }
 
@@ -53,4 +52,8 @@ class ServerFailure extends Failure {
       return ServerFailure(message: "Something Went Wrong");
     }
   }
+}
+
+class FailureLocal extends Failure {
+  FailureLocal({required super.message});
 }

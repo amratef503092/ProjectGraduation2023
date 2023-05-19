@@ -6,6 +6,7 @@ import '../../../../core/resource/color_mananger.dart';
 import '../../../../core/resource/style_manager.dart';
 import '../../../pages/hotels_booking_screens/hotels_booking_screens.dart';
 import '../custom_button.dart';
+
 class CustomCardBooking extends StatelessWidget {
   const CustomCardBooking({
     super.key,
@@ -27,8 +28,7 @@ class CustomCardBooking extends StatelessWidget {
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 5,
             blurRadius: 7,
-            offset:
-            const Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
       ),
@@ -38,11 +38,12 @@ class CustomCardBooking extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          const CustomBottomSheet(
+          CustomBottomSheet(
+            function: () {},
             icon: Icons.location_on_outlined,
             text: "Location",
-            widget: SizedBox(
-                width: double.infinity, child: Text("Location")),
+            widget:
+                const SizedBox(width: double.infinity, child: Text("Location")),
           ),
           SizedBox(
             height: 10.h,
@@ -51,12 +52,12 @@ class CustomCardBooking extends StatelessWidget {
             children: [
               SizedBox(
                 width: 211.w,
-                child: const CustomBottomSheet(
+                child: CustomBottomSheet(
+                  function: () {},
                   icon: Icons.calendar_today,
                   text: "Sun, 4 Oct 2020",
-                  widget: SizedBox(
-                      width: double.infinity,
-                      child: Text("Sun, 4 Oct 2020")),
+                  widget: const SizedBox(
+                      width: double.infinity, child: Text("Sun, 4 Oct 2020")),
                 ),
               ),
               SizedBox(
@@ -64,12 +65,12 @@ class CustomCardBooking extends StatelessWidget {
               ),
               SizedBox(
                 width: 115.w,
-                child: const CustomBottomSheet(
+                child: CustomBottomSheet(
+                  function: () {},
                   icon: Icons.nightlight_outlined,
                   text: "1 night(s)",
-                  widget: SizedBox(
-                      width: double.infinity,
-                      child: Text("Location")),
+                  widget: const SizedBox(
+                      width: double.infinity, child: Text("Location")),
                 ),
               ),
             ],
@@ -79,19 +80,17 @@ class CustomCardBooking extends StatelessWidget {
           ),
           Text("Check-out: Mon, 5 Otc 2020",
               style: getRegularStyle(
-                  fontSize: 20.sp,
-                  color: ColorManage.gray,
-                  height: 1)),
+                  fontSize: 20.sp, color: ColorManage.gray, height: 1)),
           Row(
             children: [
               SizedBox(
                 width: 211.w,
-                child: const CustomBottomSheet(
+                child: CustomBottomSheet(
+                  function: () {},
                   icon: Icons.family_restroom,
                   text: "1 guest(s)",
-                  widget: SizedBox(
-                      width: double.infinity,
-                      child: Text("Sun, 4 Oct 2020")),
+                  widget: const SizedBox(
+                      width: double.infinity, child: Text("Sun, 4 Oct 2020")),
                 ),
               ),
               SizedBox(
@@ -99,12 +98,12 @@ class CustomCardBooking extends StatelessWidget {
               ),
               SizedBox(
                 width: 115.w,
-                child: const CustomBottomSheet(
+                child: CustomBottomSheet(
+                  function: () {},
                   icon: Icons.bed,
                   text: "1 room(s)",
-                  widget: SizedBox(
-                      width: double.infinity,
-                      child: Text("Location")),
+                  widget:
+                      SizedBox(width: double.infinity, child: Text("Location")),
                 ),
               ),
             ],
@@ -112,11 +111,12 @@ class CustomCardBooking extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          const CustomBottomSheet(
+          CustomBottomSheet(
+            function: () {},
             icon: FontAwesomeIcons.filter,
             text: "Filter",
-            widget: SizedBox(
-                width: double.infinity, child: Text("Location")),
+            widget:
+                const SizedBox(width: double.infinity, child: Text("Location")),
           ),
           SizedBox(
             height: 10.h,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
+import 'package:graduation_project/core/resource/routes_manager.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_body.dart';
 import 'package:graduation_project/view_model/bloc/booked-cubit/cubit/booked_cubit.dart';
@@ -36,6 +37,7 @@ class MainPageBookedScreen extends StatelessWidget {
                 SizedBox(
                   height: 0.7.sh,
                   child: PageView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     controller: cubit.pageController,
                     itemCount: cubit.pages.length,
                     onPageChanged: (index) {
@@ -59,6 +61,10 @@ class MainPageBookedScreen extends StatelessWidget {
                                       value: cubit,
                                       child: const MySampleState(),
                                     )));
+                      } else if (BookedCubit.get(context).currentIndex ==
+                          BookedCubit.get(context).pages.length - 1) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Routes.LayoutScreen, (route) => false);
                       } else {
                         cubit.next();
                       }
