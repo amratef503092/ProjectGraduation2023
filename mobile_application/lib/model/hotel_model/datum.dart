@@ -18,20 +18,21 @@ class HotelModelInfo extends Equatable {
   final CityId? cityId;
   final List<Review>? reviews;
   final num? rate;
+  final String? description;
 
-  const HotelModelInfo({
-    this.id,
-    this.hotelManager,
-    this.review,
-    this.hotelName,
-    this.images,
-    this.location,
-    this.options,
-    this.typeOfRoom,
-    this.cityId,
-    this.reviews,
-    this.rate,
-  });
+  const HotelModelInfo(
+      {this.id,
+      this.hotelManager,
+      this.review,
+      this.hotelName,
+      this.images,
+      this.location,
+      this.options,
+      this.typeOfRoom,
+      this.cityId,
+      this.reviews,
+      this.rate,
+      this.description});
 
   factory HotelModelInfo.fromMap(Map<String, dynamic> data) => HotelModelInfo(
       id: data['id'] as int?,
@@ -50,7 +51,8 @@ class HotelModelInfo extends Equatable {
       reviews: (data['reviews'] as List<dynamic>?)
           ?.map((e) => Review.fromMap(e as Map<String, dynamic>))
           .toList(),
-      rate: data['rate'] ?? 0);
+      rate: data['rate'] ?? 0,
+      description: data['description'] as String?);
 
   Map<String, dynamic> toMap() => {
         'id': id,

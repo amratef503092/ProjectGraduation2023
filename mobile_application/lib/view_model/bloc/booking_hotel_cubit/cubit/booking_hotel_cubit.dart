@@ -11,7 +11,7 @@ class BookingHotelCubit extends Cubit<BookingHotelState> {
   String? checkInTime;
   String? timeOfNight;
   int? numberOfGuest;
-  int? numberOfRooms;
+  int? numberOfbed;
   void setCheckInTime(String checkInTime) {
     this.checkInTime = checkInTime;
     emit(SetCheckInState());
@@ -27,8 +27,8 @@ class BookingHotelCubit extends Cubit<BookingHotelState> {
     emit(SetNumberOfGuestState());
   }
 
-  void setnumberOfRooms(int numberOfRooms) {
-    this.numberOfRooms = numberOfRooms;
+  void setNumberOfBed(int numberOfbed) {
+    this.numberOfbed = numberOfbed;
     emit(SetnumberOfRoomsState());
   }
 }

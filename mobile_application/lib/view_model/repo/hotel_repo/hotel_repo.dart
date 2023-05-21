@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 
 import '../../../core/errors/faliuar.dart';
@@ -18,8 +19,10 @@ class HotelRepoImpl extends HotelRepo {
       Response response = await DioHelper.getData(url: getHotelEndPoint);
       return Right(HotelModel.fromMap(response.data));
     } on DioError catch (error) {
+      debugPrint(error.response!.data);
       return Left(ServerFailure.fromDioError(error));
     } catch (error) {
+      debugPrint(error.toString());
       return Left(FailureLocal(message: error.toString()));
     }
   }

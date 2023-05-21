@@ -16,10 +16,15 @@ import '../../../model/hotel_model/datum.dart';
 import '../../../view_model/bloc/booking_hotel_cubit/cubit/booking_hotel_cubit.dart';
 import '../hotels_booking_screens/hotels_booking_screens.dart';
 
-class HotelDetailsScreen extends StatelessWidget {
+class HotelDetailsScreen extends StatefulWidget {
   HotelDetailsScreen({Key? key, required this.hotelModel}) : super(key: key);
   HotelModelInfo? hotelModel;
 
+  @override
+  State<HotelDetailsScreen> createState() => _HotelDetailsScreenState();
+}
+
+class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -56,10 +61,10 @@ class HotelDetailsScreen extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                   ),
                                   items: List.generate(
-                                      hotelModel!.images!.length,
+                                      widget.hotelModel!.images!.length,
                                       (index) => Image(
-                                            image: NetworkImage(
-                                                hotelModel!.images![index]),
+                                            image: NetworkImage(widget
+                                                .hotelModel!.images![index]),
                                             fit: BoxFit.fitWidth,
                                             width: double.infinity,
                                           ))),
@@ -92,7 +97,7 @@ class HotelDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                                 child: Text(
-                                  "${hotelModel!.images!.length}",
+                                  "${widget.hotelModel!.images!.length}",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -214,7 +219,7 @@ class HotelDetailsScreen extends StatelessWidget {
                                 //     'check out my website https://example.com',
                                 //     subject: 'Look what I made!');
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.share_outlined,
                                 color: ColorManage.background,
                               ),
@@ -319,7 +324,7 @@ class HotelDetailsScreen extends StatelessWidget {
                                   child: ListView(
                                     children: [
                                       Text(
-                                        "${hotelModel!.hotelName}",
+                                        "${widget.hotelModel!.hotelName}",
                                         style: getMediumStyle(
                                             color: ColorManage.primaryBlue,
                                             fontSize: 28,
@@ -333,8 +338,9 @@ class HotelDetailsScreen extends StatelessWidget {
                                       Row(
                                         children: [
                                           RatingBar.builder(
-                                            initialRating:
-                                                hotelModel!.rate!.toDouble(),
+                                            initialRating: widget
+                                                .hotelModel!.rate!
+                                                .toDouble(),
                                             minRating: 1,
                                             direction: Axis.horizontal,
                                             itemCount: 5,
@@ -346,13 +352,11 @@ class HotelDetailsScreen extends StatelessWidget {
                                               Icons.star,
                                               color: Colors.amber,
                                             ),
-                                            onRatingUpdate: (rating) {
-                                              print(rating);
-                                            },
+                                            onRatingUpdate: (rating) {},
                                             itemSize: 30.sp,
                                           ),
                                           Text(
-                                            "(${hotelModel!.reviews!.length} review)",
+                                            "(${widget.hotelModel!.reviews!.length} review)",
                                             style: getRegularStyle(
                                                 color: ColorManage.gray,
                                                 height: toFigmaHeight(
@@ -376,7 +380,7 @@ class HotelDetailsScreen extends StatelessWidget {
                                             listener: (context, state) {},
                                             builder: (context, state) {
                                               return Text(
-                                                "${LocationCubit.get(context).getLocation(hotelModel!.location![0].toDouble(), hotelModel!.location![1].toDouble())} km from current location",
+                                                "${LocationCubit.get(context).getLocation(widget.hotelModel!.location![0].toDouble(), widget.hotelModel!.location![1].toDouble())} km from current location",
                                                 style: getRegularStyle(
                                                     color: ColorManage.black,
                                                     height: toFigmaHeight(
@@ -392,50 +396,45 @@ class HotelDetailsScreen extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          BlocBuilder<BookingHotelCubit,
-                                              BookingHotelState>(
-                                            builder: (context, state) {
-                                              return Expanded(
-                                                child: CustomBottomSheet(
-                                                  function: () {
-                                                    showDatePicker(
-                                                            context: context,
-                                                            initialDate:
-                                                                DateTime.now(),
-                                                            firstDate:
-                                                                DateTime.now(),
-                                                            lastDate: DateTime
-                                                                    .now()
-                                                                .add(const Duration(
-                                                                    days: 365)))
-                                                        .then((value) {
-                                                      debugPrint(
-                                                          DateFormat.MMMMEEEEd()
-                                                              .format(value!));
-                                                      BookingHotelCubit.get(
-                                                              context)
-                                                          .setCheckInTime(
-                                                              DateFormat
-                                                                      .MMMMEEEEd()
-                                                                  .format(
-                                                                      value));
-                                                    });
-                                                  },
-                                                  icon: Icons.calendar_today,
-                                                  text: BookingHotelCubit.get(
-                                                              context)
+                                          Expanded(
+                                            child: CustomBottomSheet(
+                                              function: () {
+                                                showDatePicker(
+                                                        context: context,
+                                                        initialDate:
+                                                            DateTime.now(),
+                                                        firstDate:
+                                                            DateTime.now(),
+                                                        lastDate: DateTime.now()
+                                                            .add(const Duration(
+                                                                days: 365)))
+                                                    .then((value) {
+                                                  debugPrint(
+                                                      DateFormat.MMMMEEEEd()
+                                                          .format(value!));
+                                                  setState(() {
+                                                    BookingHotelCubit.get(
+                                                            context)
+                                                        .setCheckInTime(
+                                                            DateFormat
+                                                                    .MMMMEEEEd()
+                                                                .format(value));
+                                                  });
+                                                });
+                                              },
+                                              icon: Icons.calendar_today,
+                                              text:
+                                                  BookingHotelCubit.get(context)
                                                           .checkInTime ??
                                                       "Check In",
-                                                  widget: SizedBox(
-                                                      width: double.infinity,
-                                                      child: Text(
-                                                          BookingHotelCubit.get(
-                                                                      context)
-                                                                  .checkInTime ??
-                                                              "Check In")),
-                                                ),
-                                              );
-                                            },
+                                              widget: SizedBox(
+                                                  width: double.infinity,
+                                                  child: Text(
+                                                      BookingHotelCubit.get(
+                                                                  context)
+                                                              .checkInTime ??
+                                                          "Check In")),
+                                            ),
                                           ),
                                           SizedBox(
                                             width: 10.w,
@@ -463,9 +462,10 @@ class HotelDetailsScreen extends StatelessWidget {
                                                               (context, index) {
                                                             return TextButton(
                                                                 onPressed: () {
-                                                                  cubit.settimeOfNight(
-                                                                      "$index night(s)");
-
+                                                                  setState(() {
+                                                                    cubit.settimeOfNight(
+                                                                        "$index night(s)");
+                                                                  });
                                                                   Navigator.pop(
                                                                       context);
                                                                 },
@@ -505,28 +505,121 @@ class HotelDetailsScreen extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Expanded(
-                                            child: CustomBottomSheet(
-                                              function: () {},
-                                              icon: Icons.family_restroom,
-                                              text: "1 guest(s)",
-                                              widget: const SizedBox(
-                                                  width: double.infinity,
-                                                  child:
-                                                      Text("Sun, 4 Oct 2020")),
-                                            ),
+                                          BlocConsumer<BookingHotelCubit,
+                                              BookingHotelState>(
+                                            listener: (context, state) {
+                                              // TODO: implement listener
+                                            },
+                                            builder: (context, state) {
+                                              BookingHotelCubit cubit =
+                                                  BookingHotelCubit.get(
+                                                      context);
+                                              return Expanded(
+                                                child: CustomBottomSheet(
+                                                  function: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          content: SizedBox(
+                                                            width: 200.w,
+                                                            height: 300.h,
+                                                            child: ListView
+                                                                .builder(
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                return TextButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      setState(
+                                                                          () {
+                                                                        cubit.setnumberOfGuest(
+                                                                            index);
+                                                                        debugPrint(
+                                                                            index.toString());
+                                                                      });
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    child: Text(
+                                                                        "$index guest(s)"));
+                                                              },
+                                                              itemCount: 10,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: Icons.family_restroom,
+                                                  text:
+                                                      "${BookingHotelCubit.get(context).numberOfGuest} guest(s)",
+                                                  widget: const SizedBox(
+                                                      width: double.infinity,
+                                                      child: Text(
+                                                          "Sun, 4 Oct 2020")),
+                                                ),
+                                              );
+                                            },
                                           ),
                                           SizedBox(
                                             width: 10.w,
                                           ),
                                           Expanded(
-                                            child: CustomBottomSheet(
-                                              function: () {},
-                                              icon: Icons.bed,
-                                              text: "1 room(s)",
-                                              widget: const SizedBox(
-                                                  width: double.infinity,
-                                                  child: Text("Location")),
+                                            child: BlocConsumer<
+                                                BookingHotelCubit,
+                                                BookingHotelState>(
+                                              listener: (context, state) {
+                                                // TODO: implement listener
+                                              },
+                                              builder: (context, state) {
+                                                BookingHotelCubit cubit =
+                                                    BookingHotelCubit.get(
+                                                        context);
+                                                return CustomBottomSheet(
+                                                  function: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          content: SizedBox(
+                                                            width: 200.w,
+                                                            height: 300.h,
+                                                            child: ListView
+                                                                .builder(
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                return TextButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      setState(
+                                                                          () {
+                                                                        cubit.setNumberOfBed(
+                                                                            index);
+                                                                      });
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    child: Text(
+                                                                        "$index room(s)"));
+                                                              },
+                                                              itemCount: 10,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: Icons.bed,
+                                                  text:
+                                                      "${BookingHotelCubit.get(context).numberOfbed} room(s)",
+                                                  widget: const SizedBox(
+                                                      width: double.infinity,
+                                                      child: Text("Location")),
+                                                );
+                                              },
                                             ),
                                           ),
                                         ],
@@ -580,8 +673,8 @@ class HotelDetailsScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 20.h,
                                       ),
-                                      const ExpandableText(
-                                        "The Intecontinental Residences Saigon is conveniently located at the Kumho Plaza, which is a walking distance to Saigon Tower , Saigon Trade Center and foreign consulate offices. It is a leisurely 10 minute walk to city parks, zoo and Reunification palace.InterContinental Residences Saigon offers premium residential services and facilities. Other than offering panoramic views of the city on the residences, it offers first- class health club and spa. Live the InterContinental life at Saigon s premier address, where discerning international residents can experience distinctive contemporary living in the city s finest integrated complex.",
+                                      ExpandableText(
+                                        "${widget.hotelModel!.description}",
                                         expandText: 'show more',
                                         collapseText: 'show less',
                                         maxLines: 5,
