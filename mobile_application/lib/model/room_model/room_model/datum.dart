@@ -32,7 +32,7 @@ class Datum extends Equatable {
         booked: json['booked'] as bool?,
         priceperDay: json['priceperDay'] as int?,
         descripions: json['descripions'] as String?,
-        images: json['images'] as List<String>?,
+        images: List.from(json['images'].map((e) => e)),
       );
 
   @override
