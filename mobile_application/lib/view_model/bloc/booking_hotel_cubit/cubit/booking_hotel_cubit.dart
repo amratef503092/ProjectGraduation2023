@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 
 part 'booking_hotel_state.dart';
 
@@ -30,5 +31,17 @@ class BookingHotelCubit extends Cubit<BookingHotelState> {
   void setNumberOfBed(int numberOfbed) {
     this.numberOfbed = numberOfbed;
     emit(SetnumberOfRoomsState());
+  }
+
+  Future<void> bookingRoom(Map<String, dynamic> data) async {
+    emit(BookingRoomLoadingState());
+    await DioHelper.postData(
+      url: "/hotel/rooms/bookRoomID",
+      data: data,
+    ).then((value) {
+      emit(BookingRoomSuccessfullyState());
+    }).catchError((error) {
+      emit(BookingRoomSuccessfullyState());
+    });
   }
 }

@@ -1,7 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../model/room_model/room_model/room_model.dart';
 import '../../../repo/room_repo/room_repo.dart';
 

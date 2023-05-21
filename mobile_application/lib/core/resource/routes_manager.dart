@@ -6,8 +6,9 @@ import 'package:graduation_project/view/pages/auth/forget_password/Recover_passw
 import 'package:graduation_project/view/pages/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:graduation_project/view/pages/home_screens/home_screen.dart';
 import 'package:graduation_project/view/pages/layout_screen/layout_screen.dart';
+import 'package:graduation_project/view_model/bloc/booking_hotel_cubit/cubit/booking_hotel_cubit.dart';
 import 'package:graduation_project/view_model/bloc/onBoarding_cubit/on_boarding_cubit.dart';
-
+import '../../model/room_model/room_model/datum.dart';
 import '../../view/pages/Setting_Screen/languages_screen/languages_screen.dart';
 import '../../view/pages/Setting_Screen/setting_currency/setting_currency.dart';
 import '../../view/pages/Setting_Screen/setting_screen.dart';
@@ -99,8 +100,13 @@ class RouteGenerator {
                 ));
       case Routes.RoomDetailsScreen:
         return MaterialPageRoute(
-          builder: (_) {
-            return RoomDetailsScreen();
+          builder: (context) {
+            return BlocProvider.value(
+              value: BlocProvider.of<BookingHotelCubit>(context),
+              child: RoomDetailsScreen(
+                roomModelInfo: routeSettings.arguments as RoomModelInfo,
+              ),
+            );
           },
         );
       case Routes.BookedActivityScreen:
@@ -114,7 +120,7 @@ class RouteGenerator {
       case Routes.mainBookedDetialesScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return MainPageBookedScreen();
+            return const MainPageBookedScreen();
           },
         );
 

@@ -1,12 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:graduation_project/core/constatnts.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
-
 import '../../../core/errors/faliuar.dart';
-import '../../../model/acitvity_model/activity_model.dart';
 import '../../../model/booked_activity/booked_activity_model.dart';
 import '../../database/network/end_points.dart';
 

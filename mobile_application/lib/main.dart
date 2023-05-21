@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
+import 'package:graduation_project/view_model/bloc/booking_hotel_cubit/cubit/booking_hotel_cubit.dart';
 import 'package:graduation_project/view_model/bloc/internet_services/internet_service_bloc.dart';
 import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 import 'package:graduation_project/view_model/database/local/cache_helper.dart';
@@ -76,6 +77,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) =>
                   ActivityCubit(sl.get<ActivityRepImpl>())..getActivity(),
+            ),
+            BlocProvider(
+              create: (context) => BookingHotelCubit(),
             ),
           ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(

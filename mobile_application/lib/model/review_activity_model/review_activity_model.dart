@@ -2,9 +2,7 @@ import 'package:graduation_project/model/user_model/user_model.dart';
 
 class ReviewActivityModel {
   final int rate;
-
   final String comment;
-
   final String created_at;
   final User user;
 

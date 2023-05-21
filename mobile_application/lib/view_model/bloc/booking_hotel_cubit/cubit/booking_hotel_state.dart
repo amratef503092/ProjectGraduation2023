@@ -16,3 +16,9 @@ class SetTimeOfNight extends BookingHotelState {}
 class SetNumberOfGuestState extends BookingHotelState {}
 
 class SetnumberOfRoomsState extends BookingHotelState {}
+
+class BookingRoomLoadingState extends BookingHotelState {}
+
+class BookingRoomSuccessfullyState extends BookingHotelState {}
+
+class BookingRoomErrorState extends BookingHotelState {}

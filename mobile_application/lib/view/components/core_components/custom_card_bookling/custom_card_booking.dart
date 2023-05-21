@@ -102,8 +102,8 @@ class CustomCardBooking extends StatelessWidget {
                   function: () {},
                   icon: Icons.bed,
                   text: "1 room(s)",
-                  widget:
-                      SizedBox(width: double.infinity, child: Text("Location")),
+                  widget: const SizedBox(
+                      width: double.infinity, child: Text("Location")),
                 ),
               ),
             ],

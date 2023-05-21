@@ -1,24 +1,35 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:graduation_project/core/constatnts.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
+import 'package:graduation_project/view/pages/hotels_booking_screens/hotels_booking_screens.dart';
+import 'package:graduation_project/view_model/bloc/booking_hotel_cubit/cubit/booking_hotel_cubit.dart';
 
 import '../../../core/resource/assets_manager.dart';
 import '../../../core/resource/color_mananger.dart';
 import '../../../core/resource/style_manager.dart';
+import '../../../model/room_model/room_model/datum.dart';
 
 class RoomDetailsScreen extends StatelessWidget {
-  RoomDetailsScreen({
+  const RoomDetailsScreen({
     Key? key,
+    required this.roomModelInfo,
   }) : super(key: key);
-
+  final RoomModelInfo roomModelInfo;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+    return BlocConsumer<BookingHotelCubit, BookingHotelState>(
+      listener: (context, state) {
+        // TODO: implement
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: SingleChildScrollView(
+              child: Column(children: [
             Stack(
               children: [
                 Stack(
@@ -29,22 +40,23 @@ class RoomDetailsScreen extends StatelessWidget {
                             height: 420.h,
                             viewportFraction: 1,
                             autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 3),
+                            autoPlayInterval: const Duration(seconds: 3),
                             onPageChanged: (index, reason) {},
                             autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
+                                const Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enlargeCenterPage: true,
                             scrollDirection: Axis.horizontal,
                           ),
-                          items: const [
-                            Image(
-                              image: NetworkImage(
-                                  "https://i.travelapi.com/hotels/1000000/190000/185500/185418/63c38c05_z.jpg"),
-                              fit: BoxFit.fitWidth,
-                              width: double.infinity,
-                            )
-                          ]),
+                          items: List.generate(
+                              roomModelInfo.images!.length,
+                              (index) => Image(
+                                    image: NetworkImage(
+                                      roomModelInfo.images![index],
+                                    ),
+                                    fit: BoxFit.fitWidth,
+                                    width: double.infinity,
+                                  ))),
                     ),
                     Positioned(
                       right: 10.w,
@@ -67,8 +79,8 @@ class RoomDetailsScreen extends StatelessWidget {
                               color: Colors.black.withOpacity(0.1),
                               spreadRadius: 10,
                               blurRadius: 20,
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
+                              offset: const Offset(
+                                  0, 2), // changes position of shadow
                             ),
                           ],
                         ),
@@ -298,52 +310,172 @@ class RoomDetailsScreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            Text("Room Information"),
-          ],
-        ),
-      ),
-      bottomSheet: Container(
-        width: double.infinity,
-        decoration:
-            BoxDecoration(border: Border.all(color: ColorManage.variantBlue1)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text("Total Price for 4-5 Oct 2020, 1 Night(s), 1 Room(s)"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    "29\$ ",
-                    style: getBoldStyle(
-                        color: ColorManage.redError,
-                        height:
-                            toFigmaHeight(figmaHeight: 26, fontSize: 30.sp)),
+            Text(roomModelInfo.descripions!),
+            SizedBox(
+              height: 20.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Price Per Night ",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+                Text(
+                  "${roomModelInfo.priceperDay} EGP",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Check In",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+                Text(
+                  DateFormat.yMMMMEEEEd().format(DateTime.parse(
+                      BookingHotelCubit.get(context).checkInTime!)),
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 18.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "check out",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+                Text(
+                  DateFormat.yMMMMEEEEd().format(DateTime.parse(
+                          BookingHotelCubit.get(context).checkInTime!)
+                      .add(Duration(
+                          days: int.parse(BookingHotelCubit.get(context)
+                              .timeOfNight![0])))),
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 18.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Number of Days",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+                Text(
+                  "${BookingHotelCubit.get(context).timeOfNight![0]}Days",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 18.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total Price",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 28.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+                Text(
+                  "${int.parse(BookingHotelCubit.get(context).timeOfNight![0]) * roomModelInfo.priceperDay!} EGP",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue,
+                      fontSize: 18.sp,
+                      height:
+                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                ),
+              ],
+            ),
+          ])),
+          bottomSheet: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                border: Border.all(color: ColorManage.variantBlue1)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "29\$ ",
+                        style: getBoldStyle(
+                            color: ColorManage.redError,
+                            height: toFigmaHeight(
+                                figmaHeight: 26, fontSize: 30.sp)),
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      Text(
+                        "50\$ ",
+                        style: getBoldStyle(
+                            color: ColorManage.gray,
+                            textDecoration: TextDecoration.lineThrough,
+                            height: toFigmaHeight(
+                                figmaHeight: 26, fontSize: 30.sp)),
+                      ),
+                      const Spacer(),
+                      CustomButton(
+                          size: const Size(80, 40),
+                          widget: const Text("Book"),
+                          function: () {
+                            Map<String, dynamic> data = {
+                              "hotel_info_id": roomModelInfo.id,
+                              "user_id": getUserID(),
+                              "room_id": roomModelInfo.id
+                            };
+                            BookingHotelCubit.get(context).bookingRoom(
+                                roomModelInfo: roomModelInfo, context: context);
+                          },
+                          color: ColorManage.primaryYellow)
+                    ],
                   ),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  Text(
-                    "50\$ ",
-                    style: getBoldStyle(
-                        color: ColorManage.gray,
-                        textDecoration: TextDecoration.lineThrough,
-                        height:
-                            toFigmaHeight(figmaHeight: 26, fontSize: 30.sp)),
-                  ),
-                  const Spacer(),
-                  CustomButton(
-                      size: const Size(80, 40),
-                      widget: const Text("Book"),
-                      function: () {},
-                      color: ColorManage.primaryYellow)
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

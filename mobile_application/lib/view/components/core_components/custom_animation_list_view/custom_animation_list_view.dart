@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
 class AnimationListView extends StatelessWidget {
   const AnimationListView(
       {super.key, required this.widget, required this.index});
@@ -14,7 +15,8 @@ class AnimationListView extends StatelessWidget {
       duration: const Duration(seconds: 2),
       child: SlideAnimation(
         verticalOffset: 50.0,
-        child: FadeInAnimation(duration: Duration(seconds: 4), child: widget),
+        child: FadeInAnimation(
+            duration: const Duration(seconds: 4), child: widget),
       ),
     );
   }

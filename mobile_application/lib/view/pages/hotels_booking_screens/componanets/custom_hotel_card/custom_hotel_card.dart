@@ -162,7 +162,7 @@ class CustomTopHotelCard extends StatelessWidget {
                       },
                     ),
                     CustomButton(
-                        widget: Text("Book"),
+                        widget: const Text("Book"),
                         size: Size(80.w, 40.h),
                         function: () {
                           function();

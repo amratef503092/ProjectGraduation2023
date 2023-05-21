@@ -4,7 +4,7 @@ import 'package:graduation_project/model/hotel_model/hotel_model.dart';
 
 import '../../hotel_model/datum.dart';
 
-class Datum extends Equatable {
+class RoomModelInfo extends Equatable {
   final int? id;
   final HotelModelInfo? hotelInfo;
   final int? numnberOfBeds;
@@ -13,7 +13,7 @@ class Datum extends Equatable {
   final String? descripions;
   final List<String>? images;
 
-  const Datum({
+  const RoomModelInfo({
     this.id,
     this.hotelInfo,
     this.numnberOfBeds,
@@ -23,7 +23,7 @@ class Datum extends Equatable {
     this.images,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory RoomModelInfo.fromJson(Map<String, dynamic> json) => RoomModelInfo(
         id: json['id'] as int?,
         hotelInfo: json['hotelInfo'] == null
             ? null
