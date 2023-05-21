@@ -54,19 +54,6 @@ class HotelModelInfo extends Equatable {
       rate: data['rate'] ?? 0,
       description: data['description'] as String?);
 
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'hotelManager': hotelManager?.toMap(),
-        'review': review,
-        'hotel_name': hotelName,
-        'images': images,
-        'location': location,
-        'OPTIONS': options,
-        'type_of_room': typeOfRoom,
-        'city_id': cityId?.toMap(),
-        'reviews': reviews?.map((e) => e.toMap()).toList(),
-      };
-
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [HotelModelInfo].
@@ -77,7 +64,6 @@ class HotelModelInfo extends Equatable {
   /// `dart:convert`
   ///
   /// Converts [HotelModelInfo] to a JSON string.
-  String toJson() => json.encode(toMap());
 
   @override
   List<Object?> get props {

@@ -19,12 +19,6 @@ class HotelModel extends Equatable {
             .toList(),
       );
 
-  Map<String, dynamic> toMap() => {
-        'message': message,
-        'statusCode': statusCode,
-        'data': data?.map((e) => e.toMap()).toList(),
-      };
-
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [HotelModel].
@@ -35,7 +29,6 @@ class HotelModel extends Equatable {
   /// `dart:convert`
   ///
   /// Converts [HotelModel] to a JSON string.
-  String toJson() => json.encode(toMap());
 
   @override
   List<Object?> get props => [message, statusCode, data];

@@ -631,7 +631,8 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                         widget: Text("Select Room & Book"),
                                         function: () {
                                           Navigator.pushNamed(
-                                              context, Routes.SelectRoomScreen);
+                                              context, Routes.SelectRoomScreen,
+                                              arguments: widget.hotelModel!.id);
                                         },
                                         color: ColorManage.primaryYellow,
                                         size: Size(366.w, 52.h),
@@ -799,8 +800,8 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                                       height: 20,
                                                     ),
                                                     CustomButton(
-                                                        widget:
-                                                            Text("Make Review"),
+                                                        widget: const Text(
+                                                            "Make Review"),
                                                         function: () {},
                                                         color: ColorManage
                                                             .primaryBlue)
@@ -852,24 +853,34 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        const Image(
+                                                        Image(
                                                           image: NetworkImage(
-                                                              "https://th.bing.com/th/id/R.57494e6bfd1d080da4d9dbd91d265e37?rik=QhwW6KpZLNgwfA&pid=ImgRaw&r=0"),
+                                                              widget
+                                                                  .hotelModel!
+                                                                  .reviews![
+                                                                      index]
+                                                                  .user!
+                                                                  .profileImage!),
                                                         ),
                                                         SizedBox(
                                                           width: 10.w,
                                                         ),
-                                                        Text("Name user")
+                                                        Text(
+                                                            "${widget.hotelModel!.reviews![index].user!.name}")
                                                       ],
                                                     ),
                                                   ),
-                                                  const Text("Good Review"),
+                                                  Text(widget
+                                                      .hotelModel!
+                                                      .reviews![index]
+                                                      .comments!),
                                                 ],
                                               ),
                                             ),
                                           );
                                         },
-                                        itemCount: 10,
+                                        itemCount:
+                                            widget.hotelModel!.reviews!.length,
                                       ))
                                     ],
                                   ),

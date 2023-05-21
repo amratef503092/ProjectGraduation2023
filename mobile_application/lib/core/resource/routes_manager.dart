@@ -93,7 +93,10 @@ class RouteGenerator {
       case Routes.VerificationEmailScreen:
         return MaterialPageRoute(builder: (_) => VerificationEmailScreen());
       case Routes.SelectRoomScreen:
-        return MaterialPageRoute(builder: (_) => const SelectRoomScreen());
+        return MaterialPageRoute(
+            builder: (_) => SelectRoomScreen(
+                  hotelid: routeSettings.arguments as int,
+                ));
       case Routes.RoomDetailsScreen:
         return MaterialPageRoute(
           builder: (_) {
