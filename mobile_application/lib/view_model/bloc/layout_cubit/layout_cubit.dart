@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../view/pages/create_program_screen/create_program_screen.dart';
 import '../../../view/pages/hotels_booking_screens/hotels_booking_screens.dart';
+import '../../../view/pages/profile_screen/profile_screen.dart';
 import '../../../view/pages/social_media_screen/social_media_screen.dart';
 
 part 'layout_state.dart';
@@ -18,8 +19,9 @@ class LayoutCubit extends Cubit<LayoutState> {
   [
     HomePageScreen(),
     const SocialMediaScreen(),
-    const CreateProgramScreen(),
     const HotelBookingScreen(),
+    const ProfileScreen(),
+
 
   ];
   void changeIndex(int index)

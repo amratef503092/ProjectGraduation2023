@@ -12,6 +12,8 @@ class CustomTextField extends StatelessWidget {
     required this.fieldValidator,
     this.iconData,
     this.border = false,
+    this.keyboardType = TextInputType.text,
+    this.enable = true,
     Key? key,
   }) : super(key: key);
   final TextEditingController controller;
@@ -22,10 +24,15 @@ class CustomTextField extends StatelessWidget {
   final Function? function;
   final Widget ?iconData;
   final bool ?border;
+  final TextInputType ?keyboardType;
+  final bool ?enable;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
+      enabled: enable,
       validator: (value) => fieldValidator(value),
       decoration: InputDecoration(
         border: border==true?InputBorder.none:OutlineInputBorder(

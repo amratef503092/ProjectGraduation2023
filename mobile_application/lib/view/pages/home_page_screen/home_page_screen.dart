@@ -18,12 +18,14 @@ import '../../components/core_components/custom_card_activity/custom_Card_activi
 import '../activity_details_screen/activity_details_screen.dart';
 import '../map_screen/map_screen.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatelessWidget
+{
   HomePageScreen({Key? key}) : super(key: key);
   double padding = 24;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
       body: Scrollbar(
         child: SingleChildScrollView(
@@ -78,7 +80,7 @@ class HomePageScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                         onPressed: () {
                           Navigator.pushNamed(context, Routes.settingScreen);
@@ -170,84 +172,68 @@ class HomePageScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              BlocConsumer<LocationCubit, LocationState>(
-                buildWhen: (previous, current) {
-                  return current is GetLocationSuccessful ||
-                      current is GetLocationLoading ||
-                      current is GetActivityError;
-                },
-                listener: (context, state) {
-                  // TODO: implement listener
-                },
-                builder: (context, state) {
-                  return (state is GetLocationSuccessful)
-                      ? OpenContainer(
-                          closedBuilder: (context, action) {
-                            return Padding(
-                              padding: EdgeInsets.zero,
-                              child: Stack(
-                                children: [
-                                  SizedBox(
-                                      width: double.infinity,
-                                      height: 250.h,
-                                      child: FlutterMap(
-                                        options: MapOptions(
-                                          center: LatLng(
-                                              LocationCubit.get(context)
-                                                      .position
-                                                      ?.latitude ??
-                                                  30.033333,
-                                              LocationCubit.get(context)
-                                                      .position
-                                                      ?.longitude ??
-                                                  31.00),
-                                          zoom: 9,
-                                        ),
-                                        nonRotatedChildren: [
-                                          AttributionWidget.defaultWidget(
-                                            source:
-                                                'OpenStreetMap contributors',
-                                            onSourceTapped: null,
-                                          ),
-                                        ],
-                                        children: [
-                                          TileLayer(
-                                            urlTemplate:
-                                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                            userAgentPackageName:
-                                                'com.example.app',
-                                          ),
-                                        ],
-                                      )),
-                                  Positioned(
-                                    bottom: 20.w,
-                                    left: 25.w,
-                                    child: Center(
-                                      child: CustomButton(
-                                        widget: const Text(
-                                          "Explore  Nearby Places",
-                                        ),
-                                        function: () {
-                                          action();
-                                        },
-                                        color: ColorManage.primaryYellow,
-                                        disable: true,
-                                      ),
+              OpenContainer(
+                      closedBuilder: (context, action) {
+                        return Padding(
+                          padding: EdgeInsets.zero,
+                          child: Stack(
+                            children: [
+                              SizedBox(
+                                  width: double.infinity,
+                                  height: 250.h,
+                                  child: FlutterMap(
+                                    options: MapOptions(
+                                      center: LatLng(
+                                          LocationCubit.get(context)
+                                                  .position
+                                                  ?.latitude ??
+                                              30.033333,
+                                          LocationCubit.get(context)
+                                                  .position
+                                                  ?.longitude ??
+                                              31.00),
+                                      zoom: 9,
                                     ),
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                          openBuilder: (context, action) {
-                            return const MapScreen();
-                          },
-                        )
-                      : const Center(
-                          child: CircularProgressIndicator(),
+                                    nonRotatedChildren: [
+                                      AttributionWidget.defaultWidget(
+                                        source:
+                                            'OpenStreetMap contributors',
+                                        onSourceTapped: null,
+                                      ),
+                                    ],
+                                    children: [
+                                      TileLayer(
+                                        urlTemplate:
+                                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                        userAgentPackageName:
+                                            'com.example.app',
+                                      ),
+                                    ],
+                                  )),
+                              Positioned(
+                                bottom: 20.w,
+                                left: 25.w,
+                                child: Center(
+                                  child: CustomButton(
+                                    widget: const Text(
+                                      "Explore  Nearby Places",
+                                    ),
+                                    function: () {
+                                      action();
+                                    },
+                                    color: ColorManage.primaryYellow,
+                                    disable: true,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         );
-                },
-              ),
+                      },
+                      openBuilder: (context, action) {
+                        return const MapScreen();
+                      },
+                    ),
               SizedBox(
                 height: 20.h,
               ),

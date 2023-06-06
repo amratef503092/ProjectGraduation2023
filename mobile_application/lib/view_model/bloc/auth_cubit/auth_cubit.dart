@@ -45,6 +45,7 @@ class AuthCubit extends Cubit<AuthState> {
       loginModel = responseLoginData;
       await CacheHelper.put(key: name, value: loginModel!.user!.name);
       await CacheHelper.put(key: userID, value: loginModel!.user!.id);
+      await CacheHelper.put(key: token, value: loginModel!.accessToken);
       emit(SignInSuccessfulState(loginModel: responseLoginData));
     });
   }

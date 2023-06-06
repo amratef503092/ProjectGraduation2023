@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 
@@ -9,10 +10,10 @@ class BookingHotelCubit extends Cubit<BookingHotelState> {
   BookingHotelCubit() : super(BookingHotelInitial());
   static BookingHotelCubit get(context) =>
       BlocProvider.of<BookingHotelCubit>(context);
-  String? checkInTime;
+  String? checkInTime = DateTime.now().toString();
   String? timeOfNight;
-  int? numberOfGuest;
-  int? numberOfbed;
+  int? numberOfGuest = 1;
+  int? numberOfbed = 2;
   void setCheckInTime(String checkInTime) {
     this.checkInTime = checkInTime;
     emit(SetCheckInState());
@@ -33,15 +34,17 @@ class BookingHotelCubit extends Cubit<BookingHotelState> {
     emit(SetnumberOfRoomsState());
   }
 
-  Future<void> bookingRoom(Map<String, dynamic> data) async {
+  Future<void> bookingRoom(Map<String, dynamic> data) async
+  {
     emit(BookingRoomLoadingState());
     await DioHelper.postData(
-      url: "/hotel/rooms/bookRoomID",
+      url: "/hotel/rooms/createBookingRoom",
       data: data,
-    ).then((value) {
+    ).then((value)
+    {
       emit(BookingRoomSuccessfullyState());
     }).catchError((error) {
-      emit(BookingRoomSuccessfullyState());
+      emit(BookingRoomErrorState());
     });
   }
 }

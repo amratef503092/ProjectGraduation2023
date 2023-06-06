@@ -28,7 +28,7 @@ class LoginRepoImpl extends LoginRepo
     } on DioError catch (e)
     {
       debugPrint("-------------Response Data----------------");
-      debugPrint(e.response!.data);
+      debugPrint(e.response!.data.toString());
       debugPrint("-------------Response Data----------------");
       return Left(ServerFailure.fromDioError(e));
     }

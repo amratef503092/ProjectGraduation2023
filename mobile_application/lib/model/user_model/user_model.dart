@@ -58,21 +58,23 @@ class User {
     this.profileImage,
     this.password,
     this.passwordConfirmation,
+    this.phone
   });
 
   User.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    emailVerifiedAt = json['email_verified_at'];
-    birthday = json['birthday'];
-    gender = json['gender'];
-    nationality = json['nationality'];
-    status = json['status'];
-    location = json['location'].cast<String>();
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    profileImage = json['profile_image'];
+    id = json['id'] ?? 0;
+    name = json['name'] ?? "";
+    email = json['email'] ?? "";
+    emailVerifiedAt = json['email_verified_at']?? "";
+    birthday = json['birthday'] ?? "";
+    gender = json['gender'] ?? "";
+    nationality = json['nationality'] ?? "";
+    status = json['status']?? "";
+    location = json['location'].cast<String>() ?? [];
+    createdAt = json['created_at'] ?? "";
+    updatedAt = json['updated_at'] ?? "";
+    profileImage = json['profile_image'] ?? "";
+    phone = json['phone'] ?? " " ;
   }
   num? id;
   String? name;
@@ -88,7 +90,7 @@ class User {
   String? profileImage;
   String? password;
   String? passwordConfirmation;
-
+  String? phone;
   User copyWith({
     num? id,
     String? name,
@@ -102,6 +104,7 @@ class User {
     String? createdAt,
     String? updatedAt,
     dynamic profileImage,
+    String ? phone,
   }) =>
       User(
         id: id ?? this.id,
@@ -116,6 +119,7 @@ class User {
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
         profileImage: profileImage ?? this.profileImage,
+        phone: phone ?? this.phone,
       );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

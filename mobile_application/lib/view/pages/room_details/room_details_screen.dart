@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ import '../../../core/resource/assets_manager.dart';
 import '../../../core/resource/color_mananger.dart';
 import '../../../core/resource/style_manager.dart';
 import '../../../model/room_model/room_model/datum.dart';
+import '../booking_successfuly_screen/booking_successfuly_screen.dart';
 
 class RoomDetailsScreen extends StatelessWidget {
   const RoomDetailsScreen({
@@ -23,10 +26,16 @@ class RoomDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BookingHotelCubit, BookingHotelState>(
-      listener: (context, state) {
+      listener: (context, state)
+      {
+        if(state is BookingRoomSuccessfullyState)
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>BookedSuccessfulyScreen()));
+        }
         // TODO: implement
       },
-      builder: (context, state) {
+      builder: (context, state)
+      {
         return Scaffold(
           body: SingleChildScrollView(
               child: Column(children: [
@@ -277,35 +286,38 @@ class RoomDetailsScreen extends StatelessWidget {
                 // ),
               ],
             ),
-            Column(
-              children: [
-                Text(
-                  "Deluxe Room, 1 King Bed",
-                  style: getBoldStyle(
-                      color: ColorManage.primaryBlue,
-                      fontSize: 28.sp,
-                      height:
-                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(AssetsManager.peopleIcon),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text("1 guest(s)"),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    SvgPicture.asset(AssetsManager.bedIcon),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text("2 Twin bed"),
-                  ],
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.all(24.0.sp),
+              child: Column(
+                children: [
+                  Text(
+                    "Deluxe Room, 1 King Bed",
+                    style: getBoldStyle(
+                        color: ColorManage.primaryBlue,
+                        fontSize: 28.sp,
+                        height:
+                            toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AssetsManager.peopleIcon),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Text("1 guest(s)"),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      SvgPicture.asset(AssetsManager.bedIcon),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Text("2 Twin bed"),
+                    ],
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 20.h,
@@ -313,27 +325,6 @@ class RoomDetailsScreen extends StatelessWidget {
             Text(roomModelInfo.descripions!),
             SizedBox(
               height: 20.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Price Per Night ",
-                  style: getBoldStyle(
-                      color: ColorManage.primaryBlue,
-                      fontSize: 28.sp,
-                      height:
-                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                ),
-                Text(
-                  "${roomModelInfo.priceperDay} EGP",
-                  style: getBoldStyle(
-                      color: ColorManage.primaryBlue,
-                      fontSize: 28.sp,
-                      height:
-                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                ),
-              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -394,7 +385,7 @@ class RoomDetailsScreen extends StatelessWidget {
                           toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
                 ),
                 Text(
-                  "${BookingHotelCubit.get(context).timeOfNight![0]}Days",
+                  "${BookingHotelCubit.get(context).timeOfNight![0]} Days",
                   style: getBoldStyle(
                       color: ColorManage.primaryBlue,
                       fontSize: 18.sp,
@@ -403,27 +394,27 @@ class RoomDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Price",
-                  style: getBoldStyle(
-                      color: ColorManage.primaryBlue,
-                      fontSize: 28.sp,
-                      height:
-                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                ),
-                Text(
-                  "${int.parse(BookingHotelCubit.get(context).timeOfNight![0]) * roomModelInfo.priceperDay!} EGP",
-                  style: getBoldStyle(
-                      color: ColorManage.primaryBlue,
-                      fontSize: 18.sp,
-                      height:
-                          toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       "Total Price",
+            //       style: getBoldStyle(
+            //           color: ColorManage.primaryBlue,
+            //           fontSize: 28.sp,
+            //           height:
+            //               toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+            //     ),
+            //     Text(
+            //       "${int.parse(BookingHotelCubit.get(context).timeOfNight![0]) * roomModelInfo.priceperDay!} EGP",
+            //       style: getBoldStyle(
+            //           color: ColorManage.primaryBlue,
+            //           fontSize: 18.sp,
+            //           height:
+            //               toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+            //     ),
+            //   ],
+            // ),
           ])),
           bottomSheet: Container(
             width: double.infinity,
@@ -437,37 +428,46 @@ class RoomDetailsScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "29\$ ",
+                        "${int.parse(BookingHotelCubit.get(context).timeOfNight![0]) * roomModelInfo.priceperDay!} EGP",
                         style: getBoldStyle(
                             color: ColorManage.redError,
                             height: toFigmaHeight(
                                 figmaHeight: 26, fontSize: 30.sp)),
                       ),
-                      SizedBox(
-                        width: 20.w,
-                      ),
-                      Text(
-                        "50\$ ",
-                        style: getBoldStyle(
-                            color: ColorManage.gray,
-                            textDecoration: TextDecoration.lineThrough,
-                            height: toFigmaHeight(
-                                figmaHeight: 26, fontSize: 30.sp)),
-                      ),
                       const Spacer(),
                       CustomButton(
-                          size: const Size(80, 40),
-                          widget: const Text("Book"),
-                          function: () {
+                        color: ColorManage.primaryYellow,
+                          size: Size(100.w, 40.h),
+                          function: () async {
+                            print("Amr");
+                            print(getUserID());
                             Map<String, dynamic> data = {
-                              "hotel_info_id": roomModelInfo.id,
+                              "hotel_info_id": roomModelInfo.hotelInfo!.id,
                               "user_id": getUserID(),
-                              "room_id": roomModelInfo.id
+                              "room_id": roomModelInfo.id,
+                              "num_of_nights": BookingHotelCubit.get(context)
+                                  .timeOfNight![0],
+                              "num_of_guests":
+                                  BookingHotelCubit.get(context).numberOfGuest,
+                              "total_price": int.parse(
+                                      BookingHotelCubit.get(context)
+                                          .timeOfNight![0]) *
+                                  roomModelInfo.priceperDay!,
+                              "check_in":
+                                  BookingHotelCubit.get(context).checkInTime,
+                              "check_out": DateTime.parse(
+                                      BookingHotelCubit.get(context)
+                                          .checkInTime!)
+                                  .add(Duration(
+                                      days: int.parse(
+                                          BookingHotelCubit.get(context)
+                                              .timeOfNight![0])))
+                                  .toString()
                             };
-                            BookingHotelCubit.get(context).bookingRoom(
-                                roomModelInfo: roomModelInfo, context: context);
+                            await BookingHotelCubit.get(context)
+                                .bookingRoom(data);
                           },
-                          color: ColorManage.primaryYellow)
+                          widget: const Text("Book"))
                     ],
                   ),
                 )

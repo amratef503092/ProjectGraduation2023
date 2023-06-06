@@ -8,7 +8,8 @@ abstract class Failure {
 class ServerFailure extends Failure {
   ServerFailure({required super.message});
 
-  factory ServerFailure.fromDioError(DioError dioError) {
+  factory ServerFailure.fromDioError(DioError dioError)
+  {
     switch (dioError.type) {
       case DioErrorType.connectTimeout:
         return ServerFailure(message: "Connection TimeOut");
@@ -36,9 +37,15 @@ class ServerFailure extends Failure {
   }
 
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+    if (statusCode == 400 || statusCode == 401 || statusCode == 403)
+    {
+      if(response.data['message'] == null)
+      {
+        return ServerFailure(message: "Something Went Wrong");
+      }
       return ServerFailure(message: response.data['message']);
-    } else if (statusCode == 404) {
+    } else if (statusCode == 404)
+    {
       // 404 not found
       return ServerFailure(message: "Your Request Not Found Try Again Later");
     } else if (statusCode == 409) {

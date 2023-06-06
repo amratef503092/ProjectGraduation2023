@@ -10,7 +10,6 @@ import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:motion_toast/motion_toast.dart';
-
 import '../../../../core/resource/routes_manager.dart';
 import '../../../../core/resource/validator.dart';
 import '../../../../model/user_model/user_model.dart';

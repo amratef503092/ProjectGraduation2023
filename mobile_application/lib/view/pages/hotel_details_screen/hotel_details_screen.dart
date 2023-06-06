@@ -418,7 +418,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                                 DateTime.parse(
                                                     BookingHotelCubit.get(
                                                             context)
-                                                        .checkInTime!)),
+                                                        .checkInTime!)  ) ,
                                             widget: SizedBox(
                                                 width: double.infinity,
                                                 child: Text(
@@ -486,13 +486,13 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    Center(
-                                      child: Text("Check-out: Mon, 5 Otc 2020",
-                                          style: getRegularStyle(
-                                              fontSize: 20.sp,
-                                              color: ColorManage.gray,
-                                              height: 1)),
-                                    ),
+                                    // Center(
+                                    //   child: Text("Check-out: Mon, 5 Otc 2020",
+                                    //       style: getRegularStyle(
+                                    //           fontSize: 20.sp,
+                                    //           color: ColorManage.gray,
+                                    //           height: 1)),
+                                    // ),
                                     Row(
                                       children: [
                                         BlocConsumer<BookingHotelCubit,
@@ -617,8 +617,17 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                       height: 40.h,
                                     ),
                                     CustomButton(
-                                      widget: Text("Select Room & Book"),
-                                      function: () {
+                                      widget: const Text("Select Room & Book"),
+                                      function: ()
+                                      {
+                                        if(BookingHotelCubit.get(context).timeOfNight == null)
+                                          {
+                                            ScaffoldMessenger.of(context).showSnackBar(const
+                                            SnackBar(content: Text("Please Select Number of days") ,
+                                            backgroundColor: ColorManage.redError,
+                                            ));
+                                            return;
+                                          }
                                         Navigator.pushNamed(
                                             context, Routes.SelectRoomScreen,
                                             arguments: widget.hotelModel!.id);
@@ -632,80 +641,84 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                               // About
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Text(
-                                      "About",
-                                      style: getMediumStyle(
-                                          color: ColorManage.primaryBlue,
-                                          fontSize: 28.sp,
-                                          height: toFigmaHeight(
-                                              figmaHeight: 36.sp,
-                                              fontSize: 28.sp)),
-                                    ),
-                                    SizedBox(
-                                      height: 32.h,
-                                    ),
-                                    Text(
-                                      "Description",
-                                      style: getMediumStyle(
-                                          color: ColorManage.secondaryBlack,
-                                          fontSize: 29.sp,
-                                          height: toFigmaHeight(
-                                              figmaHeight: 30.sp,
-                                              fontSize: 20.sp)),
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    ExpandableText(
-                                      "${widget.hotelModel!.description}",
-                                      expandText: 'show more',
-                                      collapseText: 'show less',
-                                      maxLines: 5,
-                                      linkColor: Colors.blue,
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Text(
-                                      "Facilities",
-                                      style: getMediumStyle(
-                                          color: ColorManage.secondaryBlack,
-                                          fontSize: 29.sp,
-                                          height: toFigmaHeight(
-                                              figmaHeight: 30.sp,
-                                              fontSize: 20.sp)),
-                                    ),
-                                    Expanded(
-                                        child: GridView.builder(
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 3),
-                                      itemCount: 10,
-                                      itemBuilder: (context, index) {
-                                        return Card(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Icon(
-                                                Icons.wifi,
-                                              ),
-                                              SizedBox(
-                                                height: 2.h,
-                                              ),
-                                              Text("Free Wifi")
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ))
-                                  ],
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      Text(
+                                        "About",
+                                        style: getMediumStyle(
+                                            color: ColorManage.primaryBlue,
+                                            fontSize: 28.sp,
+                                            height: toFigmaHeight(
+                                                figmaHeight: 36.sp,
+                                                fontSize: 28.sp)),
+                                      ),
+                                      SizedBox(
+                                        height: 32.h,
+                                      ),
+                                      Text(
+                                        "Description",
+                                        style: getMediumStyle(
+                                            color: ColorManage.secondaryBlack,
+                                            fontSize: 29.sp,
+                                            height: toFigmaHeight(
+                                                figmaHeight: 30.sp,
+                                                fontSize: 20.sp)),
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      ExpandableText(
+                                        "${widget.hotelModel!.description}",
+                                        expandText: 'show more',
+                                        collapseText: 'show less',
+                                        maxLines: 5,
+                                        linkColor: Colors.blue,
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      Text(
+                                        "Facilities",
+                                        style: getMediumStyle(
+                                            color: ColorManage.secondaryBlack,
+                                            fontSize: 29.sp,
+                                            height: toFigmaHeight(
+                                                figmaHeight: 30.sp,
+                                                fontSize: 20.sp)),
+                                      ),
+                                      GridView.builder(
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 3),
+                                        itemCount: 10,
+                                        itemBuilder: (context, index)
+                                        {
+                                      return Card(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.wifi,
+                                            ),
+                                            SizedBox(
+                                              height: 2.h,
+                                            ),
+                                            Text("Free Wifi")
+                                          ],
+                                        ),
+                                      );
+                                        },
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               Padding(

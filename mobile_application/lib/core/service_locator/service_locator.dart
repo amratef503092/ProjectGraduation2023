@@ -3,6 +3,7 @@ import 'package:graduation_project/view_model/bloc/interstend_cubit/intersted_cu
 import 'package:graduation_project/view_model/repo/activity_repo/activity_repo.dart';
 import 'package:graduation_project/view_model/repo/hotel_repo/hotel_repo.dart';
 import 'package:graduation_project/view_model/repo/interseted_repo/intersted_repo.dart';
+import 'package:graduation_project/view_model/repo/profile_repo/profile_repo.dart';
 import 'package:graduation_project/view_model/repo/register_repo/register_repo.dart';
 import 'package:graduation_project/view_model/repo/room_repo/room_repo.dart';
 import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo.dart';
@@ -22,6 +23,7 @@ Future<void> setup() async {
       () => BookedActivityRepoImpl());
   sl.registerLazySingleton<HotelRepoImpl>(() => HotelRepoImpl());
   sl.registerLazySingleton<RoomRepoImpl>(() => RoomRepoImpl());
+  sl.registerLazySingleton<ProfileRepoImpl>(() => ProfileRepoImpl());
 
   // cubit
 }
