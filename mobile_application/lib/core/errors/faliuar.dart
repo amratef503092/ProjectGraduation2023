@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:graduation_project/view_model/database/network/dio-helper.dart';
+
+import '../constatnts.dart';
 
 abstract class Failure {
   final String message;
@@ -42,6 +45,23 @@ class ServerFailure extends Failure {
       if(response.data['message'] == null)
       {
         return ServerFailure(message: "Something Went Wrong");
+      }else if(response.data['message'] == "Unauthorized")
+      {
+        DioHelper.postData(url: '/auth/refresh', token: getToken() , data: {}).then((value)
+        {
+         print(value.statusCode);
+
+        }).catchError((error)
+        {
+          if(error is DioError)
+          {
+            print("////////////////////////////////////");
+            print(getToken());
+            print(error.response!.data);
+            print("////////////////////////////////////");
+          }
+          print(error);
+        });
       }
       return ServerFailure(message: response.data['message']);
     } else if (statusCode == 404)
@@ -60,6 +80,7 @@ class ServerFailure extends Failure {
   }
 }
 
-class FailureLocal extends Failure {
+class FailureLocal extends Failure
+{
   FailureLocal({required super.message});
 }

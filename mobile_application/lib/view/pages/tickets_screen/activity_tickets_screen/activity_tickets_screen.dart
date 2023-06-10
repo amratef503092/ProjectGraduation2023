@@ -27,23 +27,34 @@ class ActivityTicketsScreen extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          return ListView.separated(
-              itemBuilder: (context, index) {
-                return const CustomTicketInfo(
-                  activityDate: "",
-                  activityId: "",
-                  activityLocation: "",
-                  activityName: "",
-                  activityNumberOfTickets: "",
-                  activityPrice: "",
-                  image:
-                      "https://media.istockphoto.com/id/1146532466/photo/abstract-blue-digital-background.jpg?s=612x612&w=0&k=20&c=RkhNiZpHTQkx8p6FPiHgZtcWr_o2WabZLgDAVFHTS8g=",
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              itemCount: 10);
+          return (state is GetBookingActivityLoadingState)
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : (state is GetBookingActivityErrorState)
+                  ? Center(
+                      child: TextCustom(text: state.message),
+                    )
+                  : (state is GetBookingActivitySuccessfullyState)
+                      ? ListView.separated(
+                          itemBuilder: (context, index) {
+                            return  CustomTicketInfo(
+                              ticketID: state.bookingUserActivityModel.data![index].id.toString(),
+                              activityDate: state.bookingUserActivityModel.data![index].date.toString(),
+                              activityId: state.bookingUserActivityModel.data![index].activity!.id.toString(),
+                              activityLocation: state.bookingUserActivityModel.data![index].activity!.location!,
+                              activityName:state.bookingUserActivityModel.data![index].activity!.activityName.toString(),
+                              activityNumberOfTickets: state.bookingUserActivityModel.data![index].numberOfPeople.toString(),
+                              activityPrice:( state.bookingUserActivityModel.data![index].activity!.activityPrice * state.bookingUserActivityModel.data![index].numberOfPeople).toString(),
+                              image:
+                                  state.bookingUserActivityModel.data![index].activity!.images[0].toString(),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                          itemCount:  state.bookingUserActivityModel.data!.length,)
+                      : const TextCustom(text: "Error");
         },
       ),
     );

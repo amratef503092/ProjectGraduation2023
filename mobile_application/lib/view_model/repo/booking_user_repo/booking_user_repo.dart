@@ -21,7 +21,7 @@ class BookingUserRepoImpl extends BookingUserActivityRepo {
       );
       return Right(BookingUserActivityModel.fromJson(response.data));
     } on DioError catch (error) {
-      debugPrint(error.response!.data);
+      debugPrint(error.response!.data.toString());
       return Left(ServerFailure.fromDioError(error));
     } catch (error) {
       debugPrint(error.toString());

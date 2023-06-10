@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/resource/color_mananger.dart';
+import '../../../core/resource/helper_function.dart';
 import '../core_components/custom_button.dart';
 import '../text/text_custom.dart';
 
@@ -15,14 +17,19 @@ class CustomTicketInfo extends StatelessWidget {
     required this.activityNumberOfTickets,
     required this.activityLocation,
     required this.image,
+    required this.ticketID,
   });
+
   final String activityName;
   final String image;
+  final String ticketID;
+
   final String activityPrice;
   final String activityId;
+
   final String activityDate;
   final String activityNumberOfTickets;
-  final String activityLocation;
+  final List<num> activityLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -58,52 +65,50 @@ class CustomTicketInfo extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextCustom(
-                      text: activityId,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    rowTextWidget(title: "Ticket ID", value: ticketID),
                     SizedBox(
                       height: 10.h,
                     ),
-                    TextCustom(
-                      text: activityDate,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    rowTextWidget(title: "Date", value: activityDate),
+
                     SizedBox(
                       height: 10.h,
                     ),
-                    TextCustom(
-                      text: activityNumberOfTickets,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+
+                    rowTextWidget(title: "Number of Ticket : ", value: activityNumberOfTickets),
+
                     SizedBox(
                       height: 10.h,
                     ),
                     CustomButton(
                       size: Size(150.w, 50.h),
                       widget: Row(children: [
-                        Icon(Icons.location_on),
+                        const Icon(Icons.location_on),
                         SizedBox(
                           width: 10.w,
                         ),
                         TextCustom(
-                          text: activityLocation,
+                          text: "Location",
                           color: Colors.white,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ]),
-                      function: () {},
+                      function: () {
+                        openMap
+                          (
+                            activityLocation[0].toDouble(),
+                            activityLocation[1].toDouble()
+                          );
+                      },
                       color: ColorManage.primaryBlue,
                     ),
                     InkWell(
                       onTap: () {
                         showDialog(
                           context: context,
-                          builder: (context) {
+                          builder: (context)
+                          {
                             return AlertDialog(
                               title: TextCustom(
                                 text:
@@ -114,14 +119,14 @@ class CustomTicketInfo extends StatelessWidget {
                               actions: [
                                 TextButton(
                                   onPressed: () {},
-                                  child: TextCustom(
+                                  child: const TextCustom(
                                     color: ColorManage.primaryBlue,
                                     text: "Cancel",
                                   ),
                                 ),
                                 TextButton(
                                   onPressed: () {},
-                                  child: TextCustom(
+                                  child: const TextCustom(
                                     color: ColorManage.error,
                                     text: "Ok",
                                   ),
@@ -146,4 +151,22 @@ class CustomTicketInfo extends StatelessWidget {
           )
         ]);
   }
+
+  Row rowTextWidget({required String title, required String value}) {
+    return Row(
+      children: [
+        TextCustom(
+          text: title,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+        ),
+        TextCustom(
+          text: value,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+        ),
+      ],
+    );
+  }
 }
+
