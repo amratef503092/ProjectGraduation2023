@@ -34,14 +34,12 @@ class BookingHotelCubit extends Cubit<BookingHotelState> {
     emit(SetnumberOfRoomsState());
   }
 
-  Future<void> bookingRoom(Map<String, dynamic> data) async
-  {
+  Future<void> bookingRoom(Map<String, dynamic> data) async {
     emit(BookingRoomLoadingState());
     await DioHelper.postData(
       url: "/hotel/rooms/createBookingRoom",
       data: data,
-    ).then((value)
-    {
+    ).then((value) {
       emit(BookingRoomSuccessfullyState());
     }).catchError((error) {
       emit(BookingRoomErrorState());

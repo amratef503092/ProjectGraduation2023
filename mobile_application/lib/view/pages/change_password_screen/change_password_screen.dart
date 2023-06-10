@@ -46,7 +46,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           (
           listener: (context, state)
           {
-
+            if(state is ChangePasswordSuccessfullyState)
+              {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: TextCustom(
+                      text: 'Password changed successfully',
+                      color: ColorManage.white,
+                      fontSize: 24.sp,
+                    ),
+                    backgroundColor: ColorManage.primaryBlue
+                  ),
+                );
+              }
             // TODO: implement listener
           },
           builder: (context, state) {
