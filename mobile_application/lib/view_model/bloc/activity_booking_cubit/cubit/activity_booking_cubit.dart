@@ -23,4 +23,14 @@ class ActivityBookingCubit extends Cubit<ActivityBookingState> {
       emit(GetBookingActivitySuccessfullyState(r));
     });
   }
+  Future<void> bookedActivityHistory() async {
+    emit(GetBookingActivityLoadingState());
+    var result = await bookingUserActivityRepo.getBookingUserHistory();
+    result.fold((l) {
+      emit(GetBookingActivityErrorState(l.message));
+    }, (r) {
+      emit(GetBookingActivitySuccessfullyState(r));
+    });
+  }
+
 }

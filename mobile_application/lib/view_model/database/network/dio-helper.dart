@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'end_points.dart';
 
 //Dio Helper That's Connect and Talk to API.
-class DioHelper {
+class DioHelper
+{
   static late Dio dio;
 
   //Here The Initialize of Dio and Start Connect to API Using baseUrl.
@@ -47,6 +48,10 @@ class DioHelper {
     debugPrint("-------------Request Data----------------");
     debugPrint('data is $queryParameters');
     debugPrint("-------------Request Data----------------");
+    debugPrint("-------------Request Data----------------");
+    debugPrint('data is $token');
+    debugPrint("-------------Request Data----------------");
+
     try {
       dio.options.headers = {
         'Authorization': 'Bearer ${token ?? ''}',
@@ -90,6 +95,9 @@ class DioHelper {
 
       debugPrint("-------------Request Data----------------");
       debugPrint('data is $data');
+      debugPrint("-------------Request Data----------------");
+      debugPrint("-------------Request Data----------------");
+      debugPrint('data is $token');
       debugPrint("-------------Request Data----------------");
       try{
         final Response response = await dio.post(

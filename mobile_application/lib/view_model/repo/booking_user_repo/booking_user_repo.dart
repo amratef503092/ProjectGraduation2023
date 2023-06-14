@@ -9,6 +9,8 @@ import '../../../model/booking_user_model/booking_user_activity_model/booking_us
 
 abstract class BookingUserActivityRepo {
   Future<Either<Failure, BookingUserActivityModel>> getBookingUser();
+  Future<Either<Failure, BookingUserActivityModel>> getBookingUserHistory();
+
 }
 
 class BookingUserRepoImpl extends BookingUserActivityRepo {
@@ -28,4 +30,24 @@ class BookingUserRepoImpl extends BookingUserActivityRepo {
       return Left(FailureLocal(message: error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, BookingUserActivityModel>> getBookingUserHistory()
+ async
+ {
+    try {
+      Response response = await DioHelper.getData(
+        url: "/activiy/user/activity",
+        token: getToken(),
+      );
+      return Right(BookingUserActivityModel.fromJson(response.data));
+    } on DioError catch (error) {
+      debugPrint(error.response!.data.toString());
+      return Left(ServerFailure.fromDioError(error));
+    } catch (error) {
+      debugPrint(error.toString());
+      return Left(FailureLocal(message: error.toString()));
+    }
+  }
+
 }

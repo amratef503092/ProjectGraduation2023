@@ -29,7 +29,7 @@ class RoomModelInfo extends Equatable {
             ? null
             : HotelModelInfo.fromMap(json['hotelInfo'] as Map<String, dynamic>),
         numnberOfBeds: json['numnberOfBeds'] as int?,
-        booked: json['booked'] as bool?,
+        booked: json['booked'] == 0 ? false : true,
         priceperDay: json['priceperDay'] as int?,
         descripions: json['descripions'] as String?,
         images: List.from(json['images'].map((e) => e)),

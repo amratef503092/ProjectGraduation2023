@@ -50,7 +50,10 @@ class _TicketsScreenState extends State<TicketsScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [ActivityTicketsScreen(), HotelTicketScreen()],
+        children: const [
+          ActivityTicketsScreen(),
+          HotelTicketScreen()
+        ],
       ),
     );
   }

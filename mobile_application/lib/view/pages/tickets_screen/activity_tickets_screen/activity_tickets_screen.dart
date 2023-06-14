@@ -37,7 +37,8 @@ class ActivityTicketsScreen extends StatelessWidget {
                     )
                   : (state is GetBookingActivitySuccessfullyState)
                       ? ListView.separated(
-                          itemBuilder: (context, index) {
+                          itemBuilder: (context, index)
+                          {
                             return  CustomTicketInfo(
                               ticketID: state.bookingUserActivityModel.data![index].id.toString(),
                               activityDate: state.bookingUserActivityModel.data![index].date.toString(),
