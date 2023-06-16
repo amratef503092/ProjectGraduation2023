@@ -28,7 +28,8 @@ class RoomHistoryScreen extends StatelessWidget {
       ),
         body: BlocProvider(
           create: (context) =>
-          RoomBookingCubit(sl.get<BookingRoomRepoImpl>())..getBookRoom(),
+          RoomBookingCubit(sl.get<BookingRoomRepoImpl>())..
+          getBookRoom(),
           child: BlocConsumer<RoomBookingCubit, RoomBookingState>(
             listener: (context, state) {},
             builder: (context, state) {

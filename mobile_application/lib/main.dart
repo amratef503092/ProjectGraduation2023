@@ -24,6 +24,8 @@ import 'core/resource/color_mananger.dart';
 import 'core/resource/routes_manager.dart';
 import 'core/resource/theme_manager.dart';
 import 'core/service_locator/service_locator.dart';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,9 @@ void main() async {
   await DioHelper.init();
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
+  final GoogleMapsFlutterPlatform platform = GoogleMapsFlutterPlatform.instance;
+  // Default to Hybrid Composition for the example.
+  (platform as GoogleMapsFlutterAndroid).useAndroidViewSurface = true;
   await setup();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
