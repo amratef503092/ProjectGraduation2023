@@ -10,6 +10,7 @@ import 'package:graduation_project/view/components/core_components/custom_button
 import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
 import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/resource/routes_manager.dart';
 
@@ -82,14 +83,15 @@ class ActivityDetailsScreen extends StatelessWidget {
                           color: ColorManage.black, height: 1, fontSize: 24),
                     ),
                     const Spacer(),
-                    Text(
-                      "${activityModel!.activityPrice} EGP",
-                      style: getBoldStyle(
-                          color: ColorManage.primaryBlue,
-                          height: 1,
-                          fontSize: 24),
-                    ),
                   ],
+                ),
+                SizedBox(
+                  height: 0.02.sh,
+                ),
+                Text(
+                  "${activityModel!.activityPrice} EGP",
+                  style: getBoldStyle(
+                      color: ColorManage.primaryBlue, height: 1, fontSize: 24),
                 ),
                 SizedBox(
                   height: 0.02.sh,
@@ -115,20 +117,32 @@ class ActivityDetailsScreen extends StatelessWidget {
                     },
                     builder: (context, state) {
                       return (state is GetAddressFromLatLngSuccessful)
-                          ? Row(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: ColorManage.primaryBlue,
-                                ),
-                                Text(
-                                  state.address[0].street.toString(),
-                                  style: getBoldStyle(
-                                      color: ColorManage.primaryBlue,
-                                      height: 1,
-                                      fontSize: 18.sp),
-                                )
-                              ],
+                          ? InkWell(
+                              onTap: () async {
+                                final Uri _url = Uri.parse(
+                                    'https://www.google.com/maps/search/?api=1&query=${
+                                        activityModel!.location[0].toDouble()},'
+                                        '${activityModel!.location[1].toDouble()}');
+                                // url launcher
+                                if (!await launchUrl(_url)) {
+                                  throw Exception('Could not launch $_url');
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: ColorManage.primaryBlue,
+                                  ),
+                                  Text(
+                                    state.address[0].street.toString(),
+                                    style: getBoldStyle(
+                                        color: ColorManage.primaryBlue,
+                                        height: 1,
+                                        fontSize: 18.sp),
+                                  )
+                                ],
+                              ),
                             )
                           : const Text("Loading...");
                     },

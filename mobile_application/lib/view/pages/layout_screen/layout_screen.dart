@@ -40,14 +40,7 @@ class _LayoutScreenState extends State<LayoutScreen>
               // TODO: implement listener
             },
             builder: (context, state) {
-              return BlocProvider(
-                create: (context) => LocationCubit()..determinePosition(),
-                child: BlocConsumer<LocationCubit, LocationState>(
-                  listener: (context, state) {
-                    // TODO: implement listener
-                  },
-                  builder: (context, state) {
-                    return Scaffold(
+              return Scaffold(
 
                       body: LayoutCubit
                           .get(context)
@@ -101,9 +94,9 @@ class _LayoutScreenState extends State<LayoutScreen>
                         },
                       ),
                     );
-                  },
-                ),
-              );
+
+
+
             },
           ),
         );

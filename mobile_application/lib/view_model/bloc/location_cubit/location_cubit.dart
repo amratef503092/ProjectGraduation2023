@@ -8,7 +8,11 @@ part 'location_state.dart';
 class LocationCubit extends Cubit<LocationState> {
   LocationCubit() : super(LocationInitial());
   static LocationCubit get(context) => BlocProvider.of<LocationCubit>(context);
-  Position? position;
+  Position  position = Position(
+    longitude:  31.28262492625303, latitude: 29.982708441440902,
+    accuracy: 0.0, altitude: 0.0, heading: 0.0, speed: 0.0, speedAccuracy: 0.0,
+    timestamp: DateTime.now(), floor: 0, isMocked: false,
+  );
 
   Future<void> determinePosition() async {
     bool serviceEnabled;
@@ -38,20 +42,40 @@ class LocationCubit extends Cubit<LocationState> {
 
   double getLocation(double lat1, double lang2) {
     emit(GetLocationLoading());
-    double distance = Geolocator.distanceBetween(
-        position!.latitude, position!.longitude, lat1, lang2);
+    double distance = Geolocator.
+    distanceBetween(
+        position.latitude,
+        position.longitude,
+        lat1,
+        lang2) /1000;
 
     return distance;
   }
 
   List<Placemark>? address;
 
-  Future<void> getPlaceMark(double lat1, double lang2) async {
+  Future<void> getPlaceMark(double lat1, double lang2) async
+  {
     emit(GetAddressFromLatLngLoading());
     await placemarkFromCoordinates(lat1, lang2).then((value) {
       address = value;
       debugPrint(value[0].street);
       emit(GetAddressFromLatLngSuccessful(value));
+    }).catchError((error) {
+      emit(GetAddressFromLatLngError('error'));
+    });
+  }
+  List<Placemark>? addressCurrent;
+
+  Future<void> getPlaceMarkCurrentLocation()
+      async
+      {
+    emit(GetAddressFromLatLngLoading());
+    await placemarkFromCoordinates(29.982708441440902,31.28262492625303 ).then((value)
+    {
+      addressCurrent = value;
+      debugPrint(value[0].street);
+      emit(GetAddressFromLatLngCurrentSuccessful(value));
     }).catchError((error) {
       emit(GetAddressFromLatLngError('error'));
     });

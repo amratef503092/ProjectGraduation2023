@@ -41,6 +41,7 @@ void main() async {
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
       statusBarColor: Colors.white));
+  
   runApp(
     EasyLocalization(
         supportedLocales: const [
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
                 create: (context) => AuthCubit(sl.get<LoginRepoImpl>(),
                     sl.get<RegisterRepoImpl>(), sl.get<VerifyEmailRepoImpl>())),
             BlocProvider(
-              create: (context) => LocationCubit()..determinePosition(),
+              create: (context) => LocationCubit()..determinePosition()..getPlaceMarkCurrentLocation(),
             ),
             BlocProvider(
               create: (context) =>
@@ -91,7 +92,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => ProfileCubit(sl.get<ProfileRepoImpl>())..getProfile(),
             ),
-          ],
+            BlocProvider(
+            create: (context) => LocationCubit()),
+    ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
             listener: (context, state) {
               if (state is Connected) {
@@ -114,18 +117,29 @@ class MyApp extends StatelessWidget {
                     fontSize: 16.0);
               }
             },
-            child: MaterialApp(
-              supportedLocales: context.supportedLocales,
-              localizationsDelegates: context.localizationDelegates,
-              locale: context.locale,
-              debugShowCheckedModeBanner: false,
-              onGenerateRoute: RouteGenerator.getRoute,
-              initialRoute:
-                  getUserID() == null ?
-                  Routes.onBoarding:
-                  Routes.LayoutScreen,
-              theme: getTheme(),
-            ),
+            child: BlocConsumer<LocationCubit, LocationState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state)
+  {
+
+   return MaterialApp(
+     supportedLocales: context.supportedLocales,
+     localizationsDelegates: context.localizationDelegates,
+     locale: context.locale,
+     debugShowCheckedModeBanner: false,
+     onGenerateRoute: RouteGenerator.getRoute,
+     initialRoute:
+     getUserID() == null ?
+     Routes.onBoarding:
+     Routes.LayoutScreen,
+     theme: getTheme(),
+   );
+
+
+  },
+),
           ),
         );
       },

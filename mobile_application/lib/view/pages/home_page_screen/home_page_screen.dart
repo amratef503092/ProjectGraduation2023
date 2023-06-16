@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:graduation_project/core/constatnts.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
@@ -18,14 +19,42 @@ import '../../components/core_components/custom_card_activity/custom_Card_activi
 import '../activity_details_screen/activity_details_screen.dart';
 import '../map_screen/map_screen.dart';
 
-class HomePageScreen extends StatelessWidget
+class HomePageScreen extends StatefulWidget
 {
   HomePageScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
   double padding = 24;
 
+  List<Placemark>? address;
+
+  Future<void> getPlaceMark() async
+  {
+    await placemarkFromCoordinates(29.9827021, 31.2827832).then((value) {
+      address = value;
+      debugPrint(value[0].street);
+      setState(() {
+
+      });
+    }).catchError((error) {
+    });
+  }
+@override
+  void initState() {
+  getPlaceMark();
+
+    // TODO: implement initState
+  LocationCubit.get(context).getPlaceMarkCurrentLocation();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context)
   {
+
     return Scaffold(
       body: Scrollbar(
         child: SingleChildScrollView(
@@ -64,20 +93,35 @@ class HomePageScreen extends StatelessWidget
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Row(
+                        BlocConsumer<LocationCubit, LocationState>(
+                          buildWhen: (previous, current) {
+                            if (current is GetAddressFromLatLngCurrentSuccessful)
+                            {
+                              return true;
+                            }
+                            return false;
+                          },
+        listener: (context, state) {
+    // TODO: implement listener
+      },
+          builder: (context, state) {
+    return (state is GetAddressFromLatLngCurrentSuccessful)? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Icon(Icons.location_on_outlined,
                                 color: ColorManage.primaryBlue),
                             Text(
-                              "Your Location Now",
-                              style: getRegularStyle(
+                                "${state.address[0].name} ",
+
+                                    style: getRegularStyle(
                                   color: ColorManage.primaryBlue,
                                   fontSize: 20.sp,
                                   height: 1),
                             )
                           ],
-                        )
+                        ) : Center(child: CircularProgressIndicator());
+  },
+)
                       ],
                     ),
                     const Spacer(),
@@ -266,7 +310,8 @@ class HomePageScreen extends StatelessWidget
                                   transitionType: ContainerTransitionType.fade,
                                   closedBuilder: (context, action) =>
                                       CustomCardActivity(
-                                    function: () {
+                                    function: ()
+                                    {
                                       action();
                                     },
                                     title: cubit.activityModel?.data[index]
@@ -277,7 +322,9 @@ class HomePageScreen extends StatelessWidget
                                         .toString(),
                                     functionSave: () {},
                                     location:
-                                        "${LocationCubit.get(context).getLocation(cubit.activityModel!.data[index].location[0].toDouble(), cubit.activityModel!.data[index].location[1].toDouble()).toStringAsFixed(2)} ",
+                                        "${LocationCubit.get(context).
+                                        getLocation(cubit.activityModel!.data[index].location[0].toDouble(),
+                                            cubit.activityModel!.data[index].location[1].toDouble()).toStringAsFixed(2)} ",
                                     rating: cubit
                                         .activityModel!.data[index].rate
                                         .toDouble(),
@@ -302,7 +349,8 @@ class HomePageScreen extends StatelessWidget
                           ),
                         );
                       },
-                      separatorBuilder: (BuildContext context, int index) {
+                      separatorBuilder: (BuildContext context, int index)
+                      {
                         return SizedBox(
                           height: 5.h,
                         );

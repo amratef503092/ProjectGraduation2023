@@ -30,3 +30,14 @@ class GetDistanceError extends LocationState {
   String messages;
   GetDistanceError(this.messages);
 }
+class GetAddressFromLatLngCurrentLoading extends LocationState {}
+
+class GetAddressFromLatLngCurrentSuccessful extends LocationState {
+  final List<Placemark> address;
+  GetAddressFromLatLngCurrentSuccessful(this.address);
+}
+
+class GetAddressFromLatLngCurrentError extends LocationState {
+  final String error;
+  GetAddressFromLatLngCurrentError(this.error);
+}
