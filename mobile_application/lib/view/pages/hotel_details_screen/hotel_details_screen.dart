@@ -800,7 +800,10 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                                   CustomButton(
                                                       widget: const Text(
                                                           "Make Review"),
-                                                      function: () {},
+                                                      function: ()
+                                                      {
+                                                        
+                                                      },
                                                       color: ColorManage
                                                           .primaryBlue)
                                                 ],

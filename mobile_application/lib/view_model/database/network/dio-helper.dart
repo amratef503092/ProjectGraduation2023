@@ -60,6 +60,7 @@ class DioHelper
         url,
         queryParameters: queryParameters,
         onReceiveProgress: onReceiveProgress,
+
       );
       debugPrint("-------------Response Data----------------");
       debugPrint('response is => ${response.data}');

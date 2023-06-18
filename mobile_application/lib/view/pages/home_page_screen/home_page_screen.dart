@@ -9,6 +9,7 @@ import 'package:graduation_project/core/resource/color_mananger.dart';
 import 'package:graduation_project/core/resource/style_manager.dart';
 import 'package:graduation_project/view/components/core_components/custom_button.dart';
 import 'package:graduation_project/view/components/core_components/custom_text_form_faild.dart';
+import 'package:graduation_project/view/pages/search_screen/search_screen.dart';
 import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -31,7 +32,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   double padding = 24;
 
   List<Placemark>? address;
-
+  TextEditingController searchController = TextEditingController();
   Future<void> getPlaceMark() async
   {
     await placemarkFromCoordinates(29.9827021, 31.2827832).then((value) {
@@ -119,7 +120,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   height: 1),
                             )
                           ],
-                        ) : Center(child: CircularProgressIndicator());
+                        ) : const Center(child: CircularProgressIndicator());
   },
 )
                       ],
@@ -167,9 +168,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                 padding: const EdgeInsets.only(top: 1.0),
                                 child: CustomTextField(
                                   border: true,
-                                  controller: TextEditingController(),
+                                  controller: searchController,
                                   hint: "Explore Destination",
-                                  fieldValidator: (value) {},
+                                  fieldValidator: (value) {
+                                    if (value!.isEmpty)
+                                    {
+                                      return "Please Enter Your Destination";
+                                    }
+                                  },
+                                  onEditingComplete: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                      return  SearchScreen(queryText: searchController.text,);
+                                    },));
+                                  },
                                 ),
                               ),
                             )

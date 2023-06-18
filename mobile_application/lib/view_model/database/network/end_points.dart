@@ -16,6 +16,7 @@ const String getActivityEndPoints = '/activiy';
 const String bookedActivitiyEndPoint = '/activiy/booked/bookActivity';
 const String getHotelEndPoint = "/hotel";
 const String getRoomByHotelId = "/hotel/rooms/";
+const String searchEndPoint = "/hotel/search";
 
 // const refresh = 'auth/token';
 // const forgetPassword = '/api/v1/auth/forget-password';

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/resource/color_mananger.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
+
     required this.controller,
     required this.hint,
     this.password = false,
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.border = false,
     this.keyboardType = TextInputType.text,
     this.enable = true,
+    this.onEditingComplete,
     Key? key,
   }) : super(key: key);
   final TextEditingController controller;
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
   final bool ?border;
   final TextInputType ?keyboardType;
   final bool ?enable;
+  final Function ?onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       controller: controller,
       enabled: enable,
+      onEditingComplete: () => onEditingComplete!(),
       validator: (value) => fieldValidator(value),
       decoration: InputDecoration(
         border: border==true?InputBorder.none:OutlineInputBorder(

@@ -7,6 +7,7 @@ import 'package:graduation_project/view_model/repo/interseted_repo/intersted_rep
 import 'package:graduation_project/view_model/repo/profile_repo/profile_repo.dart';
 import 'package:graduation_project/view_model/repo/register_repo/register_repo.dart';
 import 'package:graduation_project/view_model/repo/room_repo/room_repo.dart';
+import 'package:graduation_project/view_model/repo/search_repo/serarch_repo.dart';
 import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo.dart';
 
 import '../../view_model/repo/book_room_repo/book_room_repo.dart';
@@ -28,6 +29,7 @@ Future<void> setup() async {
   sl.registerLazySingleton<ProfileRepoImpl>(() => ProfileRepoImpl());
   sl.registerLazySingleton<BookingUserRepoImpl>(() => BookingUserRepoImpl());
   sl.registerLazySingleton<BookingRoomRepoImpl>(() => BookingRoomRepoImpl());
+  sl.registerLazySingleton<SearchRepoImpl>(() => SearchRepoImpl());
 
 
   // cubit
