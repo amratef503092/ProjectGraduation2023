@@ -2,30 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/model/hotel_model/hotel_model.dart';
+import 'package:graduation_project/view_model/bloc/hotel_whish_list/hotel_whish_list_cubit.dart';
 import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 
 import '../../../../../core/resource/color_mananger.dart';
 import '../../../../../core/resource/style_manager.dart';
+import '../../../../../model/hotel_model/datum.dart';
+import '../../../../../view_model/repo/hotel_wish_list_repo/hotel_wish_list_repo.dart';
 import '../../../../components/core_components/custom_button.dart';
 
-class CustomTopHotelCard extends StatelessWidget {
-  const CustomTopHotelCard(
-      {super.key,
-      required this.function,
-      required this.image,
-      required this.discount,
-      required this.price,
-      required this.rate,
-      required this.reviwe,
-      required this.title,
-      required this.functionCard,
-      this.imageHeight = 145,
-      this.imageWidth = 270,
-      this.cardHeight = 337,
-      this.cardWidth = 271,
-      required this.save,
-      required this.lang,
-      required this.lat});
+class CustomTopHotelCard extends StatefulWidget {
+   CustomTopHotelCard({super.key,
+    required this.function,
+    required this.image,
+    required this.discount,
+    required this.price,
+    required this.rate,
+    required this.reviwe,
+    required this.title,
+    required this.functionCard,
+    this.imageHeight = 145,
+    this.imageWidth = 270,
+    this.cardHeight = 337,
+    this.cardWidth = 271,
+    required this.save,
+    required this.lang,
+    required this.lat,
+    required this.isFav ,
+    required this.hotelModel,
+  });
+
   final String image;
   final double rate;
   final String reviwe;
@@ -41,16 +48,23 @@ class CustomTopHotelCard extends StatelessWidget {
   final Function save;
   final double lang;
   final double lat;
+   bool ?isFav;
+  final HotelModelInfo hotelModel;
 
+  @override
+  State<CustomTopHotelCard> createState() => _CustomTopHotelCardState();
+}
+
+class _CustomTopHotelCardState extends State<CustomTopHotelCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        functionCard();
+        widget.functionCard();
       },
       child: Container(
-        height: cardHeight.h,
-        width: cardWidth.w,
+        height: widget.cardHeight.h,
+        width: widget.cardWidth.w,
         decoration: BoxDecoration(
             color: ColorManage.background,
             borderRadius: BorderRadius.circular(15.r),
@@ -68,30 +82,56 @@ class CustomTopHotelCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(14.r),
                   child: Image(
-                    image: NetworkImage(image),
+                    image: NetworkImage(widget.image),
                     fit: BoxFit.cover,
-                    width: imageWidth,
-                    height: imageHeight,
+                    width: widget.imageWidth,
+                    height: widget.imageHeight,
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      width: 32.w,
-                      height: 32.h,
-                      decoration: const BoxDecoration(
-                        color: ColorManage.background,
-                        shape: BoxShape.circle,
+                BlocConsumer<HotelWhishListCubit, HotelWhishListState>(
+                  listener: (context, state) {
+                    // TODO: implement listener
+                  },
+                  builder: (context, state) {
+                    return InkWell(
+                      onTap: ()
+                      {
+                        if (widget.isFav!) {
+                          HotelWhishListCubit.get(context).removeAllWishList(
+                              id: widget.hotelModel.id!);
+                          setState(() {
+                            widget.isFav = false;
+                          });
+                        } else {
+                          HotelWhishListCubit.get(context).addAllWishList(
+                              id: widget.hotelModel.id!);
+                          setState(() {
+                            widget.isFav = true;
+                          });
+                        }
+                      },
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Container(
+                            width: 32.w,
+                            height: 32.h,
+                            decoration: const BoxDecoration(
+                              color: ColorManage.background,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              (widget.isFav ?? false) ? Icons.bookmark : Icons
+                                  .bookmark_border,
+                              size: 20.sp,
+                              color: ColorManage.primaryYellow,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: Icon(
-                        Icons.bookmark_border,
-                        size: 14.sp,
-                        color: ColorManage.primaryYellow,
-                      ),
-                    ),
-                  ),
+                    );
+                  },
                 )
               ],
             ),
@@ -106,7 +146,7 @@ class CustomTopHotelCard extends StatelessWidget {
                       height: 12.h,
                     ),
                     Text(
-                      title,
+                      widget.title,
                       style: getMediumStyle(
                           color: ColorManage.black,
                           fontSize: 18.sp,
@@ -116,13 +156,14 @@ class CustomTopHotelCard extends StatelessWidget {
                     Row(
                       children: [
                         RatingBar.builder(
-                          initialRating: rate,
+                          initialRating: widget.rate,
                           minRating: 1,
                           direction: Axis.horizontal,
                           itemCount: 5,
                           itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 1.0),
-                          itemBuilder: (context, _) => const Icon(
+                          const EdgeInsets.symmetric(horizontal: 1.0),
+                          itemBuilder: (context, _) =>
+                          const Icon(
                             Icons.star,
                             color: Colors.amber,
                           ),
@@ -132,7 +173,7 @@ class CustomTopHotelCard extends StatelessWidget {
                           itemSize: 30.sp,
                         ),
                         Text(
-                          "($reviwe review)",
+                          "(${widget.reviwe} review)",
                           style: getRegularStyle(
                               color: ColorManage.gray,
                               height: toFigmaHeight(
@@ -151,7 +192,9 @@ class CustomTopHotelCard extends StatelessWidget {
                               color: ColorManage.primaryBlue,
                             ),
                             Text(
-                              "${LocationCubit.get(context).getLocation(lang, lat).toStringAsFixed(1)} km from current location",
+                              "${LocationCubit.get(context).getLocation(
+                                  widget.lang, widget.lat).toStringAsFixed(
+                                  1)} km from current location",
                               style: getRegularStyle(
                                   color: ColorManage.black,
                                   height: toFigmaHeight(
@@ -165,7 +208,7 @@ class CustomTopHotelCard extends StatelessWidget {
                         widget: const Text("Book"),
                         size: Size(80.w, 40.h),
                         function: () {
-                          function();
+                          widget.function();
                         },
                         color: ColorManage.primaryYellow)
                   ],

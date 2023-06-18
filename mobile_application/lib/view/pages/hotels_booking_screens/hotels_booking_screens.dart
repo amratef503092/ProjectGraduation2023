@@ -11,6 +11,7 @@ import 'package:graduation_project/view/components/core_components/custom_body.d
 import 'package:graduation_project/view_model/bloc/hotel_cubit/cubit/hotel_cubit.dart';
 import 'package:graduation_project/view_model/repo/hotel_repo/hotel_repo.dart';
 
+import '../../../view_model/bloc/hotel_whish_list/hotel_whish_list_cubit.dart';
 import '../../components/core_components/custom_animation_list_view/custom_animation_list_view.dart';
 import '../../components/core_components/custom_card_bookling/custom_card_booking.dart';
 import '../hotel_details_screen/hotel_details_screen.dart';
@@ -73,13 +74,21 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                       AnimationListView(
                                     index: index,
                                     widget: CustomTopHotelCard(
+
+                                      hotelModel: state.hotelModel.data![index],
+                                      isFav: state
+                                          .hotelModel.data![index].fovourite!,
                                       lang: state
                                           .hotelModel.data![index].location![0]
                                           .toDouble(),
                                       lat: state
                                           .hotelModel.data![index].location![1]
                                           .toDouble(),
-                                      save: () {},
+                                      save: ()
+                                      {
+
+
+                                      },
                                       cardHeight: 340,
                                       cardWidth: 270,
                                       imageWidth: 366,

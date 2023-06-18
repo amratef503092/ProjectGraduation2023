@@ -16,3 +16,6 @@ class GetHotelErrorState extends HotelState {
   final String message;
   GetHotelErrorState(this.message);
 }
+class ChangeState extends HotelState {
+
+}

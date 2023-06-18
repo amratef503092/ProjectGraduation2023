@@ -2,12 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/constatnts.dart';
 import '../../../core/errors/faliuar.dart';
 import '../../../model/room_model/room_model/room_model.dart';
 import '../../database/network/dio-helper.dart';
 import '../../database/network/end_points.dart';
 
-abstract class RoomRepo {
+abstract class RoomRepo
+{
   Future<Either<Failure, RoomModel>> getRoomInfo(int hotelInfoId);
 }
 
@@ -16,7 +18,9 @@ class RoomRepoImpl extends RoomRepo {
   Future<Either<Failure, RoomModel>> getRoomInfo(int hotelInfoId) async {
     try {
       Response response =
-          await DioHelper.getData(url: "$getRoomByHotelId/$hotelInfoId");
+          await DioHelper.getData(url: "$getRoomByHotelId/$hotelInfoId",
+          token: getToken()
+          );
       return Right(RoomModel.fromJson(response.data));
     } on DioError catch (error) {
       debugPrint(error.response!.data);

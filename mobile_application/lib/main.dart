@@ -7,12 +7,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/bloc/booking_hotel_cubit/cubit/booking_hotel_cubit.dart';
+import 'package:graduation_project/view_model/bloc/hotel_whish_list/hotel_whish_list_cubit.dart';
 import 'package:graduation_project/view_model/bloc/internet_services/internet_service_bloc.dart';
 import 'package:graduation_project/view_model/bloc/location_cubit/location_cubit.dart';
 import 'package:graduation_project/view_model/bloc/profile_cubit/profile_cubit.dart';
 import 'package:graduation_project/view_model/database/local/cache_helper.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 import 'package:graduation_project/view_model/repo/activity_repo/activity_repo.dart';
+import 'package:graduation_project/view_model/repo/hotel_wish_list_repo/hotel_wish_list_repo.dart';
 import 'package:graduation_project/view_model/repo/login_repo/login_repo.dart';
 import 'package:graduation_project/view_model/repo/profile_repo/profile_repo.dart';
 import 'package:graduation_project/view_model/repo/register_repo/register_repo.dart';
@@ -94,6 +96,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
             create: (context) => LocationCubit()),
+            BlocProvider(create: (context) => HotelWhishListCubit(sl.get<HotelWishListRepoImpl>()),)
     ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
             listener: (context, state) {

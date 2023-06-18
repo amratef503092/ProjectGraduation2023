@@ -12,6 +12,7 @@ import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo
 
 import '../../view_model/repo/book_room_repo/book_room_repo.dart';
 import '../../view_model/repo/booked_activity_repo/booked_activity_repo.dart';
+import '../../view_model/repo/hotel_wish_list_repo/hotel_wish_list_repo.dart';
 import '../../view_model/repo/login_repo/login_repo.dart';
 
 final sl = GetIt.instance;
@@ -30,6 +31,8 @@ Future<void> setup() async {
   sl.registerLazySingleton<BookingUserRepoImpl>(() => BookingUserRepoImpl());
   sl.registerLazySingleton<BookingRoomRepoImpl>(() => BookingRoomRepoImpl());
   sl.registerLazySingleton<SearchRepoImpl>(() => SearchRepoImpl());
+  sl.registerLazySingleton<HotelWishListRepoImpl>(() => HotelWishListRepoImpl());
+
 
 
   // cubit

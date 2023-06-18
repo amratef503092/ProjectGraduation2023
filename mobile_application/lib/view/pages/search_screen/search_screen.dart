@@ -7,6 +7,7 @@ import 'package:graduation_project/view_model/bloc/hotel_cubit/cubit/hotel_cubit
 
 import '../../../core/resource/color_mananger.dart';
 import '../../../core/service_locator/service_locator.dart';
+import '../../../view_model/bloc/hotel_whish_list/hotel_whish_list_cubit.dart';
 import '../../../view_model/bloc/search_cubit/search_cubit.dart';
 import '../../../view_model/repo/hotel_repo/hotel_repo.dart';
 import '../../../view_model/repo/search_repo/serarch_repo.dart';
@@ -100,6 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           width: 20.w,
                         ),
                         InkWell(
+
                           onTap: () {
                             SearchCubit.get(context).searchHotel(
                                 searchKey: searchController.text);
@@ -146,13 +148,30 @@ class _SearchScreenState extends State<SearchScreen> {
                                         AnimationListView(
                                       index: index,
                                       widget: CustomTopHotelCard(
+
+                                        hotelModel: state.hotelModel.data![index],
+                                        isFav: state
+                                            .hotelModel.data![index].fovourite!,
                                         lang: state
                                             .hotelModel.data![index].location![0]
                                             .toDouble(),
                                         lat: state
                                             .hotelModel.data![index].location![1]
                                             .toDouble(),
-                                        save: () {},
+                                        save: ()
+                                        {
+                                          if ( state
+                                              .hotelModel.data![index].fovourite!)
+                                          {
+                                            HotelWhishListCubit.get(context).addAllWishList(id: state
+                                                .hotelModel.data![index].id!);
+                                          }
+                                          else
+                                          {
+                                            HotelWhishListCubit.get(context).addAllWishList(id: state
+                                                .hotelModel.data![index].id!);
+                                          }
+                                        },
                                         cardHeight: 340,
                                         cardWidth: 270,
                                         imageWidth: 366,

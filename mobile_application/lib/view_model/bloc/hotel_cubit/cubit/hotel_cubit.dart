@@ -20,4 +20,8 @@ class HotelCubit extends Cubit<HotelState> {
       emit(GetHotelSuccessfullyState(r));
     });
   }
+  void emitState()
+  {
+    emit(ChangeState());
+  }
 }

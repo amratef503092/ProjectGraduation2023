@@ -19,8 +19,9 @@ class HotelModelInfo extends Equatable {
   final List<Review>? reviews;
   final num? rate;
   final String? description;
+   bool ? fovourite;
 
-  const HotelModelInfo(
+   HotelModelInfo(
       {this.id,
       this.hotelManager,
       this.review,
@@ -32,9 +33,12 @@ class HotelModelInfo extends Equatable {
       this.cityId,
       this.reviews,
       this.rate,
-      this.description});
+      this.description ,
+      required this.fovourite
+      });
 
   factory HotelModelInfo.fromMap(Map<String, dynamic> data) => HotelModelInfo(
+    fovourite: data['fovourite'] as bool?,
       id: data['id'] as int?,
       hotelManager: data['hotelManager'] == null
           ? null
