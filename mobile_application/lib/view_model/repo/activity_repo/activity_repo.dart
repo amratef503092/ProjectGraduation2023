@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:graduation_project/core/constatnts.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 
 import '../../../core/errors/faliuar.dart';
@@ -17,7 +18,9 @@ class ActivityRepImpl extends ActivityRep
   {
     try
     {
-      Response response = await DioHelper.getData(url: getActivityEndPoints);
+      Response response = await DioHelper.getData(url: getActivityEndPoints ,
+      token: getToken()
+      );
       return Right(GetActivityModel.fromJson(response.data));
     } on DioError catch (e)
     {

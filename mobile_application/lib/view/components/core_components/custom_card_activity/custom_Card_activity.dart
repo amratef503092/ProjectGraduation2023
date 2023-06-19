@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/model/acitvity_model/activity_model.dart';
+import 'package:graduation_project/view_model/bloc/activity_whilist_cubit/activity_whilist_cubit.dart';
 
 import '../../../../core/resource/color_mananger.dart';
 import '../../../../core/resource/style_manager.dart';
-class CustomCardActivity extends StatelessWidget {
-  const CustomCardActivity({
+
+class CustomCardActivity extends StatefulWidget {
+   CustomCardActivity({
     required this.image,
     required this.title,
     required this.function,
@@ -14,6 +18,8 @@ class CustomCardActivity extends StatelessWidget {
     required this.location,
     required this.review,
     required this.time,
+    required this.activityModel,
+    required this.isFavorite,
     Key? key,
   }) : super(key: key);
   final String image;
@@ -24,12 +30,19 @@ class CustomCardActivity extends StatelessWidget {
   final Function function;
   final Function functionSave;
   final String time;
+   bool ? isFavorite;
+  final ActivityModel activityModel;
 
+  @override
+  State<CustomCardActivity> createState() => _CustomCardActivityState();
+}
+
+class _CustomCardActivityState extends State<CustomCardActivity> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        function();
+        widget.function();
       },
       child: Container(
         height: 400.h,
@@ -51,24 +64,46 @@ class CustomCardActivity extends StatelessWidget {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(20.r),
                     child: Image.network(
-                      image,
+                      widget.image,
                       fit: BoxFit.cover,
                     )),
-                Positioned(
-                  top: 20.h,
-                  right: 20.w,
-                  child: GestureDetector(
-                    onTap: () {
-                      functionSave();
-                    },
-                    child: const CircleAvatar(
-                      backgroundColor: ColorManage.background,
-                      child: Icon(
-                        Icons.bookmark_border,
-                        color: ColorManage.primaryYellow,
+                BlocConsumer<ActivityWhilistCubit, ActivityWishState>(
+                  listener: (context, state) {
+                    // TODO: implement listener
+                  },
+                  builder: (context, state) {
+                    return Positioned(
+                      top: 20.h,
+                      right: 20.w,
+                      child: GestureDetector(
+                        onTap: ()
+                        {
+                          if (widget.isFavorite!) {
+                            ActivityWhilistCubit.get(context).removeAllWishList(
+                                id: widget.activityModel.id);
+                            setState(() {
+                              widget.isFavorite = false;
+                              widget.activityModel.fovourite = false;
+                            });
+                          } else {
+                            ActivityWhilistCubit.get(context).addAllWishList(
+                                id: widget.activityModel.id);
+                            setState(() {
+                              widget.isFavorite = true;
+                              widget.activityModel.fovourite = true;
+                            });
+                          }
+                        },
+                        child:  CircleAvatar(
+                          backgroundColor: ColorManage.background,
+                          child: Icon(
+                            widget.isFavorite !? Icons.bookmark: Icons.bookmark_border,
+                            color: ColorManage.primaryYellow,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -79,7 +114,7 @@ class CustomCardActivity extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  widget.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: getBoldStyle(
@@ -92,13 +127,14 @@ class CustomCardActivity extends StatelessWidget {
                   children: [
                     Align(
                       child: RatingBar.builder(
-                        initialRating: rating,
+                        initialRating: widget.rating,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
                         itemCount: 5,
                         itemSize: 20.r,
-                        itemBuilder: (context, _) => const Icon(
+                        itemBuilder: (context, _) =>
+                        const Icon(
                           Icons.star,
                           color: Colors.amber,
                           size: 5,
@@ -112,7 +148,7 @@ class CustomCardActivity extends StatelessWidget {
                       width: 10.w,
                     ),
                     Text(
-                      "($review review)",
+                      "(${widget.review} review)",
                       style: getRegularStyle(
                           color: ColorManage.gray, fontSize: 14.sp, height: 1),
                     ),
@@ -129,7 +165,7 @@ class CustomCardActivity extends StatelessWidget {
                           size: 20.r,
                         ),
                         Text(
-                          "$location km",
+                          "${widget.location} km",
                           style: getRegularStyle(
                               color: ColorManage.gray,
                               fontSize: 14.sp,
@@ -145,7 +181,7 @@ class CustomCardActivity extends StatelessWidget {
                           size: 20.r,
                         ),
                         Text(
-                          time,
+                          widget.time,
                           style: getRegularStyle(
                               color: ColorManage.gray,
                               fontSize: 14.sp,

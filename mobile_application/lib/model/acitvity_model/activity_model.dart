@@ -34,6 +34,7 @@ class ActivityModel {
   final List<ReviewActivityModel> review;
   final List<String> images;
   final num rate;
+   bool ? fovourite;
 
   ActivityModel(
       {required this.id,
@@ -47,7 +48,9 @@ class ActivityModel {
       required this.location,
       required this.review,
       required this.images,
-      required this.rate});
+      required this.rate ,
+      required this.fovourite
+      });
 
   factory ActivityModel.fromJson(Map<String, dynamic> json) => ActivityModel(
         id: json['id'],
@@ -64,5 +67,6 @@ class ActivityModel {
             .map((e) => ReviewActivityModel.fromJson(e))
             .toList(),
         rate: json['rate'] ?? 0,
+        fovourite: json['fovourite'] as bool
       );
 }

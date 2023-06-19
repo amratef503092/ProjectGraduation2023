@@ -14,6 +14,7 @@ import '../../view_model/repo/book_room_repo/book_room_repo.dart';
 import '../../view_model/repo/booked_activity_repo/booked_activity_repo.dart';
 import '../../view_model/repo/hotel_wish_list_repo/hotel_wish_list_repo.dart';
 import '../../view_model/repo/login_repo/login_repo.dart';
+import '../../view_model/repo/whish_list_activity/whish_list_activity.dart';
 
 final sl = GetIt.instance;
 
@@ -32,6 +33,7 @@ Future<void> setup() async {
   sl.registerLazySingleton<BookingRoomRepoImpl>(() => BookingRoomRepoImpl());
   sl.registerLazySingleton<SearchRepoImpl>(() => SearchRepoImpl());
   sl.registerLazySingleton<HotelWishListRepoImpl>(() => HotelWishListRepoImpl());
+  sl.registerLazySingleton<ActivityWishListRepoImpl>(() => ActivityWishListRepoImpl());
 
 
 

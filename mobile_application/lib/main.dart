@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/view_model/bloc/activity_cubit/activity_cubit.dart';
+import 'package:graduation_project/view_model/bloc/activity_whilist_cubit/activity_whilist_cubit.dart';
 import 'package:graduation_project/view_model/bloc/auth_cubit/auth_cubit.dart';
 import 'package:graduation_project/view_model/bloc/booking_hotel_cubit/cubit/booking_hotel_cubit.dart';
 import 'package:graduation_project/view_model/bloc/hotel_whish_list/hotel_whish_list_cubit.dart';
@@ -19,6 +20,7 @@ import 'package:graduation_project/view_model/repo/login_repo/login_repo.dart';
 import 'package:graduation_project/view_model/repo/profile_repo/profile_repo.dart';
 import 'package:graduation_project/view_model/repo/register_repo/register_repo.dart';
 import 'package:graduation_project/view_model/repo/verifyEmail/verify_email_repo.dart';
+import 'package:graduation_project/view_model/repo/whish_list_activity/whish_list_activity.dart';
 
 import 'core/BlocObserver.dart';
 import 'core/constatnts.dart';
@@ -96,8 +98,10 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
             create: (context) => LocationCubit()),
-            BlocProvider(create: (context) => HotelWhishListCubit(sl.get<HotelWishListRepoImpl>()),)
-    ],
+            BlocProvider(create: (context) => HotelWhishListCubit(sl.get<HotelWishListRepoImpl>()),),
+            BlocProvider(create: (context) => ActivityWhilistCubit(sl.get<ActivityWishListRepoImpl>()),),
+
+          ],
           child: BlocListener<InternetServiceBloc, InternetServiceState>(
             listener: (context, state) {
               if (state is Connected) {

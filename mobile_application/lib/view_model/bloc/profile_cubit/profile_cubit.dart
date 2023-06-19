@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 import '../../../view/pages/activity_history_screen/activity_hstory_screen.dart';
 import '../../../view/pages/room_history_screen/room_history_screen.dart';
 import '../../../view/pages/user_settings_screen/settings_screen.dart';
+import '../../../view/pages/wishlist_activity_screen/wish_list_activity_screen.dart';
 import '../../../view/pages/wishlist_screen/wishlist_screen.dart';
 import '../../repo/profile_repo/profile_repo.dart';
 
@@ -20,7 +21,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   List<String> profileNames = [
     // 'My Wallet',
-    'Wishlist',
+    'Wishlist Hotels',
+    'Wishlist Activities',
     'Activities History',
     'Rooms History',
     'Settings'
@@ -28,12 +30,14 @@ class ProfileCubit extends Cubit<ProfileState> {
   List<Widget> screenNames = [
     // WalletScreen(),
     const WishlistScreen(),
+    const WishListActivityScreen(),
     const ActivityHistoryScreen(),
     const RoomHistoryScreen(),
     const UserSettingsScreen()
   ];
   List<String> profileIconName = [
     // 'wallet-2',
+    'Heart2',
     'Heart2',
     'clock',
     'clock',

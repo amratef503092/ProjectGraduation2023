@@ -321,6 +321,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   transitionType: ContainerTransitionType.fade,
                                   closedBuilder: (context, action) =>
                                       CustomCardActivity(
+                                        activityModel: cubit
+                                            .activityModel!.data[index],
+                                    isFavorite: cubit.activityModel!.data[index].fovourite,
                                     function: ()
                                     {
                                       action();

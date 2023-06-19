@@ -32,7 +32,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return BlocProvider(
       create: (context) => HotelCubit(sl.get<HotelRepoImpl>())..getHotel(),
       child: BlocConsumer<HotelCubit, HotelState>(
@@ -54,7 +55,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                             ),
                             child: ListView.separated(
                               shrinkWrap: true,
-                              separatorBuilder: (context, index) {
+                              separatorBuilder: (context, index)
+                              {
                                 return SizedBox(
                                   height: 20.h,
                                 );
@@ -74,7 +76,6 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                       AnimationListView(
                                     index: index,
                                     widget: CustomTopHotelCard(
-
                                       hotelModel: state.hotelModel.data![index],
                                       isFav: state
                                           .hotelModel.data![index].fovourite!,
@@ -87,20 +88,21 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                       save: ()
                                       {
 
-
                                       },
                                       cardHeight: 340,
                                       cardWidth: 270,
                                       imageWidth: 366,
                                       imageHeight: 145,
-                                      functionCard: () {
+                                      functionCard: ()
+                                      {
                                         action();
                                       },
                                       image: state
                                           .hotelModel.data![index].images![0],
                                       title: state
                                           .hotelModel.data![index].hotelName!,
-                                      function: () {
+                                      function: ()
+                                      {
                                         action();
                                       },
                                       discount: '0',

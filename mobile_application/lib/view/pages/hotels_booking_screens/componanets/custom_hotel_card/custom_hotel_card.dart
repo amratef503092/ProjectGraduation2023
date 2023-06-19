@@ -101,12 +101,14 @@ class _CustomTopHotelCardState extends State<CustomTopHotelCard> {
                               id: widget.hotelModel.id!);
                           setState(() {
                             widget.isFav = false;
+                            widget.hotelModel.fovourite = false;
                           });
                         } else {
                           HotelWhishListCubit.get(context).addAllWishList(
                               id: widget.hotelModel.id!);
                           setState(() {
                             widget.isFav = true;
+                            widget.hotelModel.fovourite = true;
                           });
                         }
                       },
