@@ -60,7 +60,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(SignUpErrorState(error: failure.message));
     }, (responseRegisterData) async {
       registerModel = responseRegisterData;
-      await CacheHelper.put(key: 'name', value: loginModel!.user!.name);
+      await CacheHelper.put(key: 'name', value: registerModel!.user!.name);
 
       emit(SignUpSuccessfulState(registerModel: responseRegisterData));
     });

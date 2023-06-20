@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/core/constatnts.dart';
 import 'package:graduation_project/view_model/database/network/dio-helper.dart';
 
 import '../../../core/errors/faliuar.dart';
@@ -20,7 +21,7 @@ class SearchRepoImpl extends SearchRepo
   {
     try {
       Response response = await DioHelper.getData(url: "/hotel/search?query=$searchKey",
-
+        token: getToken()
       );
       return Right(HotelModel.fromMap(response.data));
     } on DioError catch (error) {

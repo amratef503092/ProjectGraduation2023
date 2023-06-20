@@ -131,7 +131,7 @@ class User {
     map['gender'] = gender;
     map['nationality'] = nationality;
     map['status'] = status;
-    map['location'] = jsonEncode(location);
+    map['location'] = jsonEncode(['29.9826692' , '31.2761695']);
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     map['profile_image'] =

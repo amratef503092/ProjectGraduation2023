@@ -2,7 +2,8 @@
 
 // Network Connection Details
 
-const String baseUrl = 'http://10.0.2.2:8000/api';
+const String baseUrl = 'https://seashell-app-xx4uo.ondigitalocean.app/api';
+// const String baseUrl = 'http://10.0.2.2:8000/api';
 
 // End Points
 
