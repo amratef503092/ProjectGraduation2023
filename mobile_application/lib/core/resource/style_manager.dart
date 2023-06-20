@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'font_manager.dart';
 
 TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color ,
     TextDecoration textDecoration
     ) {
-  return GoogleFonts.inter(
+  return TextStyle(
       fontSize: fontSize,
       color: color,
       fontWeight: fontWeight,
