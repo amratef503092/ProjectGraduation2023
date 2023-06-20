@@ -113,7 +113,7 @@ class BookedActivityScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "  ${ActivityCubit.get(context).numberOfPeople * activityModel!.activityPrice} EGP",
+                    "  ${(ActivityCubit.get(context).numberOfPeople * double.parse(activityModel!.activityPrice)).toString()} EGP",
                     style: getSemiBoldStyle(
                         color: ColorManage.primaryBlue,
                         height: 1,

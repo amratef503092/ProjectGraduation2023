@@ -28,7 +28,7 @@ class DataBookingUserModel {
   final RoomModelInfo room;
   final int numOfNights;
   final int numOfGuests;
-  final int totalPrice;
+  final String totalPrice;
   final String checkIn;
   final String checkOut;
   final String status;

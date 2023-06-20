@@ -428,7 +428,7 @@ class RoomDetailsScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "${int.parse(BookingHotelCubit.get(context).timeOfNight![0]) * roomModelInfo.priceperDay!} EGP",
+                        "${int.parse(BookingHotelCubit.get(context).timeOfNight![0]) * double.parse( roomModelInfo.priceperDay!)} EGP",
                         style: getBoldStyle(
                             color: ColorManage.redError,
                             height: toFigmaHeight(
@@ -452,7 +452,7 @@ class RoomDetailsScreen extends StatelessWidget {
                               "total_price": int.parse(
                                       BookingHotelCubit.get(context)
                                           .timeOfNight![0]) *
-                                  roomModelInfo.priceperDay!,
+                                  double.parse(roomModelInfo.priceperDay!),
                               "check_in":
                                   BookingHotelCubit.get(context).checkInTime,
                               "check_out": DateTime.parse(

@@ -24,7 +24,7 @@ class CustomTicketInfo extends StatelessWidget {
   final String image;
   final String ticketID;
 
-  final String activityPrice;
+  final num activityPrice;
   final String activityId;
 
   final String activityDate;

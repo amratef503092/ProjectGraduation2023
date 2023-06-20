@@ -123,7 +123,7 @@ class YourBookingScreen extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '${ActivityCubit.get(context).numberOfPeople * ActivityCubit.get(context).activityModel2!.activityPrice} EGP',
+                '${ActivityCubit.get(context).numberOfPeople *double.parse( ActivityCubit.get(context).activityModel2!.activityPrice)} EGP',
                 style: getSemiBoldStyle(
                     color: ColorManage.primaryBlue, height: 1, fontSize: 20),
               ),

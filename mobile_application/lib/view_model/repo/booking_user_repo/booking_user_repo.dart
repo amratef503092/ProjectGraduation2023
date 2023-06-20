@@ -10,7 +10,6 @@ import '../../../model/booking_user_model/booking_user_activity_model/booking_us
 abstract class BookingUserActivityRepo {
   Future<Either<Failure, BookingUserActivityModel>> getBookingUser();
   Future<Either<Failure, BookingUserActivityModel>> getBookingUserHistory();
-
 }
 
 class BookingUserRepoImpl extends BookingUserActivityRepo {

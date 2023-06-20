@@ -46,7 +46,7 @@ class ActivityTicketsScreen extends StatelessWidget {
                               activityLocation: state.bookingUserActivityModel.data![index].activity!.location!,
                               activityName:state.bookingUserActivityModel.data![index].activity!.activityName.toString(),
                               activityNumberOfTickets: state.bookingUserActivityModel.data![index].numberOfPeople.toString(),
-                              activityPrice:( state.bookingUserActivityModel.data![index].activity!.activityPrice * state.bookingUserActivityModel.data![index].numberOfPeople).toString(),
+                              activityPrice:( double.parse(state.bookingUserActivityModel.data![index].activity!.activityPrice) * state.bookingUserActivityModel.data![index].numberOfPeople!),
                               image:
                                   state.bookingUserActivityModel.data![index].activity!.images[0].toString(),
                             );

@@ -9,7 +9,7 @@ class RoomModelInfo extends Equatable {
   final HotelModelInfo? hotelInfo;
   final int? numnberOfBeds;
   final bool? booked;
-  final int? priceperDay;
+  final String? priceperDay;
   final String? descripions;
   final List<String>? images;
 
@@ -30,7 +30,7 @@ class RoomModelInfo extends Equatable {
             : HotelModelInfo.fromMap(json['hotelInfo'] as Map<String, dynamic>),
         numnberOfBeds: json['numnberOfBeds'] as int?,
         booked: json['booked'] == 0 ? false : true,
-        priceperDay: json['priceperDay'] as int?,
+        priceperDay: json['priceperDay'] as String ?,
         descripions: json['descripions'] as String?,
         images: List.from(json['images'].map((e) => e)),
       );

@@ -24,7 +24,7 @@ class GetActivityModel {
 class ActivityModel {
   final int id;
   final String activityName;
-  final dynamic activityPrice;
+  final String activityPrice;
   final String description;
   final String openTime;
   final String closeTime;
