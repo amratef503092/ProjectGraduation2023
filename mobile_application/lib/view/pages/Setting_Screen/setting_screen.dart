@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
@@ -36,46 +37,46 @@ class SettingScreen extends StatelessWidget {
                       ),
                        CustomCardSetting(
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.LanguageScreen);
+                          context.setLocale(const Locale('ar'));
                         },
-                        title: "Language",
-                        select: "English",
+                        title: "Language".tr(),
+                        select: "العربيه",
                       ),
                       SizedBox(
                         height: 20.h,
                       ),
                       CustomCardSetting(
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.SettingCurrency);
+                          context.setLocale(const Locale('en'));
                         },
-                        title: "Language",
+                        title: "Language".tr(),
                         select: "English",
                       ),
                       SizedBox(
                         height: 20.h,
                       ),
-                      CustomCardSetting(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.UnitScreen);
-
-                        },
-                        title: "Language",
-                        select: "English",
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CustomCardSetting(
-                        onTap: ()
-                        {
-                          Navigator.pushNamed(context, Routes.welcomePage);
-                        },
-                        title: "Interstes ",
-                        select: "select",
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      // CustomCardSetting(
+                      //   onTap: () {
+                      //     Navigator.pushNamed(context, Routes.UnitScreen);
+                      //
+                      //   },
+                      //   title: "Language",
+                      //   select: "English",
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // CustomCardSetting(
+                      //   onTap: ()
+                      //   {
+                      //     Navigator.pushNamed(context, Routes.welcomePage);
+                      //   },
+                      //   title: "Interstes ",
+                      //   select: "select",
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
 
                     ],
                   ),
