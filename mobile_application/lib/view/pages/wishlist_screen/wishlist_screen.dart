@@ -93,12 +93,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
                             index: index,
                             widget: CustomTopHotelCard(
                               hotelModel: state.hotelModel.data![index],
-                              lang: state
-                                  .hotelModel.data![index].location![0]
-                                  .toDouble(),
-                              lat: state
-                                  .hotelModel.data![index].location![1]
-                                  .toDouble(),
+                              lang: double.parse(state
+                                  .hotelModel.data![index].location![0]),
+                              lat: double.parse(state
+                                  .hotelModel.data![index].location![1]),
                               save: ()
                               {
                                 // if ( state

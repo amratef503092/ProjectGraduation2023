@@ -12,7 +12,7 @@ class HotelModelInfo extends Equatable {
   final int? review;
   final String? hotelName;
   final List<String>? images;
-  final List<num>? location;
+  final List<String>? location;
   final List<String>? options;
   final String? typeOfRoom;
   final CityId? cityId;

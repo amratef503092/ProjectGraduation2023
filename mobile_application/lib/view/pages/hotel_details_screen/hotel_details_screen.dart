@@ -375,7 +375,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                           listener: (context, state) {},
                                           builder: (context, state) {
                                             return Text(
-                                              "${LocationCubit.get(context).getLocation(widget.hotelModel!.location![0].toDouble(), widget.hotelModel!.location![1].toDouble())} " + "km from current location".tr(),
+                                              "${LocationCubit.get(context).getLocation(double.parse(widget.hotelModel!.location![0]) , double.parse( widget.hotelModel!.location![1]))} ${"km from current location".tr()}",
                                               style: getRegularStyle(
                                                   color: ColorManage.black,
                                                   height: toFigmaHeight(

@@ -58,7 +58,7 @@ class PaymentScreen extends StatelessWidget {
               height: 20.h,
             ),
             (BookedCubit.get(context).paymentSelected)
-                ? const Column(
+                ?  Column(
                     children: [],
                   )
                 : const SizedBox.shrink()

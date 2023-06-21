@@ -79,12 +79,12 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                       hotelModel: state.hotelModel.data![index],
                                       isFav: state
                                           .hotelModel.data![index].fovourite!,
-                                      lang: state
-                                          .hotelModel.data![index].location![0]
-                                          .toDouble(),
-                                      lat: state
-                                          .hotelModel.data![index].location![1]
-                                          .toDouble(),
+                                      lang: double.parse(state
+                                          .hotelModel.data![index].location![0])
+                                          ,
+                                      lat: double.parse(state
+                                          .hotelModel.data![index].location![1])
+                                          ,
                                       save: ()
                                       {
 
