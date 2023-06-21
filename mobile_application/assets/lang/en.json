@@ -12,5 +12,50 @@
   "Welcome To Travel X": "Welcome To Travel X",
   "Sign Up": "sign Up",
   "Sign In": "Sign In",
-  "Or": "Or"
+  "Or": "Or",
+  "Wishlist Activity" :   "Wishlist Activity",
+  "Wishlist Hotel" :   "Wishlist Hotel" ,
+  "Settings" : "Settings",
+  "Account Settings" : "Account Settings",
+  "Personal information": "Personal information",
+  "Change password" : "Change password",
+  "More"  : "More",
+  "About Us" : "About Us",
+  "Privacy policy" : "Privacy policy",
+  "Room Number" : "Room Number",
+  "Check In" : "Check In",
+  "Check Out" : "Check Out",
+  "Guest": "Guest",
+  "Price": "Price",
+  "Select Room": "Select Room",
+  "Tickets": "Tickets",
+  "Activity Tickets" : "Activity Tickets",
+  "Rooms Tickets" : "Rooms Tickets",
+  "Search" : "Search",
+  "Room History" : "Room History",
+  "Profile" : "Profile",
+  "Wishlist Hotels" : "Wishlist Hotels",
+  "Wishlist Activities": "Wishlist Activities",
+  "Activities History'" : "Activities History'",
+  "Rooms History" : "Rooms History",
+  "Explore Destination" : "Explore Destination",
+  "Explore Nearby Places" : "Explore Nearby Places",
+  "Hi" : "Hi",
+  "Hotel" :"Hotel",
+  "About" : "About",
+  "Description" : "Description",
+  "Booking" : "Booking",
+  "Reviews" : "Reviews",
+  "km from current location" : "km from current location",
+  "select Days" : "select Days" ,
+  "Location" : "Location",
+  "Facilities" : "Facilities",
+  "Make Review" : "Make Review",
+  "Number of Days" : "Number of Days"
+
+
+
+
+
+
 }

@@ -290,14 +290,14 @@ class RoomDetailsScreen extends StatelessWidget {
               padding: EdgeInsets.all(24.0.sp),
               child: Column(
                 children: [
-                  Text(
-                    "Deluxe Room, 1 King Bed",
-                    style: getBoldStyle(
-                        color: ColorManage.primaryBlue,
-                        fontSize: 28.sp,
-                        height:
-                            toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
-                  ),
+                  // Text(
+                  //   "Deluxe Room, 1 King Bed",
+                  //   style: getBoldStyle(
+                  //       color: ColorManage.primaryBlue,
+                  //       fontSize: 28.sp,
+                  //       height:
+                  //           toFigmaHeight(figmaHeight: 36.sp, fontSize: 28.sp)),
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -330,7 +330,7 @@ class RoomDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Check In",
+                  "Check In".tr(),
                   style: getBoldStyle(
                       color: ColorManage.primaryBlue,
                       fontSize: 28.sp,
@@ -352,7 +352,7 @@ class RoomDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "check out",
+                  "Check Out".tr(),
                   style: getBoldStyle(
                       color: ColorManage.primaryBlue,
                       fontSize: 28.sp,

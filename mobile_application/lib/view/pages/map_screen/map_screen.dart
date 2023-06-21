@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,7 @@ class MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Map' ,
+        title:  Text('Map'.tr() ,
         style: TextStyle(
           color: ColorManage.primaryBlue
         ),

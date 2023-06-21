@@ -287,15 +287,15 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                   Column(
                     children: [
                       TabBar(
-                        tabs: const [
+                        tabs:  [
                           Tab(
-                            text: "Booking",
+                            text: "Booking".tr(),
                           ),
                           Tab(
-                            text: "About",
+                            text: "About".tr(),
                           ),
                           Tab(
-                            text: "Reviews",
+                            text: "Reviews".tr(),
                           )
                         ],
                         labelColor: ColorManage.primaryBlue,
@@ -351,7 +351,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                           itemSize: 30.sp,
                                         ),
                                         Text(
-                                          "(${widget.hotelModel!.reviews!.length} review)",
+                                          "${widget.hotelModel!.reviews!.length}" + "review".tr(),
                                           style: getRegularStyle(
                                               color: ColorManage.gray,
                                               height: toFigmaHeight(
@@ -375,7 +375,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                           listener: (context, state) {},
                                           builder: (context, state) {
                                             return Text(
-                                              "${LocationCubit.get(context).getLocation(widget.hotelModel!.location![0].toDouble(), widget.hotelModel!.location![1].toDouble())} km from current location",
+                                              "${LocationCubit.get(context).getLocation(widget.hotelModel!.location![0].toDouble(), widget.hotelModel!.location![1].toDouble())} " + "km from current location".tr(),
                                               style: getRegularStyle(
                                                   color: ColorManage.black,
                                                   height: toFigmaHeight(
@@ -425,7 +425,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                                     BookingHotelCubit.get(
                                                                 context)
                                                             .checkInTime ??
-                                                        "Check In")),
+                                                        "Check In".tr())),
                                           ),
                                         ),
                                         SizedBox(
@@ -471,10 +471,10 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                               },
                                               icon: Icons.nightlight_outlined,
                                               text: cubit.timeOfNight ??
-                                                  "Select Days",
-                                              widget: const SizedBox(
+                                                  "Select Days".tr(),
+                                              widget:  SizedBox(
                                                   width: double.infinity,
-                                                  child: Text("Location")),
+                                                  child: Text("Location".tr())),
                                             );
                                           },
                                         ))
@@ -649,7 +649,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                         height: 20.h,
                                       ),
                                       Text(
-                                        "About",
+                                        "About".tr(),
                                         style: getMediumStyle(
                                             color: ColorManage.primaryBlue,
                                             fontSize: 28.sp,
@@ -661,7 +661,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                         height: 32.h,
                                       ),
                                       Text(
-                                        "Description",
+                                        "Description".tr(),
                                         style: getMediumStyle(
                                             color: ColorManage.secondaryBlack,
                                             fontSize: 29.sp,
@@ -683,7 +683,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                         height: 20.h,
                                       ),
                                       Text(
-                                        "Facilities",
+                                        "Facilities".tr(),
                                         style: getMediumStyle(
                                             color: ColorManage.secondaryBlack,
                                             fontSize: 29.sp,
@@ -711,7 +711,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                             SizedBox(
                                               height: 2.h,
                                             ),
-                                            Text("Free Wifi")
+                                            const Text("Free Wifi")
                                           ],
                                         ),
                                       );
@@ -774,7 +774,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                           builder: (context) {
                                             return AlertDialog(
                                               title: Text(
-                                                "Make Review",
+                                                "Make Review".tr(),
                                                 style: getMediumStyle(
                                                     color:
                                                         ColorManage.primaryBlue,
@@ -798,8 +798,8 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                                     height: 20,
                                                   ),
                                                   CustomButton(
-                                                      widget: const Text(
-                                                          "Make Review"),
+                                                      widget:  Text(
+                                                          "Make Review".tr()),
                                                       function: ()
                                                       {
                                                         
@@ -821,9 +821,9 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: const [
+                                              children:  [
                                                 Text(
-                                                  "Create Review",
+                                                  "Make Review".tr(),
                                                 ),
                                                 Icon(
                                                   Icons.add,

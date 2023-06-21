@@ -17,4 +17,9 @@ class StringManager {
   static String signUp = 'Sign Up';
   static String signIn = 'Sign In';
   static String or = "Or";
+  static String RoomNumber = "Room Number ";
+  static String CheckIn = "Check In";
+  static String CheckOut = "Check Out";
+  static String Guest ="Guest";
+  static String Price = "Price";
 }

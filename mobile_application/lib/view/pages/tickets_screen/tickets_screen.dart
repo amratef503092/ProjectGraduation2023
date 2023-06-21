@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
@@ -29,7 +30,7 @@ class _TicketsScreenState extends State<TicketsScreen>
     return Scaffold(
       appBar: AppBar(
         title: TextCustom(
-          text: "Tickets Screen",
+          text: "Tickets".tr(),
           color: ColorManage.primary,
           fontSize: 24.sp,
           fontWeight: FontWeight.bold,
@@ -38,12 +39,12 @@ class _TicketsScreenState extends State<TicketsScreen>
         bottom: TabBar(
           labelColor: ColorManage.primary,
           controller: _tabController,
-          tabs: const [
+          tabs:  [
             Tab(
-              text: "Activity Tickets",
+              text: "Activity Tickets".tr(),
             ),
             Tab(
-              text: "Rooms Tickets",
+              text: "Rooms Tickets".tr(),
             ),
           ],
         ),

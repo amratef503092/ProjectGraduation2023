@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/core/resource/color_mananger.dart';
@@ -40,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: const Text('Profile',
+              title:  Text('Profile'.tr(),
                 style: TextStyle(
                     color: ColorManage.primaryBlue
                 ),

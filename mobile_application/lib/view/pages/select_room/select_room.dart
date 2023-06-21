@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class SelectRoomScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: ColorManage.primaryBlue,
             body: CustomBody(
-                textAppBar: "Select Room",
+                textAppBar: "Select Room".tr(),
                 widget: (state is GetRoomSuccessfullyState)
                     ? Padding(
                         padding: EdgeInsets.symmetric(

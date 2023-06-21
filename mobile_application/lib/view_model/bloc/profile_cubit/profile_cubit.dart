@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/model/user_model/user_model.dart';
@@ -21,11 +22,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   List<String> profileNames = [
     // 'My Wallet',
-    'Wishlist Hotels',
-    'Wishlist Activities',
-    'Activities History',
-    'Rooms History',
-    'Settings'
+    'Wishlist Hotels'.tr(),
+    'Wishlist Activities'.tr(),
+    'Activities History'.tr(),
+    'Rooms History'.tr(),
+    'Settings'.tr()
   ];
   List<Widget> screenNames = [
     // WalletScreen(),

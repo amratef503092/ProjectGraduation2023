@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_project/core/resource/string_manager.dart';
 
 import '../../../core/resource/color_mananger.dart';
 import '../../../core/service_locator/service_locator.dart';
@@ -21,7 +23,7 @@ class RoomHistoryScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: ColorManage.white,
         title: TextCustom(
-          text: "Room History",
+          text: "Room History".tr(),
           fontSize: 20.sp,
           color: ColorManage.primaryBlue,
         ),
@@ -80,31 +82,31 @@ class RoomHistoryScreen extends StatelessWidget {
               children: [
                 TextCustom(
                   text:
-                  " Room Number: ${state.roomBookingModel.data[index].room.id.toString()}",
+                  " ${StringManager.RoomNumber.tr()}: ${state.roomBookingModel.data[index].room.id.toString()}",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
                 TextCustom(
                   text:
-                  " Check In:  ${state.roomBookingModel.data[index].checkIn.toString()}",
+                  " ${StringManager.CheckIn.tr()}:  ${state.roomBookingModel.data[index].checkIn.toString()}",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
                 TextCustom(
                   text:
-                  " Check Out:  ${state.roomBookingModel.data[index].checkOut.toString()}",
+                  " ${StringManager.CheckOut.tr()}:  ${state.roomBookingModel.data[index].checkOut.toString()}",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
                 TextCustom(
                   text:
-                  " Guest:  ${state.roomBookingModel.data[index].numOfGuests.toString()}",
+                  "${StringManager.Guest.tr()}:  ${state.roomBookingModel.data[index].numOfGuests.toString()}",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
                 TextCustom(
                   text:
-                  " Price:  ${state.roomBookingModel.data[index].totalPrice.toString()} EGP",
+                  "${StringManager.Price.tr()}:  ${state.roomBookingModel.data[index].totalPrice.toString()} EGP",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),

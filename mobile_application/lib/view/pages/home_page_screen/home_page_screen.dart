@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -87,7 +88,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Hi ${userName()}",
+                            "Hi".tr() + userName(),
                             style: TextStyle(
                                 color: ColorManage.black,
                                 fontSize: 20.sp,
@@ -169,7 +170,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                 child: CustomTextField(
                                   border: true,
                                   controller: searchController,
-                                  hint: "Explore Destination",
+                                  hint: "Explore Destination".tr(),
                                   fieldValidator: (value) {
                                     if (value!.isEmpty)
                                     {
@@ -213,7 +214,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: padding.w),
                 child: Text(
-                  "Explore Nearby Places",
+                  "Explore Nearby Places".tr(),
                   style: getBoldStyle(
                       color: ColorManage.primaryBlue,
                       height: 1,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings', style: TextStyle(color: Colors.black)),
+        title: Text('Settings'.tr(), style: TextStyle(color: Colors.black)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -32,7 +33,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextCustom(
-              text: 'Account Settings',
+              text: 'Account Settings'.tr(),
               fontSize: 16.sp,
               color: ColorManage.settingsGrey,
               fontWeight: FontWeight.w600,
@@ -42,7 +43,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
             ),
             settingItem(
                 context: context,
-                lable: 'Personal information',
+                lable: 'Personal information'.tr(),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return BlocProvider.value(
@@ -56,7 +57,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
             ),
             settingItem(
               context: context,
-              lable: 'Change password',
+              lable: 'Change password'.tr(),
               onPressed: ()
               {
                 Navigator.push(context, MaterialPageRoute(builder: (context)
@@ -106,7 +107,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
               height: 20.h,
             ),
             TextCustom(
-              text: 'More',
+              text: 'More'.tr(),
               color: ColorManage.settingsGrey,
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
@@ -116,7 +117,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
             ),
             settingItem(
               context: context,
-              lable: 'About Us',
+              lable: 'About Us'.tr(),
               onPressed: () {
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => AboutUs()));
@@ -127,7 +128,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
             ),
             settingItem(
                 context: context,
-                lable: 'Privacy policy',
+                lable: 'Privacy policy'.tr(),
                 onPressed: () {
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => PrivacyPolicy()));

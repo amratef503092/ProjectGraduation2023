@@ -62,30 +62,30 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       // facebook and google button
-                      CustomButton(
-                        widget: Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.googlePlus,
-                              size: 32.sp,
-                            ),
-                            SizedBox(
-                              width: 115.w,
-                            ),
-                            Text("Google",
-                                style: getBoldStyle(
-                                    color: ColorManage.background,
-                                    height: toFigmaHeight(
-                                        figmaHeight: 30.sp, fontSize: 20.sp),
-                                    fontSize: 20.sp)),
-                          ],
-                        ),
-                        function: () {
-                          Navigator.pushNamed(context, Routes.signIn);
-                        },
-                        color: ColorManage.redError,
-                        disable: true,
-                      ),
+                      // CustomButton(
+                      //   widget: Row(
+                      //     children: [
+                      //       FaIcon(
+                      //         FontAwesomeIcons.googlePlus,
+                      //         size: 32.sp,
+                      //       ),
+                      //       SizedBox(
+                      //         width: 115.w,
+                      //       ),
+                      //       Text("Google",
+                      //           style: getBoldStyle(
+                      //               color: ColorManage.background,
+                      //               height: toFigmaHeight(
+                      //                   figmaHeight: 30.sp, fontSize: 20.sp),
+                      //               fontSize: 20.sp)),
+                      //     ],
+                      //   ),
+                      //   function: () {
+                      //     Navigator.pushNamed(context, Routes.signIn);
+                      //   },
+                      //   color: ColorManage.redError,
+                      //   disable: true,
+                      // ),
 
                       CustomButton(
                         widget: Row(children: [
