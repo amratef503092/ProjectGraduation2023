@@ -52,6 +52,20 @@
   "Location" : "الموقع",
   "Facilities" : "الخصائص",
   "Make Review": "عبر عن رايك",
-  "Number of Days" : "عدد الايام"
+  "Number of Days" : "عدد الايام",
+  "Description Activity" : "وصف النشاط",
+  "Book Now" : "حجز الان",
+  "Booked Activity" : "حجز نشاط",
+  "Category" : "التصنيف",
+  "How Many People " :"عدد الاشخاص",
+  "Payment Method Available" : "طرق الدفع المتاحه",
+  "Cash" : "دفع نقدي",
+  "Visa" : "دفع عن طريق البطاقه",
+  "Booked Now" : "حجز الان",
+  "Fill in Details" : "الفاتوره",
+  "Next" : "التالي",
+  "Sign In To Travel" : "تسجيل الدخول",
+  "Email" : "البريد الالكتروني",
+  "password" : "كلمه المرور"
 
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -26,7 +27,7 @@ class PaymentScreen extends StatelessWidget {
             ListTile(
               leading: Image.asset(AssetsManager.cashIcon),
               title: Text(
-                'Cash',
+                'Cash'.tr(),
                 style: getSemiBoldStyle(
                     color: ColorManage.primaryBlue, height: 1, fontSize: 18.sp),
               ),
@@ -41,7 +42,7 @@ class PaymentScreen extends StatelessWidget {
             ListTile(
               leading: Image.asset(AssetsManager.visaIcon),
               title: Text(
-                'Visa',
+                'Visa'.tr(),
                 style: getSemiBoldStyle(
                     color: ColorManage.primaryBlue, height: 1, fontSize: 18.sp),
               ),
@@ -57,8 +58,8 @@ class PaymentScreen extends StatelessWidget {
               height: 20.h,
             ),
             (BookedCubit.get(context).paymentSelected)
-                ? Column(
-                    children: const [],
+                ? const Column(
+                    children: [],
                   )
                 : const SizedBox.shrink()
           ]),

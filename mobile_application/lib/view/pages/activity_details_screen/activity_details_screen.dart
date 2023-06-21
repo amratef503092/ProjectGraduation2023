@@ -1,4 +1,5 @@
 import 'package:draggable_home/draggable_home.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -173,7 +174,7 @@ class ActivityDetailsScreen extends StatelessWidget {
                   height: 0.02.sh,
                 ),
                 Text(
-                  "Description",
+                  "Description Activity".tr(),
                   style: getSemiBoldStyle(
                       color: ColorManage.black, height: 1, fontSize: 24.sp),
                 ),
@@ -189,7 +190,7 @@ class ActivityDetailsScreen extends StatelessWidget {
                   height: 0.04.sh,
                 ),
                 Text(
-                  "Reviews",
+                  "Reviews".tr(),
                   style: getSemiBoldStyle(
                       color: ColorManage.black, height: 1, fontSize: 24.sp),
                 ),

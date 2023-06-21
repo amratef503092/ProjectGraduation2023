@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,8 @@ class MainPageBookedScreen extends StatelessWidget {
   const MainPageBookedScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return BlocProvider(
       create: (context) => BookedCubit(sl.get<BookedActivityRepoImpl>()),
       child: BlocConsumer<BookedCubit, BookedState>(
@@ -27,7 +29,7 @@ class MainPageBookedScreen extends StatelessWidget {
           BookedCubit cubit = BookedCubit.get(context);
           return Scaffold(
             body: CustomBody(
-              textAppBar: 'Fill in Details',
+              textAppBar: 'Fill in Details'.tr(),
               subTitle:
                   ' ${cubit.currentIndex + 1}/4: ${cubit.titles[cubit.currentIndex]}',
               widget: Column(children: [
@@ -40,16 +42,18 @@ class MainPageBookedScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     controller: cubit.pageController,
                     itemCount: cubit.pages.length,
-                    onPageChanged: (index) {
+                    onPageChanged: (index)
+                    {
                       cubit.changeIndex(index);
                     },
-                    itemBuilder: (context, index) {
+                    itemBuilder: (context, index)
+                    {
                       return cubit.pages[index];
                     },
                   ),
                 ),
                 CustomButton(
-                    widget: const Text("Next"),
+                    widget:  Text("Next".tr()),
                     function: () {
                       if (BookedCubit.get(context).paymentSelected &&
                           BookedCubit.get(context).currentIndex == 1 &&
@@ -61,7 +65,8 @@ class MainPageBookedScreen extends StatelessWidget {
                                       value: cubit,
                                       child: const MySampleState(),
                                     )));
-                      } else if (BookedCubit.get(context).currentIndex ==
+                      } else if
+                      (BookedCubit.get(context).currentIndex ==
                           BookedCubit.get(context).pages.length - 1) {
                         Navigator.pushNamedAndRemoveUntil(
                             context, Routes.LayoutScreen, (route) => false);

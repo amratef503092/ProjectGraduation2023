@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,7 @@ class SignInScreen extends StatelessWidget {
                     width: 75.w,
                   ),
                   Center(
-                      child: Text("Sign In To Travel",
+                      child: Text("Sign In To Travel".tr(),
                           style: getSemiBoldStyle(
                               color: Colors.white, height: 1, fontSize: 28.h))),
                 ],
@@ -67,20 +68,20 @@ class SignInScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: 20.h),
-                          const Align(
+                           Align(
                               alignment: Alignment.topLeft,
-                              child: Text('Email')),
+                              child: Text('Email'.tr())),
                           //email falid
                           CustomTextField(
                               iconData: const Icon(Icons.email),
                               controller: emailController,
-                              hint: 'email',
+                              hint: 'Email'.tr(),
                               fieldValidator: emailValidator),
                           const SizedBox(height: 10),
                           //password's
-                          const Align(
+                           Align(
                               alignment: Alignment.topLeft,
-                              child: Text('password')),
+                              child: Text('password'.tr())),
 
                           BlocConsumer<AuthCubit, AuthState>(
                             listener: (context, state) {
@@ -96,7 +97,7 @@ class SignInScreen extends StatelessWidget {
                                     }
                                 },
                                 controller: passwordController,
-                                hint: 'password',
+                                hint: 'password'.tr(),
                                 password: AuthCubit.get(context).visibility,
                                 passwordTwo: true,
                                 function: ()
@@ -108,48 +109,45 @@ class SignInScreen extends StatelessWidget {
                           ),
 
                           SizedBox(height: 30.h),
-                          Padding(
-                            padding: EdgeInsets.all(20.sp),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Remember Password",
-                                      style: getSemiBoldStyle(
-                                          color: ColorManage.secondaryBlack,
-                                          fontSize: 20.sp,
-                                          height: 1),
-                                    ),
-                                    BlocBuilder<AuthCubit, AuthState>(
-                                      buildWhen: (previous, current) {
-                                        if (current is RememberMe) {
-                                          return true;
-                                        } else {
-                                          return false;
-                                        }
-                                      },
-                                      builder: (context, state) {
-                                        return Checkbox(
-                                            value: AuthCubit.get(context)
-                                                .rememberMe,
-                                            onChanged: (value) {
-                                              AuthCubit.get(context)
-                                                  .changeStateRemember();
-                                            });
-                                      },
-                                    )
-                                  ],
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.forgotPasswordRoute);
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Remember Password",
+                                    style: getSemiBoldStyle(
+                                        color: ColorManage.secondaryBlack,
+                                        fontSize: 10.sp,
+                                        height: 1),
+                                  ),
+                                  BlocBuilder<AuthCubit, AuthState>(
+                                    buildWhen: (previous, current) {
+                                      if (current is RememberMe) {
+                                        return true;
+                                      } else {
+                                        return false;
+                                      }
                                     },
-                                    child: const Text("Forget Password"))
-                              ],
-                            ),
+                                    builder: (context, state) {
+                                      return Checkbox(
+                                          value: AuthCubit.get(context)
+                                              .rememberMe,
+                                          onChanged: (value) {
+                                            AuthCubit.get(context)
+                                                .changeStateRemember();
+                                          });
+                                    },
+                                  )
+                                ],
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, Routes.forgotPasswordRoute);
+                                  },
+                                  child:  Text("Forget Password" ,style: TextStyle(fontSize: 10.sp),))
+                            ],
                           ),
                           //sign in button
                           BlocConsumer<AuthCubit, AuthState>(

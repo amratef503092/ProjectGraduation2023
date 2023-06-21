@@ -126,14 +126,7 @@ class MyApp extends StatelessWidget {
                     fontSize: 16.0);
               }
             },
-            child: BlocConsumer<LocationCubit, LocationState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state)
-  {
-
-   return MaterialApp(
+            child:  MaterialApp(
      supportedLocales: context.supportedLocales,
      localizationsDelegates: context.localizationDelegates,
      locale: context.locale,
@@ -144,10 +137,10 @@ class MyApp extends StatelessWidget {
      Routes.onBoarding:
      Routes.LayoutScreen,
      theme: getTheme(),
-   );
 
 
-  },
+
+  
 ),
           ),
         );

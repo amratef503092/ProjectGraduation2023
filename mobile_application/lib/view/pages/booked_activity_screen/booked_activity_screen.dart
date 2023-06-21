@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/resource/assets_manager.dart';
@@ -21,8 +22,8 @@ class BookedActivityScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'Booked Activity',
+        title:  Text(
+          'Booked Activity'.tr(),
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -69,7 +70,7 @@ class BookedActivityScreen extends StatelessWidget {
                         height: 0.01.sh,
                       ),
                       Text(
-                        "Price : ${activityModel!.activityPrice} EGP",
+                         "${"Price".tr()}: ${activityModel!.activityPrice} EGP",
                         style: getSemiBoldStyle(
                             color: ColorManage.primaryBlue,
                             height: 1,
@@ -79,7 +80,7 @@ class BookedActivityScreen extends StatelessWidget {
                         height: 0.01.sh,
                       ),
                       Text(
-                        "Category : ${activityModel!.category.name}",
+                        "${"Category".tr()} : ${activityModel!.category.name}",
                         style: getSemiBoldStyle(
                             color: ColorManage.primaryBlue,
                             height: 1,
@@ -105,7 +106,7 @@ class BookedActivityScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "How Many People :  ${ActivityCubit.get(context).numberOfPeople}",
+                     "${"How Many People".tr()}:  ${ActivityCubit.get(context).numberOfPeople}",
                     style: getSemiBoldStyle(
                         color: ColorManage.primaryBlue,
                         height: 1,
@@ -125,7 +126,7 @@ class BookedActivityScreen extends StatelessWidget {
                 height: 0.02.sh,
               ),
               Text(
-                "Payment Method Available",
+                "Payment Method Available".tr(),
                 style: getSemiBoldStyle(
                     color: ColorManage.primaryBlue, height: 1, fontSize: 24.sp),
               ),
@@ -141,7 +142,7 @@ class BookedActivityScreen extends StatelessWidget {
                         image: AssetImage(AssetsManager.cashIcon),
                       ),
                       Text(
-                        "Cash",
+                        "Cash".tr(),
                         style: getSemiBoldStyle(
                             color: ColorManage.primaryBlue,
                             height: 1,
@@ -155,7 +156,7 @@ class BookedActivityScreen extends StatelessWidget {
                         image: AssetImage(AssetsManager.visaIcon),
                       ),
                       Text(
-                        "Visa",
+                        "Visa".tr(),
                         style: getSemiBoldStyle(
                             color: ColorManage.primaryBlue,
                             height: 1,
@@ -173,7 +174,7 @@ class BookedActivityScreen extends StatelessWidget {
           size: Size(1.sw, 0.07.sh),
           radius: 0,
           widget: Text(
-            "Booked Now",
+            "Booked Now".tr(),
             style: getBoldStyle(
                 color: ColorManage.background, height: 1, fontSize: 18.sp),
           ),

@@ -67,7 +67,21 @@ class CodegenLoader extends AssetLoader{
   "Location": "Location",
   "Facilities": "Facilities",
   "Make Review": "Make Review",
-  "Number of Days": "Number of Days"
+  "Number of Days": "Number of Days",
+  "Description Activity": "Description Activity",
+  "Book Now": "Book Now",
+  "Booked Activity": "Booked Activity",
+  "Category": "Category",
+  "How Many People": "How Many People",
+  "Payment Method Available": "Payment Method Available",
+  "Cash": "Cash",
+  "Visa": "Visa",
+  "Booked Now": "Booked Now",
+  "Fill in Details": "Fill in Details",
+  "Next": "Next",
+  "Sign In To Travel": "Sign In To Travel",
+  "Email": "Email",
+  "password": "password"
 };
 static const Map<String,dynamic> ar = {
   "Discover": "أكتشف",
@@ -123,7 +137,21 @@ static const Map<String,dynamic> ar = {
   "Location": "الموقع",
   "Facilities": "الخصائص",
   "Make Review": "عبر عن رايك",
-  "Number of Days": "عدد الايام"
+  "Number of Days": "عدد الايام",
+  "Description Activity": "وصف النشاط",
+  "Book Now": "حجز الان",
+  "Booked Activity": "حجز نشاط",
+  "Category": "التصنيف",
+  "How Many People ": "عدد الاشخاص",
+  "Payment Method Available": "طرق الدفع المتاحه",
+  "Cash": "دفع نقدي",
+  "Visa": "دفع عن طريق البطاقه",
+  "Booked Now": "حجز الان",
+  "Fill in Details": "الفاتوره",
+  "Next": "التالي",
+  "Sign In To Travel": "تسجيل الدخول",
+  "Email": "البريد الالكتروني",
+  "password": "كلمه المرور"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};
 }

@@ -51,7 +51,21 @@
   "Location" : "Location",
   "Facilities" : "Facilities",
   "Make Review" : "Make Review",
-  "Number of Days" : "Number of Days"
+  "Number of Days" : "Number of Days",
+  "Description Activity" : "Description Activity",
+  "Book Now" : "Book Now",
+  "Booked Activity" : "Booked Activity",
+  "Category" : "Category",
+  "How Many People" : "How Many People",
+  "Payment Method Available" : "Payment Method Available",
+  "Cash" : "Cash",
+  "Visa" : "Visa",
+  "Booked Now" : "Booked Now",
+  "Fill in Details": "Fill in Details",
+  "Next" : "Next",
+  "Sign In To Travel": "Sign In To Travel",
+  "Email" : "Email",
+  "password" : "password"
 
 
 
