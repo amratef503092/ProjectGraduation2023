@@ -697,7 +697,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                         gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3),
-                                        itemCount: 10,
+                                        itemCount: 1,
                                         itemBuilder: (context, index)
                                         {
                                       return Card(
@@ -734,7 +734,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                             width: 20.w,
                                           );
                                         },
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics: const NeverScrollableScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index) {
                                           return Container(
@@ -767,75 +767,75 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    InkWell(
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: Text(
-                                                "Make Review".tr(),
-                                                style: getMediumStyle(
-                                                    color:
-                                                        ColorManage.primaryBlue,
-                                                    fontSize: 20.sp,
-                                                    height: toFigmaHeight(
-                                                        figmaHeight: 24,
-                                                        fontSize: 20.sp)),
-                                              ),
-                                              content: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  TextFormField(
-                                                    maxLines: 5,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                      border:
-                                                          OutlineInputBorder(),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  CustomButton(
-                                                      widget:  Text(
-                                                          "Make Review".tr()),
-                                                      function: ()
-                                                      {
-                                                        
-                                                      },
-                                                      color: ColorManage
-                                                          .primaryBlue)
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Align(
-                                        alignment: Alignment.topRight,
-                                        child: SizedBox(
-                                          width: 130.w,
-                                          height: 90.h,
-                                          child: Card(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children:  [
-                                                Text(
-                                                  "Make Review".tr(),
-                                                ),
-                                                Icon(
-                                                  Icons.add,
-                                                  color:
-                                                      ColorManage.primaryBlue,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // InkWell(
+                                    //   onTap: () {
+                                    //     showDialog(
+                                    //       context: context,
+                                    //       builder: (context) {
+                                    //         return AlertDialog(
+                                    //           title: Text(
+                                    //             "Make Review".tr(),
+                                    //             style: getMediumStyle(
+                                    //                 color:
+                                    //                     ColorManage.primaryBlue,
+                                    //                 fontSize: 20.sp,
+                                    //                 height: toFigmaHeight(
+                                    //                     figmaHeight: 24,
+                                    //                     fontSize: 20.sp)),
+                                    //           ),
+                                    //           content: Column(
+                                    //             mainAxisSize: MainAxisSize.min,
+                                    //             children: [
+                                    //               TextFormField(
+                                    //                 maxLines: 5,
+                                    //                 decoration:
+                                    //                     const InputDecoration(
+                                    //                   border:
+                                    //                       OutlineInputBorder(),
+                                    //                 ),
+                                    //               ),
+                                    //               const SizedBox(
+                                    //                 height: 20,
+                                    //               ),
+                                    //               CustomButton(
+                                    //                   widget:  Text(
+                                    //                       "Make Review".tr()),
+                                    //                   function: ()
+                                    //                   {
+                                    //
+                                    //                   },
+                                    //                   color: ColorManage
+                                    //                       .primaryBlue)
+                                    //             ],
+                                    //           ),
+                                    //         );
+                                    //       },
+                                    //     );
+                                    //   },
+                                    //   child: Align(
+                                    //     alignment: Alignment.topRight,
+                                    //     child: SizedBox(
+                                    //       width: 130.w,
+                                    //       height: 90.h,
+                                    //       child: Card(
+                                    //         child: Row(
+                                    //           mainAxisAlignment:
+                                    //               MainAxisAlignment.center,
+                                    //           children:  [
+                                    //             Text(
+                                    //               "Make Review".tr(),
+                                    //             ),
+                                    //             Icon(
+                                    //               Icons.add,
+                                    //               color:
+                                    //                   ColorManage.primaryBlue,
+                                    //             )
+                                    //           ],
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Expanded(
                                         child: ListView.builder(
                                       itemBuilder: (context, index) {

@@ -48,6 +48,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                   : (state is GetHotelSuccessfullyState)
                       ? AnimationLimiter(
                           child: CustomBody(
+                            isBack: false,
                           textAppBar: "Hotel",
                           widget: Padding(
                             padding: const EdgeInsets.all(
